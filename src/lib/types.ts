@@ -1,0 +1,114 @@
+export type PrivacyGrade = "A" | "B" | "C" | "D" | "F";
+
+export interface CookieInfo {
+  name: string;
+  domain: string;
+  path: string;
+  secure: boolean;
+  httpOnly: boolean;
+  sameSite: string;
+  expires: number;
+  /** Whether the cookie belongs to a third party */
+  thirdParty: boolean;
+}
+
+export interface TrackerMatch {
+  domain: string;
+  category: "analytics" | "advertising" | "session-recording" | "social" | "cdn" | "unknown";
+  name: string;
+}
+
+export interface ScanData {
+  url: string;
+  domain: string;
+  scannedAt: string;
+  loadTimeMs: number;
+  cookies: {
+    total: number;
+    firstParty: number;
+    thirdParty: number;
+    items: CookieInfo[];
+  };
+  thirdPartyDomains: {
+    total: number;
+    items: string[];
+  };
+  trackers: {
+    analytics: TrackerMatch[];
+    advertising: TrackerMatch[];
+    sessionRecording: TrackerMatch[];
+    social: TrackerMatch[];
+  };
+  /** Whether the tool processes files server-side (heuristic) */
+  serverSideProcessing: boolean;
+}
+
+export interface AuditScores {
+  thirdPartyCookies: number;
+  thirdPartyDomains: number;
+  sessionRecording: number;
+  adNetworks: number;
+  analyticsTrackers: number;
+  serverSide: number;
+  /** Weighted total (0-100) */
+  total: number;
+}
+
+export interface AuditResult {
+  id: string;
+  domain: string;
+  displayUrl: string;
+  grade: PrivacyGrade;
+  scores: AuditScores;
+  scan: ScanData;
+  cachedAt: string;
+  expiresAt: string;
+}
+
+export interface ScanRequest {
+  url: string;
+}
+
+export interface ScanResponse {
+  success: true;
+  result: AuditResult;
+}
+
+export interface ScanError {
+  success: false;
+  error: string;
+  code?: "RATE_LIMITED" | "INVALID_URL" | "SCAN_FAILED" | "SSRF_BLOCKED" | "TIMEOUT";
+  retryAfter?: number;
+}
+
+export interface AnalyticsEvent {
+  event: string;
+  properties?: Record<string, string | number | boolean>;
+  timestamp?: string;
+}
+
+/** Converter types */
+export type ImageFormat = "png" | "jpg" | "webp" | "avif" | "gif" | "bmp" | "tiff";
+export type DocumentFormat = "pdf" | "docx" | "txt" | "csv" | "json";
+export type AudioFormat = "mp3" | "wav" | "ogg" | "aac" | "flac" | "m4a";
+
+export interface ConversionJob {
+  id: string;
+  file: File;
+  inputFormat: string;
+  outputFormat: string;
+  status: "pending" | "processing" | "done" | "error";
+  progress: number;
+  result?: Blob;
+  error?: string;
+  options?: ConversionOptions;
+}
+
+export interface ConversionOptions {
+  quality?: number;
+  width?: number;
+  height?: number;
+  bitrate?: number;
+  trimStart?: number;
+  trimEnd?: number;
+}

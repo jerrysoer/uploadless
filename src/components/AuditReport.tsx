@@ -1,0 +1,206 @@
+"use client";
+
+import type { AuditResult } from "@/lib/types";
+import { GRADE_TEXT_CLASSES, GRADE_LABELS } from "@/lib/constants";
+import {
+  Cookie,
+  Globe,
+  Video,
+  Megaphone,
+  BarChart3,
+  Server,
+  ExternalLink,
+} from "lucide-react";
+
+interface AuditReportProps {
+  result: AuditResult;
+}
+
+function ScoreBar({ label, score, icon }: { label: string; score: number; icon: React.ReactNode }) {
+  const color =
+    score >= 75
+      ? "bg-grade-a"
+      : score >= 50
+        ? "bg-grade-c"
+        : "bg-grade-f";
+
+  return (
+    <div className="flex items-center gap-3">
+      <div className="text-text-tertiary w-5 flex-shrink-0">{icon}</div>
+      <div className="flex-1 min-w-0">
+        <div className="flex justify-between text-sm mb-1">
+          <span className="text-text-secondary truncate">{label}</span>
+          <span className="text-text-primary font-mono">{score}/100</span>
+        </div>
+        <div className="h-1.5 bg-bg-elevated rounded-full overflow-hidden">
+          <div
+            className={`h-full rounded-full transition-all duration-700 ${color}`}
+            style={{ width: `${score}%` }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function AuditReport({ result }: AuditReportProps) {
+  const { scan, scores, grade } = result;
+
+  return (
+    <div className="space-y-6">
+      {/* Score breakdown */}
+      <div className="bg-bg-surface border border-border rounded-xl p-6">
+        <h2 className="font-heading font-semibold text-lg mb-4">Score Breakdown</h2>
+        <div className="space-y-4">
+          <ScoreBar
+            label={`Third-party cookies (${scan.cookies.thirdParty})`}
+            score={scores.thirdPartyCookies}
+            icon={<Cookie className="w-4 h-4" />}
+          />
+          <ScoreBar
+            label={`Third-party domains (${scan.thirdPartyDomains.total})`}
+            score={scores.thirdPartyDomains}
+            icon={<Globe className="w-4 h-4" />}
+          />
+          <ScoreBar
+            label={`Session recording (${scan.trackers.sessionRecording.length} found)`}
+            score={scores.sessionRecording}
+            icon={<Video className="w-4 h-4" />}
+          />
+          <ScoreBar
+            label={`Ad networks (${scan.trackers.advertising.length} found)`}
+            score={scores.adNetworks}
+            icon={<Megaphone className="w-4 h-4" />}
+          />
+          <ScoreBar
+            label={`Analytics trackers (${scan.trackers.analytics.length} found)`}
+            score={scores.analyticsTrackers}
+            icon={<BarChart3 className="w-4 h-4" />}
+          />
+          <ScoreBar
+            label={`Server-side processing (${scan.serverSideProcessing ? "detected" : "none"})`}
+            score={scores.serverSide}
+            icon={<Server className="w-4 h-4" />}
+          />
+        </div>
+      </div>
+
+      {/* Cookie details */}
+      <div className="bg-bg-surface border border-border rounded-xl p-6">
+        <h2 className="font-heading font-semibold text-lg mb-2">
+          Cookies ({scan.cookies.total})
+        </h2>
+        <p className="text-text-tertiary text-sm mb-4">
+          {scan.cookies.firstParty} first-party, {scan.cookies.thirdParty} third-party
+        </p>
+
+        {scan.cookies.items.length > 0 && (
+          <div className="max-h-48 overflow-y-auto">
+            <table className="w-full text-xs font-mono">
+              <thead>
+                <tr className="text-text-tertiary border-b border-border">
+                  <th className="text-left pb-2 pr-4">Name</th>
+                  <th className="text-left pb-2 pr-4">Domain</th>
+                  <th className="text-left pb-2">Type</th>
+                </tr>
+              </thead>
+              <tbody>
+                {scan.cookies.items.slice(0, 50).map((cookie, i) => (
+                  <tr key={i} className="border-b border-border/50">
+                    <td className="py-1.5 pr-4 text-text-secondary truncate max-w-[200px]">
+                      {cookie.name}
+                    </td>
+                    <td className="py-1.5 pr-4 text-text-tertiary truncate max-w-[200px]">
+                      {cookie.domain}
+                    </td>
+                    <td className="py-1.5">
+                      <span
+                        className={`px-1.5 py-0.5 rounded text-[10px] ${
+                          cookie.thirdParty
+                            ? "bg-grade-f/10 text-grade-f"
+                            : "bg-grade-a/10 text-grade-a"
+                        }`}
+                      >
+                        {cookie.thirdParty ? "3rd party" : "1st party"}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            {scan.cookies.items.length > 50 && (
+              <p className="text-text-tertiary text-xs mt-2">
+                ...and {scan.cookies.items.length - 50} more
+              </p>
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* Third-party domains */}
+      {scan.thirdPartyDomains.items.length > 0 && (
+        <div className="bg-bg-surface border border-border rounded-xl p-6">
+          <h2 className="font-heading font-semibold text-lg mb-4">
+            Third-Party Domains ({scan.thirdPartyDomains.total})
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {scan.thirdPartyDomains.items.map((domain) => (
+              <span
+                key={domain}
+                className="inline-flex items-center gap-1 px-2 py-1 bg-bg-elevated rounded text-xs text-text-secondary font-mono"
+              >
+                <ExternalLink className="w-3 h-3" />
+                {domain}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Trackers found */}
+      {(scan.trackers.analytics.length > 0 ||
+        scan.trackers.advertising.length > 0 ||
+        scan.trackers.sessionRecording.length > 0) && (
+        <div className="bg-bg-surface border border-border rounded-xl p-6">
+          <h2 className="font-heading font-semibold text-lg mb-4">
+            Identified Trackers
+          </h2>
+          <div className="space-y-3">
+            {scan.trackers.sessionRecording.map((t) => (
+              <div key={t.name} className="flex items-center gap-2 text-sm">
+                <span className="px-2 py-0.5 rounded bg-grade-f/10 text-grade-f text-xs">
+                  recorder
+                </span>
+                <span className="text-text-primary">{t.name}</span>
+                <span className="text-text-tertiary font-mono text-xs">{t.domain}</span>
+              </div>
+            ))}
+            {scan.trackers.advertising.map((t) => (
+              <div key={t.name} className="flex items-center gap-2 text-sm">
+                <span className="px-2 py-0.5 rounded bg-grade-d/10 text-grade-d text-xs">
+                  ads
+                </span>
+                <span className="text-text-primary">{t.name}</span>
+                <span className="text-text-tertiary font-mono text-xs">{t.domain}</span>
+              </div>
+            ))}
+            {scan.trackers.analytics.map((t) => (
+              <div key={t.name} className="flex items-center gap-2 text-sm">
+                <span className="px-2 py-0.5 rounded bg-grade-c/10 text-grade-c text-xs">
+                  analytics
+                </span>
+                <span className="text-text-primary">{t.name}</span>
+                <span className="text-text-tertiary font-mono text-xs">{t.domain}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Scan meta */}
+      <div className="text-center text-text-tertiary text-xs font-mono">
+        Scanned at {new Date(scan.scannedAt).toLocaleString()} · Load time: {scan.loadTimeMs}ms
+      </div>
+    </div>
+  );
+}
