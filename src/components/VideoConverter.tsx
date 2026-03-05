@@ -27,7 +27,7 @@ const RESOLUTION_PRESETS = [
   { label: "360p (640x360)", value: "640x360" },
 ] as const;
 
-const DEFAULT_CRF = 23;
+const DEFAULT_CRF = 28;
 const CRF_MIN = 18;
 const CRF_MAX = 40;
 
@@ -71,7 +71,8 @@ function buildFFmpegArgs(
 
   switch (outputFormat) {
     case "mp4": {
-      args.push("-c:v", "libx264", "-preset", "medium", "-crf", String(crf));
+      args.push("-c:v", "libx264", "-preset", "veryfast", "-crf", String(crf));
+      args.push("-threads", "0");
       args.push("-c:a", "aac");
       if (resolutionFilter) {
         args.push("-vf", resolutionFilter);
@@ -86,6 +87,8 @@ function buildFFmpegArgs(
         String(crf),
         "-b:v",
         "0",
+        "-deadline",
+        "realtime",
         "-c:a",
         "libvorbis"
       );
@@ -102,7 +105,7 @@ function buildFFmpegArgs(
       }
       args.push(
         "-vf",
-        `fps=15,scale=${gifWidth}:-1:flags=lanczos`
+        `fps=10,scale=${gifWidth}:-1:flags=lanczos`
       );
       break;
     }

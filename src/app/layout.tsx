@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "ShipTools — Privacy Auditor & Local File Converter",
+  title: "ShipTools — Privacy-first tools for the web",
   description:
-    "Audit any online tool's privacy practices and convert files locally in your browser. No uploads, no tracking.",
+    "Developer & privacy tools that run entirely in your browser. Hash, encrypt, convert, audit — no uploads, no tracking.",
   openGraph: {
-    title: "ShipTools — Privacy Auditor & Local File Converter",
+    title: "ShipTools — Privacy-first tools for the web",
     description:
-      "Audit any online tool's privacy practices and convert files locally in your browser.",
+      "Developer & privacy tools that run entirely in your browser. Hash, encrypt, convert, audit — no uploads, no tracking.",
     type: "website",
   },
 };
