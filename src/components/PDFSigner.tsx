@@ -112,7 +112,7 @@ export default function PDFSigner() {
     async (pageIndex: number, pdfData: ArrayBuffer) => {
       try {
         const pdfjs = await import("pdfjs-dist");
-        pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.mjs`;
+        pdfjs.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
         const pdf = await pdfjs.getDocument({ data: new Uint8Array(pdfData) })
           .promise;
@@ -130,10 +130,11 @@ export default function PDFSigner() {
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
 
-        await page.render({ canvas, viewport }).promise;
+        await page.render({ canvasContext: ctx, viewport, canvas } as Parameters<typeof page.render>[0]).promise;
       } catch (err) {
+        const message = err instanceof Error ? err.message : String(err);
         console.error("PDF render error:", err);
-        setError("Failed to render PDF. The file may be corrupted or unsupported.");
+        setError(`Failed to render PDF: ${message}`);
       }
     },
     [],
