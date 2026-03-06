@@ -16,12 +16,18 @@ import {
   Type,
   ClipboardPaste,
   Unplug,
+  ScanEye,
+  Palette,
+  Code,
+  Regex,
+  FileText,
+  ALargeSmall,
 } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Developer & Privacy Tools — ShipTools",
   description:
-    "Developer and privacy tools that run entirely in your browser. Hash, encode, encrypt, generate, inspect — no uploads, no tracking.",
+    "20 developer and privacy tools that run entirely in your browser. Hash, encode, encrypt, generate, inspect — no uploads, no tracking.",
 };
 
 interface ToolEntry {
@@ -91,6 +97,42 @@ const DEVELOPER_TOOLS: ToolEntry[] = [
     icon: Eye,
     title: "EXIF Stripper",
     description: "View and strip metadata from images. GPS, camera, dates.",
+  },
+  {
+    href: "/tools/contrast",
+    icon: ScanEye,
+    title: "Contrast Checker",
+    description: "Check WCAG 2.1 color contrast ratios. AA and AAA compliance.",
+  },
+  {
+    href: "/tools/gradient",
+    icon: Palette,
+    title: "CSS Gradient Generator",
+    description: "Create linear, radial, and conic CSS gradients visually.",
+  },
+  {
+    href: "/tools/svg-to-react",
+    icon: Code,
+    title: "SVG → React",
+    description: "Convert SVG markup into a clean React component with JSX.",
+  },
+  {
+    href: "/tools/regex",
+    icon: Regex,
+    title: "Regex Playground",
+    description: "Test regular expressions with real-time matching and highlights.",
+  },
+  {
+    href: "/tools/wordcount",
+    icon: FileText,
+    title: "Word Counter",
+    description: "Count words, characters, sentences, and estimate reading time.",
+  },
+  {
+    href: "/tools/case",
+    icon: ALargeSmall,
+    title: "Case Converter",
+    description: "Convert text between camelCase, snake_case, kebab-case, and more.",
   },
 ];
 
