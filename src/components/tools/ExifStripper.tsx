@@ -390,7 +390,7 @@ export default function ExifStripper() {
         <button
           onClick={stripAll}
           disabled={strippingAll}
-          className="w-full py-2.5 bg-accent hover:bg-accent/90 disabled:opacity-60 text-white rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-2"
+          className="w-full py-2.5 bg-accent hover:bg-accent/90 disabled:opacity-60 text-accent-fg rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-2"
         >
           {strippingAll ? (
             <>
@@ -499,7 +499,7 @@ export default function ExifStripper() {
                   {entry.status === "ready" && (
                     <button
                       onClick={() => stripSingle(entry.id)}
-                      className="px-3 py-1 bg-accent text-white rounded-lg text-xs font-medium hover:bg-accent/90 transition-colors"
+                      className="px-3 py-1 bg-accent text-accent-fg rounded-lg text-xs font-medium hover:bg-accent/90 transition-colors"
                     >
                       Strip
                     </button>

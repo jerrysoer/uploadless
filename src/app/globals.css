@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* Background */
-  --color-bg-primary: #0A0E17;
-  --color-bg-surface: #111827;
-  --color-bg-elevated: #1A2332;
-  --color-bg-hover: #1E2A3A;
+  /* Background — dark defaults (Tailwind generates utility classes from these) */
+  --color-bg-primary: #0F0F0F;
+  --color-bg-surface: #1A1918;
+  --color-bg-elevated: #252321;
+  --color-bg-hover: #2E2B28;
 
   /* Text */
-  --color-text-primary: #F1F5F9;
-  --color-text-secondary: #94A3B8;
-  --color-text-tertiary: #64748B;
+  --color-text-primary: #E5E0DB;
+  --color-text-secondary: #8C8580;
+  --color-text-tertiary: #5C5652;
 
   /* Grades */
   --color-grade-a: #22C55E;
@@ -20,17 +20,60 @@
   --color-grade-f: #EF4444;
 
   /* Accent */
-  --color-accent: #3B82F6;
-  --color-accent-hover: #2563EB;
+  --color-accent: #F87171;
+  --color-accent-hover: #EF4444;
+  --color-accent-secondary: #D4A574;
+  --color-accent-fg: #1C1917;
 
   /* Border */
-  --color-border: #1E293B;
-  --color-border-hover: #334155;
+  --color-border: #2E2B28;
+  --color-border-hover: #3D3935;
 
   /* Font families */
   --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
   --font-heading: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* Runtime light/dark overrides */
+@layer base {
+  :root {
+    --color-bg-primary: #F5F3F0;
+    --color-bg-surface: #EDEBE8;
+    --color-bg-elevated: #E5E2DF;
+    --color-bg-hover: #DBD8D4;
+
+    --color-text-primary: #1C1917;
+    --color-text-secondary: #78716C;
+    --color-text-tertiary: #A8A29E;
+
+    --color-accent: #B91C1C;
+    --color-accent-hover: #991B1B;
+    --color-accent-secondary: #D4A574;
+    --color-accent-fg: #FFFFFF;
+
+    --color-border: #D6D3CF;
+    --color-border-hover: #A8A29E;
+  }
+
+  .dark {
+    --color-bg-primary: #0F0F0F;
+    --color-bg-surface: #1A1918;
+    --color-bg-elevated: #252321;
+    --color-bg-hover: #2E2B28;
+
+    --color-text-primary: #E5E0DB;
+    --color-text-secondary: #8C8580;
+    --color-text-tertiary: #5C5652;
+
+    --color-accent: #F87171;
+    --color-accent-hover: #EF4444;
+    --color-accent-secondary: #D4A574;
+    --color-accent-fg: #1C1917;
+
+    --color-border: #2E2B28;
+    --color-border-hover: #3D3935;
+  }
 }
 
 /* Base styles */
@@ -64,12 +107,18 @@ body {
   background: var(--color-border-hover);
 }
 
-/* Grade glow effects */
-.grade-glow-a { filter: drop-shadow(0 0 24px var(--color-grade-a)); }
-.grade-glow-b { filter: drop-shadow(0 0 24px var(--color-grade-b)); }
-.grade-glow-c { filter: drop-shadow(0 0 24px var(--color-grade-c)); }
-.grade-glow-d { filter: drop-shadow(0 0 24px var(--color-grade-d)); }
-.grade-glow-f { filter: drop-shadow(0 0 24px var(--color-grade-f)); }
+/* Grade glow effects — reduced in light mode */
+.grade-glow-a { filter: drop-shadow(0 0 12px var(--color-grade-a)); }
+.grade-glow-b { filter: drop-shadow(0 0 12px var(--color-grade-b)); }
+.grade-glow-c { filter: drop-shadow(0 0 12px var(--color-grade-c)); }
+.grade-glow-d { filter: drop-shadow(0 0 12px var(--color-grade-d)); }
+.grade-glow-f { filter: drop-shadow(0 0 12px var(--color-grade-f)); }
+
+.dark .grade-glow-a { filter: drop-shadow(0 0 24px var(--color-grade-a)); }
+.dark .grade-glow-b { filter: drop-shadow(0 0 24px var(--color-grade-b)); }
+.dark .grade-glow-c { filter: drop-shadow(0 0 24px var(--color-grade-c)); }
+.dark .grade-glow-d { filter: drop-shadow(0 0 24px var(--color-grade-d)); }
+.dark .grade-glow-f { filter: drop-shadow(0 0 24px var(--color-grade-f)); }
 
 /* Terminal scan animation */
 @keyframes scan-line {

@@ -181,7 +181,7 @@ export default function HashCalculator() {
           onClick={() => handleModeSwitch("text")}
           className={`flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
             mode === "text"
-              ? "bg-accent text-white"
+              ? "bg-accent text-accent-fg"
               : "text-text-secondary hover:text-text-primary"
           }`}
         >
@@ -192,7 +192,7 @@ export default function HashCalculator() {
           onClick={() => handleModeSwitch("file")}
           className={`flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
             mode === "file"
-              ? "bg-accent text-white"
+              ? "bg-accent text-accent-fg"
               : "text-text-secondary hover:text-text-primary"
           }`}
         >

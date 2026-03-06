@@ -279,7 +279,7 @@ export default function JsonFormatter() {
         <button
           onClick={handleFormat}
           disabled={!result.valid}
-          className="bg-accent text-white px-4 py-2 rounded-lg hover:bg-accent/90 disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-sm font-medium"
+          className="bg-accent text-accent-fg px-4 py-2 rounded-lg hover:bg-accent/90 disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-sm font-medium"
         >
           Format
         </button>
@@ -300,7 +300,7 @@ export default function JsonFormatter() {
               onClick={() => setIndentSize(size)}
               className={`px-2.5 py-1 rounded text-xs font-medium transition-colors ${
                 indentSize === size
-                  ? "bg-accent text-white"
+                  ? "bg-accent text-accent-fg"
                   : "text-text-secondary hover:text-text-primary"
               }`}
             >
@@ -315,7 +315,7 @@ export default function JsonFormatter() {
             onClick={() => setViewMode("formatted")}
             className={`flex items-center gap-1 px-2.5 py-1 rounded text-xs font-medium transition-colors ${
               viewMode === "formatted"
-                ? "bg-accent text-white"
+                ? "bg-accent text-accent-fg"
                 : "text-text-secondary hover:text-text-primary"
             }`}
           >
@@ -326,7 +326,7 @@ export default function JsonFormatter() {
             onClick={() => setViewMode("tree")}
             className={`flex items-center gap-1 px-2.5 py-1 rounded text-xs font-medium transition-colors ${
               viewMode === "tree"
-                ? "bg-accent text-white"
+                ? "bg-accent text-accent-fg"
                 : "text-text-secondary hover:text-text-primary"
             }`}
           >

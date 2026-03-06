@@ -639,7 +639,7 @@ export default function PDFSigner() {
           }}
           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
             activeTool === "select"
-              ? "bg-accent text-white"
+              ? "bg-accent text-accent-fg"
               : "bg-bg-elevated text-text-secondary hover:text-text-primary"
           }`}
         >
@@ -657,7 +657,7 @@ export default function PDFSigner() {
           }}
           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
             activeTool === "signature"
-              ? "bg-accent text-white"
+              ? "bg-accent text-accent-fg"
               : "bg-bg-elevated text-text-secondary hover:text-text-primary"
           }`}
         >
@@ -669,7 +669,7 @@ export default function PDFSigner() {
           onClick={() => setActiveTool("text")}
           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
             activeTool === "text"
-              ? "bg-accent text-white"
+              ? "bg-accent text-accent-fg"
               : "bg-bg-elevated text-text-secondary hover:text-text-primary"
           }`}
         >
@@ -681,7 +681,7 @@ export default function PDFSigner() {
           onClick={() => setActiveTool("date")}
           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
             activeTool === "date"
-              ? "bg-accent text-white"
+              ? "bg-accent text-accent-fg"
               : "bg-bg-elevated text-text-secondary hover:text-text-primary"
           }`}
         >
@@ -931,7 +931,7 @@ export default function PDFSigner() {
                 onClick={() => setSigTab(tab)}
                 className={`flex-1 px-3 py-1.5 rounded-md text-xs font-medium transition-colors capitalize ${
                   sigTab === tab
-                    ? "bg-accent text-white"
+                    ? "bg-accent text-accent-fg"
                     : "text-text-secondary hover:text-text-primary"
                 }`}
               >
@@ -966,7 +966,7 @@ export default function PDFSigner() {
                 </button>
                 <button
                   onClick={useDrawnSignature}
-                  className="px-3 py-1.5 rounded-lg bg-accent hover:bg-accent-hover text-white text-xs font-medium transition-colors"
+                  className="px-3 py-1.5 rounded-lg bg-accent hover:bg-accent-hover text-accent-fg text-xs font-medium transition-colors"
                 >
                   Use Signature
                 </button>
@@ -1001,7 +1001,7 @@ export default function PDFSigner() {
               <button
                 onClick={useTypedSignature}
                 disabled={!typedName.trim()}
-                className="px-3 py-1.5 rounded-lg bg-accent hover:bg-accent-hover text-white text-xs font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                className="px-3 py-1.5 rounded-lg bg-accent hover:bg-accent-hover text-accent-fg text-xs font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 Use Signature
               </button>

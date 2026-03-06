@@ -4,6 +4,7 @@ import Link from "next/link";
 import { SquareSlash, ArrowLeftRight, Wrench, Sparkles } from "lucide-react";
 import { usePathname } from "next/navigation";
 import AIStatusBadge from "@/components/AIStatusBadge";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Header() {
   const pathname = usePathname();
@@ -60,6 +61,7 @@ export default function Header() {
               AI
             </span>
           </Link>
+          <ThemeToggle />
         </nav>
       </div>
     </header>

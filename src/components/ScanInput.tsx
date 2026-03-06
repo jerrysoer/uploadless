@@ -33,7 +33,7 @@ export default function ScanInput({ onScan, isScanning }: ScanInputProps) {
         <button
           type="submit"
           disabled={isScanning || !url.trim()}
-          className="absolute right-2 p-2.5 rounded-lg bg-accent hover:bg-accent-hover text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="absolute right-2 p-2.5 rounded-lg bg-accent hover:bg-accent-hover text-accent-fg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           aria-label="Start scan"
         >
           {isScanning ? (

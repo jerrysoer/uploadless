@@ -110,7 +110,7 @@ export default function FileEncryptor() {
           }}
           className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
             mode === "encrypt"
-              ? "bg-accent text-white"
+              ? "bg-accent text-accent-fg"
               : "text-text-secondary hover:text-text-primary"
           }`}
         >
@@ -125,7 +125,7 @@ export default function FileEncryptor() {
           }}
           className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
             mode === "decrypt"
-              ? "bg-accent text-white"
+              ? "bg-accent text-accent-fg"
               : "text-text-secondary hover:text-text-primary"
           }`}
         >
@@ -207,7 +207,7 @@ export default function FileEncryptor() {
       <button
         onClick={handleProcess}
         disabled={!file || !password || processing}
-        className="bg-accent text-white px-4 py-2 rounded-lg hover:bg-accent/90 disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-2 text-sm font-medium transition-colors"
+        className="bg-accent text-accent-fg px-4 py-2 rounded-lg hover:bg-accent/90 disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-2 text-sm font-medium transition-colors"
       >
         {processing ? (
           <>

@@ -91,7 +91,7 @@ export default function GradientGenerator() {
             onClick={() => setType(t)}
             className={`flex-1 px-4 py-2 rounded-lg text-sm font-medium transition-colors capitalize ${
               type === t
-                ? "bg-accent text-white"
+                ? "bg-accent text-accent-fg"
                 : "text-text-secondary hover:text-text-primary"
             }`}
           >
@@ -194,7 +194,7 @@ export default function GradientGenerator() {
           </span>
           <button
             onClick={handleCopy}
-            className="flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-lg bg-accent text-white hover:bg-accent/90 transition-colors"
+            className="flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-lg bg-accent text-accent-fg hover:bg-accent/90 transition-colors"
           >
             {copied ? (
               <Check className="w-3.5 h-3.5" />

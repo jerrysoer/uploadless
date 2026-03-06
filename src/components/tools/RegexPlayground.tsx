@@ -158,7 +158,7 @@ export default function RegexPlayground() {
                 title={label}
                 className={`px-2.5 py-1 rounded-lg text-xs font-mono font-medium transition-colors border ${
                   flags[flag]
-                    ? "bg-accent text-white border-accent"
+                    ? "bg-accent text-accent-fg border-accent"
                     : "bg-bg-surface text-text-secondary border-border hover:border-border-hover"
                 }`}
               >

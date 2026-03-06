@@ -234,7 +234,7 @@ export default function EpochConverter() {
         </select>
         <button
           onClick={fillNow}
-          className="bg-accent text-white px-4 py-2 rounded-lg hover:bg-accent/90 transition-colors text-sm font-medium inline-flex items-center gap-1.5"
+          className="bg-accent text-accent-fg px-4 py-2 rounded-lg hover:bg-accent/90 transition-colors text-sm font-medium inline-flex items-center gap-1.5"
         >
           <Play className="w-3.5 h-3.5" />
           Now

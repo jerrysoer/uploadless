@@ -288,7 +288,7 @@ export default function TrackingPixelDetector() {
           <button
             onClick={handleScan}
             disabled={!html.trim()}
-            className="bg-accent text-white px-4 py-2 rounded-lg hover:bg-accent/90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 font-medium text-sm transition-colors"
+            className="bg-accent text-accent-fg px-4 py-2 rounded-lg hover:bg-accent/90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 font-medium text-sm transition-colors"
           >
             <Search className="w-4 h-4" />
             Scan

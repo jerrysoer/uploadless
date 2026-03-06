@@ -37,7 +37,7 @@ export default function ConsentBanner() {
         <div className="flex items-center gap-4">
           <button
             onClick={accept}
-            className="px-4 py-1.5 bg-accent text-white text-sm font-medium rounded-lg hover:bg-accent/90 transition-colors"
+            className="px-4 py-1.5 bg-accent text-accent-fg text-sm font-medium rounded-lg hover:bg-accent/90 transition-colors"
           >
             Got it
           </button>

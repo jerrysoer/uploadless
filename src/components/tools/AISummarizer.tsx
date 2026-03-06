@@ -82,7 +82,7 @@ export default function AISummarizer() {
               onClick={() => setLength(opt)}
               className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                 length === opt
-                  ? "bg-accent text-white"
+                  ? "bg-accent text-accent-fg"
                   : "bg-bg-elevated text-text-secondary hover:text-text-primary border border-border"
               }`}
             >
@@ -101,7 +101,7 @@ export default function AISummarizer() {
         <button
           onClick={handleSummarize}
           disabled={!input.trim() || isStreaming || isModelLoading}
-          className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-accent hover:bg-accent/90 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-accent hover:bg-accent/90 text-accent-fg rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isStreaming || isModelLoading ? (
             <Loader2 className="w-4 h-4 animate-spin" />

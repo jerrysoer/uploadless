@@ -16,9 +16,12 @@ export default function ReportCard({ result }: ReportCardProps) {
   const handleDownload = useCallback(async () => {
     if (!cardRef.current) return;
     try {
+      const bgColor = getComputedStyle(document.documentElement)
+        .getPropertyValue("--color-bg-primary")
+        .trim();
       const dataUrl = await toPng(cardRef.current, {
         pixelRatio: 2,
-        backgroundColor: "#0A0E17",
+        backgroundColor: bgColor || "#0F0F0F",
       });
       const link = document.createElement("a");
       link.download = `shiplocal-audit-${result.domain}.png`;
@@ -103,7 +106,7 @@ export default function ReportCard({ result }: ReportCardProps) {
       <div className="flex justify-center gap-3">
         <button
           onClick={handleDownload}
-          className="flex items-center gap-2 px-4 py-2 bg-accent hover:bg-accent-hover text-white rounded-lg text-sm font-medium transition-colors"
+          className="flex items-center gap-2 px-4 py-2 bg-accent hover:bg-accent-hover text-accent-fg rounded-lg text-sm font-medium transition-colors"
         >
           <Download className="w-4 h-4" />
           Download PNG

@@ -165,7 +165,7 @@ export default function QRGenerator() {
             onClick={() => setPreset(key)}
             className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
               preset === key
-                ? "bg-accent text-white"
+                ? "bg-accent text-accent-fg"
                 : "text-text-secondary hover:text-text-primary hover:bg-bg-hover"
             }`}
           >
@@ -339,7 +339,7 @@ export default function QRGenerator() {
             <button
               onClick={downloadPNG}
               disabled={!payload}
-              className="flex-1 flex items-center justify-center gap-2 bg-accent text-white px-4 py-2 rounded-lg hover:bg-accent/90 disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-sm font-medium"
+              className="flex-1 flex items-center justify-center gap-2 bg-accent text-accent-fg px-4 py-2 rounded-lg hover:bg-accent/90 disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-sm font-medium"
             >
               <Download className="w-4 h-4" />
               Download PNG

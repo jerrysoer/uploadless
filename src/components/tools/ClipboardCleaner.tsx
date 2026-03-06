@@ -264,7 +264,7 @@ export default function ClipboardCleaner() {
           <div className="flex gap-3">
             <button
               onClick={handleCopy}
-              className="flex items-center gap-2 bg-accent text-white px-4 py-2 rounded-lg hover:bg-accent/90 transition-colors"
+              className="flex items-center gap-2 bg-accent text-accent-fg px-4 py-2 rounded-lg hover:bg-accent/90 transition-colors"
             >
               {copied ? (
                 <>

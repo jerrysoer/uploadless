@@ -472,7 +472,7 @@ export default function FingerprintViewer() {
           <div className="mt-6 flex justify-center">
             <button
               onClick={run}
-              className="bg-accent text-white px-4 py-2 rounded-lg hover:bg-accent/90 transition-colors text-sm font-medium"
+              className="bg-accent text-accent-fg px-4 py-2 rounded-lg hover:bg-accent/90 transition-colors text-sm font-medium"
             >
               Rescan
             </button>

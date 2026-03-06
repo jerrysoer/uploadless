@@ -45,7 +45,7 @@ export async function GET(
     }
   }
 
-  const gradeColor = GRADE_COLORS[grade] ?? "#64748B";
+  const gradeColor = GRADE_COLORS[grade] ?? "#5C5652";
 
   return new ImageResponse(
     (
@@ -57,7 +57,7 @@ export async function GET(
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#0A0E17",
+          backgroundColor: "#0F0F0F",
           fontFamily: "sans-serif",
         }}
       >
@@ -65,7 +65,7 @@ export async function GET(
         <div
           style={{
             fontSize: 24,
-            color: "#64748B",
+            color: "#5C5652",
             marginBottom: 16,
             letterSpacing: 4,
           }}
@@ -77,7 +77,7 @@ export async function GET(
         <div
           style={{
             fontSize: 36,
-            color: "#F1F5F9",
+            color: "#E5E0DB",
             fontWeight: 600,
             marginBottom: 32,
           }}
@@ -107,22 +107,22 @@ export async function GET(
           }}
         >
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <div style={{ fontSize: 36, fontWeight: 700, color: "#F1F5F9" }}>
+            <div style={{ fontSize: 36, fontWeight: 700, color: "#E5E0DB" }}>
               {cookieCount}
             </div>
-            <div style={{ fontSize: 14, color: "#64748B" }}>3rd-party cookies</div>
+            <div style={{ fontSize: 14, color: "#5C5652" }}>3rd-party cookies</div>
           </div>
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <div style={{ fontSize: 36, fontWeight: 700, color: "#F1F5F9" }}>
+            <div style={{ fontSize: 36, fontWeight: 700, color: "#E5E0DB" }}>
               {domainCount}
             </div>
-            <div style={{ fontSize: 14, color: "#64748B" }}>3rd-party domains</div>
+            <div style={{ fontSize: 14, color: "#5C5652" }}>3rd-party domains</div>
           </div>
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <div style={{ fontSize: 36, fontWeight: 700, color: "#F1F5F9" }}>
+            <div style={{ fontSize: 36, fontWeight: 700, color: "#E5E0DB" }}>
               {trackerCount}
             </div>
-            <div style={{ fontSize: 14, color: "#64748B" }}>trackers found</div>
+            <div style={{ fontSize: 14, color: "#5C5652" }}>trackers found</div>
           </div>
         </div>
 
@@ -132,7 +132,7 @@ export async function GET(
             position: "absolute",
             bottom: 32,
             fontSize: 16,
-            color: "#3B82F6",
+            color: "#F87171",
           }}
         >
           shiplocal.dev

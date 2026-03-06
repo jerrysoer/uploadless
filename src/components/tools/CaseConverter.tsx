@@ -146,7 +146,7 @@ export default function CaseConverter() {
               disabled={!input.trim()}
               className={`px-3 py-2 rounded-lg text-xs font-medium transition-colors border ${
                 activeCase === type
-                  ? "bg-accent text-white border-accent"
+                  ? "bg-accent text-accent-fg border-accent"
                   : "bg-bg-surface border-border text-text-secondary hover:text-text-primary hover:border-border-hover"
               } disabled:opacity-40 disabled:cursor-not-allowed`}
             >

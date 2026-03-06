@@ -188,7 +188,7 @@ export default function Base64Tool() {
             }}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
               inputMode === "text"
-                ? "bg-accent text-white"
+                ? "bg-accent text-accent-fg"
                 : "text-text-secondary hover:text-text-primary"
             }`}
           >
@@ -206,7 +206,7 @@ export default function Base64Tool() {
             }}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
               inputMode === "file"
-                ? "bg-accent text-white"
+                ? "bg-accent text-accent-fg"
                 : "text-text-secondary hover:text-text-primary"
             }`}
           >
@@ -224,7 +224,7 @@ export default function Base64Tool() {
                 onClick={() => handleDirectionChange(dir)}
                 className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors capitalize ${
                   direction === dir
-                    ? "bg-accent text-white"
+                    ? "bg-accent text-accent-fg"
                     : "text-text-secondary hover:text-text-primary"
                 }`}
               >

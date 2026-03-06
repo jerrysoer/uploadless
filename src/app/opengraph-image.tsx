@@ -15,9 +15,9 @@ export default function OgImage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#0A0E17",
+          backgroundColor: "#0F0F0F",
           backgroundImage:
-            "radial-gradient(circle at 50% 50%, #131A2B 0%, #0A0E17 70%)",
+            "radial-gradient(circle at 50% 50%, #1A1918 0%, #0F0F0F 70%)",
         }}
       >
         {/* Logo mark */}
@@ -28,7 +28,7 @@ export default function OgImage() {
             justifyContent: "center",
             width: 88,
             height: 88,
-            border: "3px solid #3B82F6",
+            border: "3px solid #F87171",
             borderRadius: 18,
             marginBottom: 32,
           }}
@@ -37,7 +37,7 @@ export default function OgImage() {
             style={{
               fontSize: 56,
               fontWeight: 700,
-              color: "#3B82F6",
+              color: "#F87171",
               lineHeight: 1,
             }}
           >
@@ -50,7 +50,7 @@ export default function OgImage() {
           style={{
             fontSize: 64,
             fontWeight: 700,
-            color: "#F1F5F9",
+            color: "#E5E0DB",
             letterSpacing: "-1px",
             marginBottom: 16,
           }}
@@ -62,7 +62,7 @@ export default function OgImage() {
         <div
           style={{
             fontSize: 24,
-            color: "#94A3B8",
+            color: "#8C8580",
             maxWidth: 600,
             textAlign: "center",
           }}

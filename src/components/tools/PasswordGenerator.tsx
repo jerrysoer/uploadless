@@ -23,11 +23,11 @@ const CHARSETS = {
 type CharsetKey = keyof typeof CHARSETS;
 
 const STRENGTH_COLORS = [
-  "bg-red-500",
-  "bg-orange-500",
-  "bg-yellow-500",
-  "bg-lime-500",
-  "bg-green-500",
+  "bg-grade-f",
+  "bg-grade-d",
+  "bg-grade-c",
+  "bg-grade-b",
+  "bg-grade-a",
 ];
 
 const STRENGTH_LABELS = [
@@ -154,7 +154,7 @@ export default function PasswordGenerator() {
           onClick={() => setMode("random")}
           className={`flex-1 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
             mode === "random"
-              ? "bg-accent text-white"
+              ? "bg-accent text-accent-fg"
               : "text-text-secondary hover:text-text-primary"
           }`}
         >
@@ -164,7 +164,7 @@ export default function PasswordGenerator() {
           onClick={() => setMode("passphrase")}
           className={`flex-1 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
             mode === "passphrase"
-              ? "bg-accent text-white"
+              ? "bg-accent text-accent-fg"
               : "text-text-secondary hover:text-text-primary"
           }`}
         >
@@ -212,7 +212,7 @@ export default function PasswordGenerator() {
           <button
             onClick={handleCopy}
             disabled={!password}
-            className="flex-1 flex items-center justify-center gap-2 bg-accent text-white px-4 py-2 rounded-lg hover:bg-accent/90 transition-colors disabled:opacity-50"
+            className="flex-1 flex items-center justify-center gap-2 bg-accent text-accent-fg px-4 py-2 rounded-lg hover:bg-accent/90 transition-colors disabled:opacity-50"
           >
             {copied ? (
               <Check className="w-4 h-4" />
@@ -322,7 +322,7 @@ export default function PasswordGenerator() {
                     onClick={() => setSeparator(sep)}
                     className={`px-3 py-1.5 rounded-lg text-sm font-mono border transition-colors ${
                       separator === sep
-                        ? "bg-accent text-white border-accent"
+                        ? "bg-accent text-accent-fg border-accent"
                         : "bg-bg-elevated border-border hover:border-border-hover"
                     }`}
                   >

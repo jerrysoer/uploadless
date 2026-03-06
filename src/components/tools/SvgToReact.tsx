@@ -98,7 +98,7 @@ export default function SvgToReact() {
             <button
               onClick={() => setUseTs((v) => !v)}
               className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-                useTs ? "bg-accent text-white" : "text-text-secondary hover:text-text-primary"
+                useTs ? "bg-accent text-accent-fg" : "text-text-secondary hover:text-text-primary"
               }`}
             >
               TypeScript
@@ -106,7 +106,7 @@ export default function SvgToReact() {
             <button
               onClick={() => setWrapMemo((v) => !v)}
               className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-                wrapMemo ? "bg-accent text-white" : "text-text-secondary hover:text-text-primary"
+                wrapMemo ? "bg-accent text-accent-fg" : "text-text-secondary hover:text-text-primary"
               }`}
             >
               memo

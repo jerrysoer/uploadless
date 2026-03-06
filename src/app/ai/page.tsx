@@ -115,7 +115,7 @@ export default function AIHubPage() {
           <button
             onClick={loadModel}
             disabled={status === "checking"}
-            className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-accent hover:bg-accent/90 text-white rounded-lg font-medium transition-colors disabled:opacity-50"
+            className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-accent hover:bg-accent/90 text-accent-fg rounded-lg font-medium transition-colors disabled:opacity-50"
           >
             <Download className="w-4 h-4" />
             Load AI Model

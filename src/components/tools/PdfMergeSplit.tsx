@@ -412,7 +412,7 @@ export default function PdfMergeSplit() {
           onClick={() => setMode("merge")}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
             mode === "merge"
-              ? "bg-accent text-white"
+              ? "bg-accent text-accent-fg"
               : "bg-bg-elevated border border-border text-text-secondary hover:text-text-primary"
           }`}
         >
@@ -423,7 +423,7 @@ export default function PdfMergeSplit() {
           onClick={() => setMode("split")}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
             mode === "split"
-              ? "bg-accent text-white"
+              ? "bg-accent text-accent-fg"
               : "bg-bg-elevated border border-border text-text-secondary hover:text-text-primary"
           }`}
         >
@@ -491,7 +491,7 @@ export default function PdfMergeSplit() {
                 <button
                   onClick={handleMerge}
                   disabled={mergeFiles.length < 2 || merging}
-                  className="flex items-center gap-2 bg-accent text-white px-4 py-2 rounded-lg hover:bg-accent/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm font-medium"
+                  className="flex items-center gap-2 bg-accent text-accent-fg px-4 py-2 rounded-lg hover:bg-accent/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm font-medium"
                 >
                   {merging ? (
                     <Loader2 className="w-4 h-4 animate-spin" />
@@ -642,7 +642,7 @@ export default function PdfMergeSplit() {
                   <button
                     onClick={handleSplit}
                     disabled={splitting}
-                    className="flex items-center gap-2 bg-accent text-white px-4 py-2 rounded-lg hover:bg-accent/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm font-medium"
+                    className="flex items-center gap-2 bg-accent text-accent-fg px-4 py-2 rounded-lg hover:bg-accent/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm font-medium"
                   >
                     {splitting ? (
                       <Loader2 className="w-4 h-4 animate-spin" />

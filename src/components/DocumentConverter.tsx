@@ -486,7 +486,7 @@ export default function DocumentConverter() {
             </div>
           ))}
           {pendingCount > 0 && (
-            <button onClick={processAll} className="w-full py-2.5 bg-accent hover:bg-accent-hover text-white rounded-lg text-sm font-medium transition-colors">
+            <button onClick={processAll} className="w-full py-2.5 bg-accent hover:bg-accent-hover text-accent-fg rounded-lg text-sm font-medium transition-colors">
               Convert {pendingCount} file{pendingCount > 1 ? "s" : ""}
             </button>
           )}

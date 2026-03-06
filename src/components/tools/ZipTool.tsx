@@ -275,7 +275,7 @@ function CreateMode() {
             <button
               onClick={createZip}
               disabled={creating || files.length === 0}
-              className="bg-accent text-white px-4 py-2 rounded-lg hover:bg-accent/90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 text-sm font-medium"
+              className="bg-accent text-accent-fg px-4 py-2 rounded-lg hover:bg-accent/90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 text-sm font-medium"
             >
               {creating ? (
                 <>
@@ -411,7 +411,7 @@ function ExtractMode() {
             <button
               onClick={extractAll}
               disabled={extractingAll}
-              className="bg-accent text-white px-4 py-2 rounded-lg hover:bg-accent/90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 text-sm font-medium"
+              className="bg-accent text-accent-fg px-4 py-2 rounded-lg hover:bg-accent/90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 text-sm font-medium"
             >
               {extractingAll ? (
                 <>
@@ -459,7 +459,7 @@ export default function ZipTool() {
             onClick={() => setMode("create")}
             className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
               mode === "create"
-                ? "bg-accent text-white"
+                ? "bg-accent text-accent-fg"
                 : "text-text-secondary hover:text-text-primary"
             }`}
           >
@@ -470,7 +470,7 @@ export default function ZipTool() {
             onClick={() => setMode("extract")}
             className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
               mode === "extract"
-                ? "bg-accent text-white"
+                ? "bg-accent text-accent-fg"
                 : "text-text-secondary hover:text-text-primary"
             }`}
           >

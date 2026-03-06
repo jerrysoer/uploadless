@@ -36,7 +36,7 @@ export default function HomePage() {
               <Hash className="w-7 h-7 text-accent" />
             </div>
             <h1 className="font-heading font-bold text-4xl sm:text-5xl mb-4 leading-tight">
-              Developer & Privacy Tools
+              Local & Private
             </h1>
             <p className="text-text-secondary text-lg mb-10 max-w-2xl mx-auto">
               Hash, encrypt, generate, decode, and inspect — 20 tools that run

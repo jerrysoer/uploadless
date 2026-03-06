@@ -120,7 +120,7 @@ export default function UuidGenerator() {
                 onClick={() => setFormat(value)}
                 className={`px-3 py-1.5 rounded-lg text-sm font-medium border transition-colors ${
                   format === value
-                    ? "bg-accent text-white border-accent"
+                    ? "bg-accent text-accent-fg border-accent"
                     : "bg-bg-elevated border-border hover:border-border-hover"
                 }`}
               >
@@ -133,7 +133,7 @@ export default function UuidGenerator() {
         {/* Generate Button */}
         <button
           onClick={generate}
-          className="mt-5 w-full flex items-center justify-center gap-2 bg-accent text-white px-4 py-2.5 rounded-lg hover:bg-accent/90 transition-colors font-medium"
+          className="mt-5 w-full flex items-center justify-center gap-2 bg-accent text-accent-fg px-4 py-2.5 rounded-lg hover:bg-accent/90 transition-colors font-medium"
         >
           <RefreshCw className="w-4 h-4" />
           Generate
@@ -174,7 +174,7 @@ export default function UuidGenerator() {
           <div className="flex gap-2 p-4 border-t border-border">
             <button
               onClick={handleCopyAll}
-              className="flex-1 flex items-center justify-center gap-2 bg-accent text-white px-4 py-2 rounded-lg hover:bg-accent/90 transition-colors text-sm"
+              className="flex-1 flex items-center justify-center gap-2 bg-accent text-accent-fg px-4 py-2 rounded-lg hover:bg-accent/90 transition-colors text-sm"
             >
               {copiedAll ? (
                 <Check className="w-4 h-4" />

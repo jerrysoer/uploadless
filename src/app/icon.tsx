@@ -13,7 +13,7 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#0A0E17",
+          backgroundColor: "#0F0F0F",
           borderRadius: 6,
         }}
       >
@@ -27,12 +27,12 @@ export default function Icon() {
           {/* Shield outline */}
           <path
             d="M11 1L2 5v7c0 5.25 3.85 10.15 9 11.25 5.15-1.1 9-6 9-11.25V5L11 1z"
-            stroke="#3B82F6"
+            stroke="#F87171"
             strokeWidth="2"
             fill="none"
           />
           {/* Local pin dot */}
-          <circle cx="11" cy="11" r="3" fill="#3B82F6" />
+          <circle cx="11" cy="11" r="3" fill="#F87171" />
         </svg>
       </div>
     ),
