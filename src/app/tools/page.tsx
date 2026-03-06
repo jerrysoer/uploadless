@@ -22,10 +22,12 @@ import {
   Regex,
   FileText,
   ALargeSmall,
+  Sparkles,
+  PenLine,
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Developer & Privacy Tools — ShipTools",
+  title: "Developer & Privacy Tools — ShipLocal",
   description:
     "20 developer and privacy tools that run entirely in your browser. Hash, encode, encrypt, generate, inspect — no uploads, no tracking.",
 };
@@ -136,6 +138,21 @@ const DEVELOPER_TOOLS: ToolEntry[] = [
   },
 ];
 
+const AI_TOOLS: ToolEntry[] = [
+  {
+    href: "/ai/summarize",
+    icon: Sparkles,
+    title: "✦ Text Summarizer",
+    description: "Summarize text using a local AI model. No server required.",
+  },
+  {
+    href: "/ai/rewrite",
+    icon: PenLine,
+    title: "✦ Text Rewriter",
+    description: "Rewrite text in different tones using local AI.",
+  },
+];
+
 const PRIVACY_TOOLS: ToolEntry[] = [
   {
     href: "/tools/fingerprint",
@@ -236,6 +253,7 @@ export default function ToolsPage() {
 
       <div className="space-y-8">
         <ToolSection title="Developer" tools={DEVELOPER_TOOLS} columns={2} />
+        <ToolSection title="AI-Powered" tools={AI_TOOLS} />
         <ToolSection title="Privacy" tools={PRIVACY_TOOLS} />
       </div>
     </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import type { AuditResult } from "@/lib/types";
 import { GRADE_TEXT_CLASSES, GRADE_LABELS } from "@/lib/constants";
 import {
@@ -11,6 +12,11 @@ import {
   Server,
   ExternalLink,
 } from "lucide-react";
+import AIChip from "@/components/AIChip";
+import AIStreamOutput from "@/components/AIStreamOutput";
+import { useLocalAI } from "@/hooks/useLocalAI";
+import { PROMPTS } from "@/lib/ai/prompts";
+import { trackEvent } from "@/lib/analytics";
 
 interface AuditReportProps {
   result: AuditResult;
@@ -45,6 +51,33 @@ function ScoreBar({ label, score, icon }: { label: string; score: number; icon: 
 
 export default function AuditReport({ result }: AuditReportProps) {
   const { scan, scores, grade } = result;
+  const { streamInfer } = useLocalAI();
+  const [aiExplanation, setAiExplanation] = useState("");
+  const [isExplaining, setIsExplaining] = useState(false);
+
+  const allTrackers = [
+    ...scan.trackers.sessionRecording.map((t) => `${t.name} (session recording) - ${t.domain}`),
+    ...scan.trackers.advertising.map((t) => `${t.name} (advertising) - ${t.domain}`),
+    ...scan.trackers.analytics.map((t) => `${t.name} (analytics) - ${t.domain}`),
+  ];
+
+  async function explainTrackers() {
+    if (allTrackers.length === 0) return;
+    setAiExplanation("");
+    setIsExplaining(true);
+    try {
+      await streamInfer(
+        `Trackers found on ${result.domain}:\n${allTrackers.join("\n")}`,
+        PROMPTS.auditExplainer,
+        (token) => setAiExplanation((prev) => prev + token)
+      );
+      trackEvent("tool_used", { tool: "ai_audit_explainer" });
+    } catch {
+      setAiExplanation("Failed to generate explanation. Please try again.");
+    } finally {
+      setIsExplaining(false);
+    }
+  }
 
   return (
     <div className="space-y-6">
@@ -194,6 +227,26 @@ export default function AuditReport({ result }: AuditReportProps) {
               </div>
             ))}
           </div>
+        </div>
+      )}
+
+      {/* AI Tracker Explainer */}
+      {allTrackers.length > 0 && (
+        <div className="bg-bg-surface border border-border rounded-xl p-6">
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="font-heading font-semibold text-lg">AI Explainer</h2>
+            <AIChip
+              label="Explain trackers"
+              onClick={explainTrackers}
+              disabled={isExplaining}
+            />
+          </div>
+          <AIStreamOutput content={aiExplanation} isStreaming={isExplaining} />
+          {!aiExplanation && !isExplaining && (
+            <p className="text-text-tertiary text-sm">
+              Click &ldquo;Explain trackers&rdquo; to get a plain-English explanation of each tracker found.
+            </p>
+          )}
         </div>
       )}
 

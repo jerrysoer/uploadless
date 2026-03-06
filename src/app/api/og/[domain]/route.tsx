@@ -28,7 +28,7 @@ export async function GET(
 
   if (supabase) {
     const { data } = await supabase
-      .from("st_audits")
+      .from("sl_audits")
       .select("grade, domain, scan")
       .eq("id", slug)
       .single();
@@ -135,7 +135,7 @@ export async function GET(
             color: "#3B82F6",
           }}
         >
-          shiptools.dev
+          shiplocal.dev
         </div>
       </div>
     ),

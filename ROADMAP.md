@@ -1,8 +1,8 @@
-# ShipTools: Complete Expansion Plan — Phased & Ranked
+# ShipLocal: Complete Expansion Plan — Phased & Ranked
 
 ## Context
 
-ShipTools has the audit scanner (F1-F2) and three converters (F3-F5) built. The PRD v1.1 defines 15 Phase 1 features (10 unbuilt), plus Phase 2-3 features. The Extended Ideas doc adds ~100 more tool ideas across 4 tiers. This plan ranks and groups everything — PRD features, Extended Ideas, and new research findings (video, PDF signing) — into three implementation phases.
+ShipLocal (formerly ShipTools) has the audit scanner (F1-F2) and three converters (F3-F5) built. The PRD v1.1 defines 15 Phase 1 features (10 unbuilt), plus Phase 2-3 features. The Extended Ideas doc adds ~100 more tool ideas across 4 tiers. This plan ranks and groups everything — PRD features, Extended Ideas, and new research findings (video, PDF signing) — into three implementation phases.
 
 **Guiding principle:** Phase 1 should make someone say *"wait, this all runs in a BROWSER?"* and come back daily.
 

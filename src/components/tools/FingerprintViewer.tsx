@@ -136,9 +136,9 @@ function getCanvasFingerprint(): string {
   ctx.fillStyle = "#f60";
   ctx.fillRect(125, 1, 62, 20);
   ctx.fillStyle = "#069";
-  ctx.fillText("ShipTools,\ud83d\ude03", 2, 15);
+  ctx.fillText("ShipLocal,\ud83d\ude03", 2, 15);
   ctx.fillStyle = "rgba(102, 204, 0, 0.7)";
-  ctx.fillText("ShipTools,\ud83d\ude03", 4, 17);
+  ctx.fillText("ShipLocal,\ud83d\ude03", 4, 17);
 
   return canvas.toDataURL();
 }

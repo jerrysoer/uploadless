@@ -21,7 +21,7 @@ export default function ReportCard({ result }: ReportCardProps) {
         backgroundColor: "#0A0E17",
       });
       const link = document.createElement("a");
-      link.download = `shiptools-audit-${result.domain}.png`;
+      link.download = `shiplocal-audit-${result.domain}.png`;
       link.href = dataUrl;
       link.click();
     } catch (err) {
@@ -95,7 +95,7 @@ export default function ReportCard({ result }: ReportCardProps) {
         </div>
 
         <p className="text-text-tertiary text-[10px] font-mono text-center mt-4">
-          shiptools.dev · Audited {new Date(scan.scannedAt).toLocaleDateString()}
+          shiplocal.dev · Audited {new Date(scan.scannedAt).toLocaleDateString()}
         </p>
       </div>
 

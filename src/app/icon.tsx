@@ -17,30 +17,23 @@ export default function Icon() {
           borderRadius: 6,
         }}
       >
-        {/* Slash in a rounded box — matches SquareSlash icon */}
-        <div
-          style={{
-            width: 22,
-            height: 22,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            border: "2px solid #3B82F6",
-            borderRadius: 4,
-          }}
+        {/* Shield shape with local pin dot */}
+        <svg
+          width="22"
+          height="24"
+          viewBox="0 0 22 24"
+          fill="none"
         >
-          <span
-            style={{
-              fontSize: 16,
-              fontWeight: 700,
-              color: "#3B82F6",
-              lineHeight: 1,
-              marginTop: -1,
-            }}
-          >
-            /
-          </span>
-        </div>
+          {/* Shield outline */}
+          <path
+            d="M11 1L2 5v7c0 5.25 3.85 10.15 9 11.25 5.15-1.1 9-6 9-11.25V5L11 1z"
+            stroke="#3B82F6"
+            strokeWidth="2"
+            fill="none"
+          />
+          {/* Local pin dot */}
+          <circle cx="11" cy="11" r="3" fill="#3B82F6" />
+        </svg>
       </div>
     ),
     { ...size }

@@ -88,7 +88,10 @@ export type AnalyticsEventName =
   | "scan_initiated"
   | "scan_completed"
   | "report_shared"
-  | "telemetry_opted_out";
+  | "telemetry_opted_out"
+  | "ai_model_loaded"
+  | "ai_tool_used"
+  | "ai_model_deleted";
 
 export interface AnalyticsEvent {
   event: AnalyticsEventName;

@@ -13,7 +13,7 @@ export async function GET() {
     const since = thirtyDaysAgo.toISOString().split("T")[0];
 
     const { data, error } = await supabase
-      .from("st_analytics_daily")
+      .from("sl_analytics_daily")
       .select("*")
       .gte("date", since)
       .order("date", { ascending: true });

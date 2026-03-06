@@ -3,7 +3,7 @@ import { getSupabase } from "@/lib/supabase";
 import AnalyticsDashboard from "@/components/admin/AnalyticsDashboard";
 
 export const metadata: Metadata = {
-  title: "Analytics — ShipTools Dashboard",
+  title: "Analytics — ShipLocal Dashboard",
 };
 
 interface DailyRow {
@@ -34,7 +34,7 @@ export default async function AdminAnalyticsPage() {
   const since = thirtyDaysAgo.toISOString().split("T")[0];
 
   const { data, error } = await supabase
-    .from("st_analytics_daily")
+    .from("sl_analytics_daily")
     .select("*")
     .gte("date", since)
     .order("date", { ascending: true });

@@ -31,7 +31,7 @@ export default function ConsentBanner() {
     <div className="fixed bottom-0 inset-x-0 z-50 p-4">
       <div className="max-w-xl mx-auto bg-bg-elevated border border-border rounded-xl px-5 py-4 shadow-lg">
         <p className="text-text-secondary text-sm mb-3">
-          ShipTools uses privacy-respecting analytics to improve the product. No
+          ShipLocal uses privacy-respecting analytics to improve the product. No
           personal data is collected.
         </p>
         <div className="flex items-center gap-4">

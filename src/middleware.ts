@@ -25,7 +25,7 @@ export function middleware(req: NextRequest) {
   return new NextResponse("Unauthorized", {
     status: 401,
     headers: {
-      "WWW-Authenticate": 'Basic realm="ShipTools Admin"',
+      "WWW-Authenticate": 'Basic realm="ShipLocal Admin"',
     },
   });
 }

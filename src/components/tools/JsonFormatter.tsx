@@ -4,6 +4,11 @@ import { useState, useMemo, useCallback } from "react";
 import { Braces, Copy, Check, ChevronRight, ChevronDown, Minimize2, TreePine, FileSpreadsheet, FileText } from "lucide-react";
 import ToolPageHeader from "@/components/tools/ToolPageHeader";
 import { highlightJson } from "@/lib/tools/json-highlight";
+import AIChip from "@/components/AIChip";
+import AIStreamOutput from "@/components/AIStreamOutput";
+import { useLocalAI } from "@/hooks/useLocalAI";
+import { PROMPTS } from "@/lib/ai/prompts";
+import { trackEvent } from "@/lib/analytics";
 
 type ViewMode = "formatted" | "tree";
 type IndentSize = 2 | 4;
@@ -151,6 +156,9 @@ export default function JsonFormatter() {
   const [indentSize, setIndentSize] = useState<IndentSize>(2);
   const [viewMode, setViewMode] = useState<ViewMode>("formatted");
   const [copied, setCopied] = useState(false);
+  const [aiExplanation, setAiExplanation] = useState("");
+  const [isExplaining, setIsExplaining] = useState(false);
+  const { streamInfer } = useLocalAI();
 
   const result = useMemo(() => parseJson(input), [input]);
 
@@ -214,11 +222,37 @@ export default function JsonFormatter() {
     URL.revokeObjectURL(link.href);
   }, [result]);
 
+  const explainError = useCallback(async () => {
+    if (!result.error || !input) return;
+    setAiExplanation("");
+    setIsExplaining(true);
+
+    // Get surrounding context around the error
+    const lines = input.split("\n");
+    const errorLine = result.errorLine ?? 1;
+    const start = Math.max(0, errorLine - 3);
+    const end = Math.min(lines.length, errorLine + 3);
+    const context = lines.slice(start, end).join("\n");
+
+    try {
+      await streamInfer(
+        `JSON error: ${result.error}\n\nContext around error (line ${errorLine}):\n${context}\n\nFull JSON:\n${input.slice(0, 2000)}`,
+        PROMPTS.jsonErrorExplainer,
+        (token) => setAiExplanation((prev) => prev + token)
+      );
+      trackEvent("tool_used", { tool: "ai_json_explainer" });
+    } catch {
+      setAiExplanation("Failed to generate explanation.");
+    } finally {
+      setIsExplaining(false);
+    }
+  }, [result, input, streamInfer]);
+
   const loadSample = () => {
     setInput(
       JSON.stringify(
         {
-          name: "ShipTools",
+          name: "ShipLocal",
           version: "0.1.0",
           tools: ["JSON Formatter", "QR Generator", "Hash Calculator"],
           config: { theme: "dark", locale: "en-US" },
@@ -327,10 +361,24 @@ export default function JsonFormatter() {
             </button>
           )}
           {result.error && (
-            <p className="text-grade-f text-xs mt-1.5 font-mono">
-              {result.error}
-              {result.errorLine && ` (line ${result.errorLine}, col ${result.errorColumn})`}
-            </p>
+            <div className="mt-1.5">
+              <div className="flex items-center gap-2">
+                <p className="text-grade-f text-xs font-mono">
+                  {result.error}
+                  {result.errorLine && ` (line ${result.errorLine}, col ${result.errorColumn})`}
+                </p>
+                <AIChip
+                  label="Explain error"
+                  onClick={explainError}
+                  disabled={isExplaining}
+                />
+              </div>
+              <AIStreamOutput
+                content={aiExplanation}
+                isStreaming={isExplaining}
+                className="mt-2"
+              />
+            </div>
           )}
         </div>
 

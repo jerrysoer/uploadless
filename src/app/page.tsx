@@ -11,13 +11,15 @@ import {
   ShieldCheck,
   EyeOff,
   Lock,
+  Sparkles,
+  Cpu,
 } from "lucide-react";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "ShipTools — Privacy-first tools for the web",
+  title: "ShipLocal — Local-first productivity suite",
   description:
     "Developer & privacy tools that run entirely in your browser. Hash, encrypt, convert, sign — no uploads, no tracking.",
 };
@@ -211,6 +213,65 @@ export default function HomePage() {
                   <ArrowRight className="w-5 h-5 text-text-tertiary group-hover:text-accent transition-colors sm:ml-auto shrink-0" />
                 </div>
               </a>
+            </div>
+          </div>
+        </section>
+
+        {/* AI Tools */}
+        <section className="px-6 pb-16">
+          <div className="max-w-4xl mx-auto">
+            <div className="border-t border-border pt-12">
+              <div className="text-center mb-8">
+                <h2 className="font-heading font-semibold text-2xl mb-2">
+                  Run AI locally — no server, no API keys
+                </h2>
+                <p className="text-text-secondary">
+                  Summarize, rewrite, and explain — powered by an AI model
+                  running entirely in your browser.
+                </p>
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-4 mb-6">
+                <a
+                  href="/ai/summarize"
+                  className="group bg-bg-surface border border-border rounded-xl p-6 hover:border-border-hover transition-colors"
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="p-2 rounded-lg bg-accent/10">
+                      <Sparkles className="w-5 h-5 text-accent" />
+                    </div>
+                    <h3 className="font-heading font-semibold">Text Summarizer</h3>
+                  </div>
+                  <p className="text-text-tertiary text-sm">
+                    Paste long text and get a concise summary — powered by local AI
+                  </p>
+                </a>
+
+                <a
+                  href="/ai/rewrite"
+                  className="group bg-bg-surface border border-border rounded-xl p-6 hover:border-border-hover transition-colors"
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="p-2 rounded-lg bg-accent/10">
+                      <Cpu className="w-5 h-5 text-accent" />
+                    </div>
+                    <h3 className="font-heading font-semibold">Text Rewriter</h3>
+                  </div>
+                  <p className="text-text-tertiary text-sm">
+                    Rewrite text in different tones — formal, simple, shorter, or detailed
+                  </p>
+                </a>
+              </div>
+
+              <div className="text-center">
+                <a
+                  href="/ai"
+                  className="inline-flex items-center gap-2 text-accent hover:text-accent/80 font-medium text-sm transition-colors"
+                >
+                  See all AI tools
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
             </div>
           </div>
         </section>

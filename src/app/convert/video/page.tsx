@@ -3,7 +3,7 @@ import ConverterTabs from "@/components/ConverterTabs";
 import VideoConverter from "@/components/VideoConverter";
 
 export const metadata: Metadata = {
-  title: "Video Converter — ShipTools",
+  title: "Video Converter — ShipLocal",
   description:
     "Convert videos between MP4, WebM, and GIF. Resize, trim, and adjust quality. All processing happens locally in your browser.",
 };

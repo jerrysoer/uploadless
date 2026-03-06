@@ -114,7 +114,7 @@ export default function PDFSigner() {
         const pdfjs = await import("pdfjs-dist");
         pdfjs.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
-        const pdf = await pdfjs.getDocument({ data: new Uint8Array(pdfData) })
+        const pdf = await pdfjs.getDocument({ data: new Uint8Array(pdfData.slice(0)) })
           .promise;
         setNumPages(pdf.numPages);
 

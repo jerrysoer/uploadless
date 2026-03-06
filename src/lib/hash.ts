@@ -1,6 +1,6 @@
 import { createHash } from "crypto";
 
-const IP_HASH_SALT = process.env.IP_HASH_SALT || "shiptools-salt-2026";
+const IP_HASH_SALT = process.env.IP_HASH_SALT || "shiplocal-salt-2026";
 
 export function hashIp(ip: string): string {
   return createHash("sha256")

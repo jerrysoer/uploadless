@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import PasswordGenerator from "@/components/tools/PasswordGenerator";
 
 export const metadata: Metadata = {
-  title: "Password Generator — ShipTools",
+  title: "Password Generator — ShipLocal",
   description:
     "Generate strong passwords and passphrases with a strength meter. Cryptographically secure, runs entirely in your browser.",
 };

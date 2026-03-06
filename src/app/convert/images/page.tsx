@@ -3,7 +3,7 @@ import ConverterTabs from "@/components/ConverterTabs";
 import ImageConverter from "@/components/ImageConverter";
 
 export const metadata: Metadata = {
-  title: "Image Converter — ShipTools",
+  title: "Image Converter — ShipLocal",
   description: "Convert images between PNG, JPG, WebP, AVIF and more. All processing happens locally in your browser.",
 };
 

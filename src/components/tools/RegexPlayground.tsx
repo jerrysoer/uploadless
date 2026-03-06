@@ -1,8 +1,13 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { Regex } from "lucide-react";
 import ToolPageHeader from "@/components/tools/ToolPageHeader";
+import AIChip from "@/components/AIChip";
+import AIStreamOutput from "@/components/AIStreamOutput";
+import { useLocalAI } from "@/hooks/useLocalAI";
+import { PROMPTS } from "@/lib/ai/prompts";
+import { trackEvent } from "@/lib/analytics";
 
 interface MatchResult {
   value: string;
@@ -58,6 +63,46 @@ export default function RegexPlayground() {
   const [pattern, setPattern] = useState("");
   const [testStr, setTestStr] = useState("");
   const [flags, setFlags] = useState<Record<string, boolean>>({ g: true, i: false, m: false, s: false });
+  const [aiOutput, setAiOutput] = useState("");
+  const [isAiStreaming, setIsAiStreaming] = useState(false);
+  const [generateInput, setGenerateInput] = useState("");
+  const { streamInfer } = useLocalAI();
+
+  const explainRegex = useCallback(async () => {
+    if (!pattern) return;
+    setAiOutput("");
+    setIsAiStreaming(true);
+    try {
+      await streamInfer(
+        `Explain this regex: /${pattern}/${Object.entries(flags).filter(([, v]) => v).map(([k]) => k).join("")}`,
+        PROMPTS.regexExplainer,
+        (token) => setAiOutput((prev) => prev + token)
+      );
+      trackEvent("tool_used", { tool: "ai_regex_explainer" });
+    } catch {
+      setAiOutput("Failed to explain regex.");
+    } finally {
+      setIsAiStreaming(false);
+    }
+  }, [pattern, flags, streamInfer]);
+
+  const generateRegex = useCallback(async () => {
+    if (!generateInput.trim()) return;
+    setAiOutput("");
+    setIsAiStreaming(true);
+    try {
+      await streamInfer(
+        `Generate a regex that matches: ${generateInput}`,
+        PROMPTS.regexGenerator,
+        (token) => setAiOutput((prev) => prev + token)
+      );
+      trackEvent("tool_used", { tool: "ai_regex_generator" });
+    } catch {
+      setAiOutput("Failed to generate regex.");
+    } finally {
+      setIsAiStreaming(false);
+    }
+  }, [generateInput, streamInfer]);
 
   const flagStr = useMemo(() => Object.entries(flags).filter(([, v]) => v).map(([k]) => k).join(""), [flags]);
 
@@ -188,6 +233,41 @@ export default function RegexPlayground() {
               )}
             </div>
           </div>
+        </div>
+
+        {/* AI Section */}
+        <div className="bg-bg-surface border border-border rounded-xl p-5 space-y-4">
+          <div className="flex items-center justify-between">
+            <h3 className="font-heading font-semibold">AI Assistant</h3>
+            <AIChip
+              label="Explain regex"
+              onClick={explainRegex}
+              disabled={!pattern || isAiStreaming}
+            />
+          </div>
+
+          {/* Generate from description */}
+          <div>
+            <label className="block text-sm font-medium text-text-secondary mb-1.5">
+              Generate regex from description
+            </label>
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={generateInput}
+                onChange={(e) => setGenerateInput(e.target.value)}
+                placeholder='e.g., "email addresses" or "US phone numbers"'
+                className="flex-1 bg-bg-elevated border border-border rounded-lg px-3 py-2 text-sm placeholder:text-text-tertiary focus:outline-none focus:border-accent transition-colors"
+              />
+              <AIChip
+                label="Generate"
+                onClick={generateRegex}
+                disabled={!generateInput.trim() || isAiStreaming}
+              />
+            </div>
+          </div>
+
+          <AIStreamOutput content={aiOutput} isStreaming={isAiStreaming} />
         </div>
       </div>
     </div>

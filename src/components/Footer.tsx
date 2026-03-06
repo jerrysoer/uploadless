@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-text-tertiary text-sm">
         <div className="flex items-center gap-2">
           <SquareSlash className="w-4 h-4" />
-          <span>ShipTools — Privacy-first tools for the web</span>
+          <span>ShipLocal — Local-first productivity suite</span>
         </div>
         <div className="flex items-center gap-4">
           <span>No tracking. No uploads. No cookies.</span>

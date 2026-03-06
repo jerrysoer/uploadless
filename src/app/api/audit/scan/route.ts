@@ -67,7 +67,7 @@ export async function POST(req: NextRequest) {
 
     if (supabase) {
       const { data: cached } = await supabase
-        .from("st_audits")
+        .from("sl_audits")
         .select("*")
         .eq("domain", domain)
         .gt("expires_at", new Date().toISOString())
@@ -116,7 +116,7 @@ export async function POST(req: NextRequest) {
 
     // 6. Cache in Supabase
     if (supabase) {
-      await supabase.from("st_audits").upsert({
+      await supabase.from("sl_audits").upsert({
         id: slug,
         domain,
         display_url: domain,
@@ -128,7 +128,7 @@ export async function POST(req: NextRequest) {
       });
 
       // Log the request
-      await supabase.from("st_audit_requests").insert({
+      await supabase.from("sl_audit_requests").insert({
         domain,
         requested_by_ip: hashIp(clientIp),
       });

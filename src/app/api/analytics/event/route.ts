@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
 
     const country = req.headers.get("x-vercel-ip-country") ?? "unknown";
 
-    await supabase.from("st_analytics_events").insert({
+    await supabase.from("sl_analytics_events").insert({
       event: eventName,
       properties: body.properties ?? null,
       session_ip: hashIp(clientIp),

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Image, FileText, Music, Video, Layers, FileArchive, ShieldCheck } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Convert Files Locally — ShipTools",
+  title: "Convert Files Locally — ShipLocal",
   description:
     "Convert images, documents, audio, and video files entirely in your browser. No uploads, no servers, no tracking.",
 };

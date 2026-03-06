@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
 
     // Query yesterday's events grouped by event + country
     const { data: events, error: queryError } = await supabase
-      .from("st_analytics_events")
+      .from("sl_analytics_events")
       .select("event, country, session_id")
       .gte("created_at", `${dateStr}T00:00:00.000Z`)
       .lt("created_at", `${dateStr}T23:59:59.999Z`);
@@ -64,7 +64,7 @@ export async function GET(req: NextRequest) {
     });
 
     const { error: upsertError } = await supabase
-      .from("st_analytics_daily")
+      .from("sl_analytics_daily")
       .upsert(rows, { onConflict: "date,event,country" });
 
     if (upsertError) {
@@ -76,7 +76,7 @@ export async function GET(req: NextRequest) {
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
     await supabase
-      .from("st_analytics_events")
+      .from("sl_analytics_events")
       .delete()
       .lt("created_at", thirtyDaysAgo.toISOString());
 

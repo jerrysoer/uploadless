@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "ShipTools — Developer & Privacy Tools";
+export const alt = "ShipLocal — Developer & Privacy Tools";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -55,7 +55,7 @@ export default function OgImage() {
             marginBottom: 16,
           }}
         >
-          ShipTools
+          ShipLocal
         </div>
 
         {/* Subtitle */}
@@ -67,7 +67,7 @@ export default function OgImage() {
             textAlign: "center",
           }}
         >
-          Developer & privacy tools that run entirely in your browser
+          Local-first productivity suite — all in your browser
         </div>
       </div>
     ),

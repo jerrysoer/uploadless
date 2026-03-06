@@ -5,10 +5,10 @@ import { hasOptedOut } from "./consent";
 
 function getSessionId(): string {
   if (typeof sessionStorage === "undefined") return "unknown";
-  let id = sessionStorage.getItem("st_session_id");
+  let id = sessionStorage.getItem("sl_session_id");
   if (!id) {
     id = crypto.randomUUID();
-    sessionStorage.setItem("st_session_id", id);
+    sessionStorage.setItem("sl_session_id", id);
   }
   return id;
 }

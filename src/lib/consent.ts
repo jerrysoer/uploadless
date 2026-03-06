@@ -1,4 +1,4 @@
-const STORAGE_KEY = "st_analytics_consent";
+const STORAGE_KEY = "sl_analytics_consent";
 
 export type ConsentStatus = "accepted" | "declined" | "unknown";
 

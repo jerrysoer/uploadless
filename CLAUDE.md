@@ -1,6 +1,6 @@
-# ShipTools
+# ShipLocal
 
-Privacy auditor & local file converter. Scan any free online tool for cookies/trackers/ad networks and get an instant privacy grade. Convert images, documents, and audio entirely in-browser.
+Local-first productivity suite. 38+ developer tools, file converters, privacy auditor, and AI-powered assistants — all running in your browser. No uploads, no tracking.
 
 ## Stack
 
@@ -10,6 +10,7 @@ Privacy auditor & local file converter. Scan any free online tool for cookies/tr
 - Puppeteer (`puppeteer-core` + `@sparticuz/chromium`) for privacy scanning
 - wasm-vips (CDN) for image conversion, ffmpeg.wasm for audio
 - pdf-lib + mammoth + papaparse for document conversion
+- WebLLM (@mlc-ai/web-llm) for in-browser AI inference
 - Vercel deployment (Pro plan required for >10s function duration)
 
 ## Commands
@@ -22,22 +23,26 @@ Privacy auditor & local file converter. Scan any free online tool for cookies/tr
 
 - `src/lib/scanner/` — Puppeteer-based privacy scanner (server-only)
 - `src/lib/grading.ts` — Weighted scoring → A-F grade
+- `src/lib/ai/` — WebLLM engine, Ollama detection, AI prompts
 - `src/components/*Converter.tsx` — Client-side WASM converters
 - `src/hooks/useConverter.ts` — Shared job queue for all converters
+- `src/hooks/useLocalAI.ts` — React hook for AI state management
 
 ## Key Patterns
 
 - **COOP/COEP scoped to `/convert/*` only** — required for SharedArrayBuffer (ffmpeg.wasm), but breaks third-party resources on other pages
 - **WASM lazy-loaded** — wasm-vips and ffmpeg.wasm load only when user visits that converter tab
+- **AI lazy-loaded** — WebLLM model downloads only when user clicks "Load AI Model"
 - **Supabase graceful null** — all API routes work without Supabase configured
 - **SSRF prevention** — DNS resolution + private IP rejection before Puppeteer launch
 - **Rate limiting** — in-memory sliding window (10 scans/IP/hour)
 
-## Supabase Tables (st_ prefix)
+## Supabase Tables (sl_ prefix)
 
-- `st_audits` — cached scan results (24h TTL)
-- `st_audit_requests` — user audit requests (hashed IP)
-- `st_analytics_events` — fire-and-forget events (service-role only)
+- `sl_audits` — cached scan results (24h TTL)
+- `sl_audit_requests` — user audit requests (hashed IP)
+- `sl_analytics_events` — fire-and-forget events (service-role only)
+- `sl_analytics_daily` — daily rollup from raw events
 
 ## Environment Variables
 
