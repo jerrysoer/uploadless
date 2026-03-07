@@ -1,5 +1,12 @@
-import { redirect } from "next/navigation";
+"use client";
+
+import { Suspense } from "react";
+import AISummarizer from "@/components/tools/AISummarizer";
 
 export default function SummarizePage() {
-  redirect("/ai");
+  return (
+    <Suspense>
+      <AISummarizer />
+    </Suspense>
+  );
 }

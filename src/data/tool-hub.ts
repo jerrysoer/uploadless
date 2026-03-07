@@ -111,7 +111,7 @@ export const QUICK_TOOLS: QuickTool[] = [
     href: "/ai/summarize",
     icon: Sparkles,
     title: "Summarize",
-    description: "Condense text to key points",
+    description: "Condense text to key points or analyze privacy policies",
   },
   {
     href: "/ai/rewrite",
@@ -122,7 +122,7 @@ export const QUICK_TOOLS: QuickTool[] = [
 ];
 
 // ═══════════════════════════════════════════════════════════════════════
-// TAB 1: WRITE — 17 tools in accordion + 2 Quick AI = 19 total
+// TAB 1: WRITE — 16 tools in accordion + 2 Quick AI = 18 total
 // "I need to compose, analyze, or process text."
 // ═══════════════════════════════════════════════════════════════════════
 
@@ -132,7 +132,6 @@ export const WRITE_GROUPS: ToolHubGroup[] = [
     tools: [
       { href: "/ai/email", icon: Mail, title: "Email Composer", description: "Draft emails with tone control — professional, casual, follow-up.", ai: { tier: "Balanced+", capability: "email_compose" } },
       { href: "/ai/social", icon: Share2, title: "Social Post Generator", description: "Create platform-optimized posts for Twitter, LinkedIn, Instagram.", ai: { tier: "Balanced+", capability: "social_post" } },
-      { href: "/ai/privacy-policy", icon: Shield, title: "Privacy Policy Summarizer", description: "Analyze privacy policies for data collection, sharing, and red flags.", ai: { tier: "General+", capability: "privacy_policy" } },
       { href: "/ai/tech-writing", icon: PenTool, title: "Tech Writing Assistant", description: "Generate technical documentation and guides.", ai: { tier: "Ollama", capability: "tech_writing" } },
     ],
   },
@@ -314,7 +313,7 @@ const countTools = (groups: ToolHubGroup[]) =>
 const countAI = (groups: ToolHubGroup[]) =>
   groups.reduce((sum, g) => sum + g.tools.filter((t) => t.ai).length, 0);
 
-export const WRITE_TOOL_COUNT = countTools(WRITE_GROUPS) + QUICK_TOOLS.length; // 17 + 2 = 19
+export const WRITE_TOOL_COUNT = countTools(WRITE_GROUPS) + QUICK_TOOLS.length; // 16 + 2 = 18
 export const CODE_TOOL_COUNT = countTools(CODE_GROUPS);   // 29
 export const MEDIA_TOOL_COUNT = countTools(MEDIA_GROUPS);  // 15
 export const PROTECT_TOOL_COUNT = countTools(PROTECT_GROUPS); // 12

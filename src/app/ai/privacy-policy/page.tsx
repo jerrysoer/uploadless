@@ -1,7 +1,5 @@
-"use client";
-
-import PrivacyPolicySummarizer from "@/components/tools/PrivacyPolicySummarizer";
+import { redirect } from "next/navigation";
 
 export default function PrivacyPolicyPage() {
-  return <PrivacyPolicySummarizer />;
+  redirect("/ai/summarize?mode=privacy-policy");
 }
