@@ -81,3 +81,8 @@ ehthumbs.db
 
 # Build
 dist/
+
+# Internal docs (not for public repo)
+CLAUDE.md
+ROADMAP.md
+archive/
