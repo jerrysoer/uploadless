@@ -26,6 +26,13 @@ import {
   Eye,
   Mail,
   FileSearch,
+  ArrowLeftRight,
+  Database,
+  Network,
+  Ruler,
+  Monitor,
+  FileCheck,
+  Bot,
 } from "lucide-react";
 import EditorialRule from "@/components/EditorialRule";
 import ToolAccordion from "@/components/ToolAccordion";
@@ -43,6 +50,7 @@ const DEVELOPER_GROUPS = [
     label: "Encode & Transform",
     tools: [
       { href: "/tools/json", icon: Braces, title: "JSON Formatter", description: "Format, minify, validate, and convert JSON to CSV/YAML." },
+      { href: "/tools/format-convert", icon: ArrowLeftRight, title: "JSON / YAML / TOML Converter", description: "Convert between JSON, YAML, and TOML with auto-detection." },
       { href: "/tools/encode", icon: Binary, title: "Encode / Decode", description: "Base64, HTML entities, and URL encode/decode." },
       { href: "/tools/hash", icon: Hash, title: "Hash Calculator", description: "MD5, SHA-1, SHA-256, SHA-512 for text and files." },
       { href: "/tools/numbers", icon: Clock, title: "Number & Date Converter", description: "Number bases (bin, oct, hex) and Unix epoch timestamps." },
@@ -76,6 +84,23 @@ const DEVELOPER_GROUPS = [
       { href: "/tools/cron", icon: Clock, title: "Cron Expression Builder", description: "Build cron expressions visually with presets and human-readable output." },
       { href: "/tools/chmod", icon: Shield, title: "Chmod Calculator", description: "Calculate Unix file permissions with a visual checkbox grid." },
       { href: "/tools/diff", icon: GitCompare, title: "Text Diff / Compare", description: "Compare two texts side by side with highlighted additions and deletions." },
+    ],
+  },
+  {
+    label: "Data & DevOps",
+    tools: [
+      { href: "/tools/sql-format", icon: Database, title: "SQL Formatter", description: "Format, beautify, and minify SQL with dialect support." },
+      { href: "/tools/ip-calc", icon: Network, title: "IP / Subnet Calculator", description: "Calculate subnet details from CIDR notation or IP + mask." },
+      { href: "/tools/units", icon: Ruler, title: "Unit Converter", description: "Convert length, weight, temperature, data, time, and speed." },
+      { href: "/tools/useragent", icon: Monitor, title: "User-Agent Parser", description: "Parse UA strings for browser, OS, device type, and bot detection." },
+    ],
+  },
+  {
+    label: "Config & Security",
+    tools: [
+      { href: "/tools/env-validate", icon: FileCheck, title: ".env Validator", description: "Validate .env files for format, duplicates, missing values, and secrets." },
+      { href: "/tools/robots", icon: Bot, title: "robots.txt Generator", description: "Build robots.txt visually with AI crawler and SEO presets." },
+      { href: "/tools/csp", icon: Shield, title: "CSP Header Builder", description: "Build Content-Security-Policy headers with visual toggles and presets." },
     ],
   },
 ];

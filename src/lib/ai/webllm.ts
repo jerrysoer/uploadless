@@ -1,24 +1,7 @@
 import type { MLCEngine } from "@mlc-ai/web-llm";
 import type { AIStatus } from "./types";
-
-/** Tiered models: try largest first, fall through on OOM */
-const MODEL_TIERS = [
-  {
-    id: "Qwen2.5-3B-Instruct-q4f16_1-MLC",
-    name: "Qwen 2.5 3B",
-    sizeLabel: "~1.8 GB",
-  },
-  {
-    id: "Qwen2.5-1.5B-Instruct-q4f16_1-MLC",
-    name: "Qwen 2.5 1.5B",
-    sizeLabel: "~900 MB",
-  },
-  {
-    id: "Qwen2.5-0.5B-Instruct-q4f16_1-MLC",
-    name: "Qwen 2.5 0.5B",
-    sizeLabel: "~350 MB",
-  },
-] as const;
+import { MODEL_PACKS, getPackByModelId } from "./registry";
+import type { ModelSlug } from "./registry";
 
 // Module-level singleton
 let engine: MLCEngine | null = null;
@@ -39,46 +22,82 @@ export function isWebGPUSupported(): boolean {
 }
 
 /**
- * Load the best available model. Tries each tier in order.
- * Returns the loaded model info or throws if all tiers fail.
+ * Load a specific model by its WebLLM model ID.
+ * If the same model is already loaded, this is a no-op.
  */
-export async function loadBestModel(
-  onProgress?: ProgressCallback
+export async function loadModel(
+  modelId: string,
+  onProgress?: ProgressCallback,
 ): Promise<{ id: string; name: string; sizeLabel: string }> {
-  // Dynamic import to avoid SSR issues
+  // Already loaded — no-op
+  if (engine && loadedModelId === modelId) {
+    const pack = getPackByModelId(modelId);
+    return {
+      id: modelId,
+      name: pack?.name ?? modelId,
+      sizeLabel: pack?.sizeLabel ?? "",
+    };
+  }
+
+  // Switching models — unload first
+  if (engine && loadedModelId !== modelId) {
+    engine.unload();
+    engine = null;
+    loadedModelId = null;
+  }
+
+  const pack = getPackByModelId(modelId);
+  const label = pack?.name ?? modelId;
+  const sizeLabel = pack?.sizeLabel ?? "";
+
   const { CreateMLCEngine } = await import("@mlc-ai/web-llm");
 
-  for (const tier of MODEL_TIERS) {
+  onProgress?.({
+    status: "downloading",
+    progress: 0,
+    text: `Downloading ${label} (${sizeLabel})...`,
+  });
+
+  engine = await CreateMLCEngine(modelId, {
+    initProgressCallback: (report) => {
+      const pct = Math.round((report.progress ?? 0) * 100);
+      onProgress?.({
+        status: report.progress === 1 ? "loading" : "downloading",
+        progress: pct,
+        text: report.text,
+      });
+    },
+  });
+
+  loadedModelId = modelId;
+  onProgress?.({
+    status: "ready",
+    progress: 100,
+    text: `${label} ready`,
+  });
+
+  return { id: modelId, name: label, sizeLabel };
+}
+
+/**
+ * Legacy: load the best available model using auto-fallback.
+ * Tries each tier in order (largest → smallest).
+ * @deprecated Use loadModel() with a specific model ID instead.
+ */
+export async function loadBestModel(
+  onProgress?: ProgressCallback,
+): Promise<{ id: string; name: string; sizeLabel: string }> {
+  const fallbackOrder = [
+    "Qwen2.5-3B-Instruct-q4f16_1-MLC",
+    "Qwen2.5-1.5B-Instruct-q4f16_1-MLC",
+    "Qwen2.5-0.5B-Instruct-q4f16_1-MLC",
+  ];
+
+  for (const modelId of fallbackOrder) {
     try {
-      onProgress?.({
-        status: "downloading",
-        progress: 0,
-        text: `Downloading ${tier.name} (${tier.sizeLabel})...`,
-      });
-
-      engine = await CreateMLCEngine(tier.id, {
-        initProgressCallback: (report) => {
-          const pct = Math.round((report.progress ?? 0) * 100);
-          onProgress?.({
-            status: report.progress === 1 ? "loading" : "downloading",
-            progress: pct,
-            text: report.text,
-          });
-        },
-      });
-
-      loadedModelId = tier.id;
-      onProgress?.({
-        status: "ready",
-        progress: 100,
-        text: `${tier.name} ready`,
-      });
-
-      return { ...tier };
+      return await loadModel(modelId, onProgress);
     } catch (err) {
-      console.warn(`[webllm] Failed to load ${tier.name}:`, err);
-      engine = null;
-      // Continue to next tier
+      console.warn(`[webllm] Failed to load ${modelId}:`, err);
     }
   }
 
@@ -91,6 +110,21 @@ export async function loadBestModel(
 }
 
 /**
+ * Switch to a different model. Unloads current engine and loads the new one.
+ */
+export async function switchModel(
+  modelId: string,
+  onProgress?: ProgressCallback,
+): Promise<{ id: string; name: string; sizeLabel: string }> {
+  if (engine) {
+    engine.unload();
+    engine = null;
+    loadedModelId = null;
+  }
+  return loadModel(modelId, onProgress);
+}
+
+/**
  * Run inference with the loaded model.
  * Returns the complete response text.
  */
@@ -100,12 +134,11 @@ export async function chat(
     temperature?: number;
     max_tokens?: number;
     onToken?: (token: string) => void;
-  }
+  },
 ): Promise<string> {
-  if (!engine) throw new Error("No model loaded. Call loadBestModel() first.");
+  if (!engine) throw new Error("No model loaded. Call loadModel() first.");
 
   if (options?.onToken) {
-    // Streaming mode
     const chunks = await engine.chat.completions.create({
       messages,
       temperature: options.temperature ?? 0.7,
@@ -123,7 +156,6 @@ export async function chat(
     }
     return result;
   } else {
-    // Non-streaming mode
     const response = await engine.chat.completions.create({
       messages,
       temperature: options?.temperature ?? 0.7,
@@ -142,7 +174,62 @@ export function getLoadedModel(): string | null {
 }
 
 /**
- * Delete the cached model from IndexedDB and unload the engine.
+ * Probe IndexedDB for cached WebLLM model IDs.
+ * Returns slugs of models that have been downloaded.
+ */
+export async function getDownloadedModels(): Promise<ModelSlug[]> {
+  if (typeof indexedDB === "undefined") return [];
+
+  try {
+    const dbs = await indexedDB.databases();
+    const dbNames = dbs.map((db) => db.name ?? "");
+    const downloaded: ModelSlug[] = [];
+
+    for (const pack of MODEL_PACKS) {
+      // WebLLM caches model data in IndexedDB with the model ID in the db name
+      const isCached = dbNames.some(
+        (name) =>
+          name.includes(pack.model) ||
+          name.includes(pack.model.replace(/-/g, "_")),
+      );
+      if (isCached) {
+        downloaded.push(pack.slug);
+      }
+    }
+
+    return downloaded;
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * Delete a specific model from IndexedDB by its WebLLM model ID.
+ */
+export async function deleteSpecificModel(modelId: string): Promise<void> {
+  // Unload if this is the active model
+  if (engine && loadedModelId === modelId) {
+    engine.unload();
+    engine = null;
+    loadedModelId = null;
+  }
+
+  if (typeof indexedDB === "undefined") return;
+
+  const dbs = await indexedDB.databases();
+  for (const db of dbs) {
+    if (
+      db.name &&
+      (db.name.includes(modelId) ||
+        db.name.includes(modelId.replace(/-/g, "_")))
+    ) {
+      indexedDB.deleteDatabase(db.name);
+    }
+  }
+}
+
+/**
+ * Delete all cached models from IndexedDB and unload the engine.
  */
 export async function deleteModel(): Promise<void> {
   if (engine) {
@@ -151,7 +238,6 @@ export async function deleteModel(): Promise<void> {
   }
   loadedModelId = null;
 
-  // Clear IndexedDB caches used by WebLLM
   if (typeof indexedDB !== "undefined") {
     const dbs = await indexedDB.databases();
     for (const db of dbs) {
@@ -159,5 +245,27 @@ export async function deleteModel(): Promise<void> {
         indexedDB.deleteDatabase(db.name);
       }
     }
+  }
+}
+
+/**
+ * Get browser storage estimate (used + available).
+ */
+export async function getStorageEstimate(): Promise<{
+  used: number;
+  available: number;
+}> {
+  if (typeof navigator === "undefined" || !navigator.storage?.estimate) {
+    return { used: 0, available: 0 };
+  }
+
+  try {
+    const estimate = await navigator.storage.estimate();
+    return {
+      used: estimate.usage ?? 0,
+      available: estimate.quota ?? 0,
+    };
+  } catch {
+    return { used: 0, available: 0 };
   }
 }

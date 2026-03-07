@@ -6,7 +6,10 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "e2e": "npx playwright test",
+    "e2e:headed": "npx playwright test --headed",
+    "e2e:chromium": "npx playwright test --project=chromium"
   },
   "dependencies": {
     "@ffmpeg/ffmpeg": "^0.12.10",
@@ -32,13 +35,17 @@
     "qrcode": "^1.5.4",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "smol-toml": "^1.6.0",
     "spark-md5": "^3.0.2",
+    "sql-formatter": "^15.7.2",
     "tesseract.js": "^7.0.0",
     "xlsx": "^0.18.5",
     "zod": "^3.24.0",
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.11.1",
+    "@playwright/test": "^1.58.2",
     "@tailwindcss/postcss": "^4.1.0",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^22.0.0",

@@ -38,3 +38,12 @@ supabase/.temp/
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Claude Code
+.claude/sessions/
+.claude/settings.json
+
+# Playwright
+/test-results/
+/e2e/report/
+/playwright-report/

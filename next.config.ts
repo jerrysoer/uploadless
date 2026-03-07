@@ -41,6 +41,11 @@ const nextConfig: NextConfig = {
         source: "/tools/waveform/:path*",
         headers: coopCoepHeaders,
       },
+      {
+        // SharedArrayBuffer for Transformers.js / Whisper on AI pages
+        source: "/ai/:path*",
+        headers: coopCoepHeaders,
+      },
     ];
   },
 };

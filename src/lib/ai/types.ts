@@ -1,3 +1,5 @@
+import type { ModelSlug } from "./registry";
+
 export type AIProvider = "webllm" | "ollama";
 
 export type AIStatus =
@@ -35,17 +37,26 @@ export interface AIContextValue {
   progress: number;
   progressText: string;
   error: string | null;
+
+  // Model Store state
+  selectedSlug: ModelSlug | null;
+  downloadedSlugs: ModelSlug[];
+  storageUsed: number;
+  storageAvailable: number;
+
+  // Actions
   loadModel: () => Promise<void>;
   deleteModel: () => Promise<void>;
+  selectModel: (slug: ModelSlug) => Promise<void>;
   infer: (
     prompt: string,
     systemPrompt?: string,
-    options?: InferenceOptions
+    options?: InferenceOptions,
   ) => Promise<string>;
   streamInfer: (
     prompt: string,
     systemPrompt?: string,
     onToken?: (token: string) => void,
-    options?: InferenceOptions
+    options?: InferenceOptions,
   ) => Promise<string>;
 }
