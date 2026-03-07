@@ -1,8 +1,8 @@
-# ShipLocal: Complete Expansion Plan — Phased & Ranked
+# Uploadless: Complete Expansion Plan — Phased & Ranked
 
 ## Context
 
-ShipLocal (formerly ShipTools) has the audit scanner (F1-F2) and three converters (F3-F5) built. The PRD v1.1 defines 15 Phase 1 features (10 unbuilt), plus Phase 2-3 features. The Extended Ideas doc adds ~100 more tool ideas across 4 tiers. This plan ranks and groups everything — PRD features, Extended Ideas, and new research findings (video, PDF signing) — into three implementation phases.
+Uploadless has the audit scanner (F1-F2) and three converters (F3-F5) built. The PRD v1.1 defines 15 Phase 1 features (10 unbuilt), plus Phase 2-3 features. The Extended Ideas doc adds ~100 more tool ideas across 4 tiers. This plan ranks and groups everything — PRD features, Extended Ideas, and new research findings (video, PDF signing) — into three implementation phases.
 
 **Guiding principle:** Phase 1 should make someone say *"wait, this all runs in a BROWSER?"* and come back daily.
 
@@ -76,7 +76,7 @@ ShipLocal (formerly ShipTools) has the audit scanner (F1-F2) and three converter
 | F3 | **Consent Banner + Opt-Out** | Small | Inline banner (not modal), localStorage toggle, footer indicator, no dark patterns |
 | F4 | **Event Schema (7 events)** | Small | page_view, tool_opened, tool_used, scan_initiated, scan_completed, report_shared, telemetry_opted_out |
 
-Reference: Full spec in `ShipTools-Analytics-PRD-v2.md`
+Reference: Full spec in `archive/ShipTools-Analytics-PRD-v2.md`
 
 ### Phase 1 Summary
 
@@ -126,7 +126,7 @@ New deps: `xlsx` (~300KB), `exif-js` (~50KB), `spark-md5` (~10KB), `qrcode` (~50
 | G13 | **Markdown Editor** (dual-pane) | 2 | markdown-it (~100KB) |
 
 ### Group H: Privacy Brand Tools
-*Unique to ShipTools — "nobody else has this" privacy features.*
+*Unique to Uploadless — "nobody else has this" privacy features.*
 
 | # | Feature | Tier | New Deps |
 |---|---------|------|----------|
@@ -287,7 +287,7 @@ Recommended build order for highest-impact, most cohesive subset:
 2. **B1-B4** — Done-state UX (batch progress, banner, animations)
 3. **C1** — PDF signing (the differentiator)
 
-These three groups form a coherent story: *"ShipTools now converts everything — documents, images, audio, AND video — plus signs PDFs, all in your browser."*
+These three groups form a coherent story: *"Uploadless now converts everything — documents, images, audio, AND video — plus signs PDFs, all in your browser."*
 
 The remaining Phase 1 features (Groups D + E) are mostly small pure-JS tools that can be cranked out rapidly in a follow-up session.
 
