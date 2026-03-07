@@ -1,5 +1,7 @@
-import { redirect } from "next/navigation";
+"use client";
+
+import AIRewriter from "@/components/tools/AIRewriter";
 
 export default function RewritePage() {
-  redirect("/ai");
+  return <AIRewriter />;
 }
