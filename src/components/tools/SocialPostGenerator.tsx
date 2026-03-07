@@ -55,6 +55,7 @@ export default function SocialPostGenerator() {
         userMessage,
         PROMPTS.socialPostGenerator,
         (token) => setOutput((prev) => prev + token),
+        { maxTokens: 512 },
       );
       trackEvent("ai_tool_used", { tool: "social_post_generator" });
     } catch {

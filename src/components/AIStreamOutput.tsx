@@ -8,6 +8,13 @@ interface AIStreamOutputProps {
   className?: string;
 }
 
+/** Strip lone surrogates that small quantized models emit as broken emoji. */
+function sanitizeStreamText(text: string): string {
+  return text
+    .replace(/[\uD800-\uDBFF](?![\uDC00-\uDFFF])/g, "")
+    .replace(/(?<![\uD800-\uDBFF])[\uDC00-\uDFFF]/g, "");
+}
+
 /**
  * Reusable streaming text output component.
  * Shows token-by-token rendering with a blinking cursor during streaming.
@@ -33,7 +40,7 @@ export default function AIStreamOutput({
       ref={containerRef}
       className={`bg-bg-elevated border border-border rounded-xl p-4 text-sm text-text-primary leading-relaxed overflow-y-auto max-h-96 whitespace-pre-wrap ${className}`}
     >
-      {content}
+      {sanitizeStreamText(content)}
       {isStreaming && (
         <span className="inline-block w-1.5 h-4 bg-accent animate-pulse ml-0.5 align-text-bottom" />
       )}
