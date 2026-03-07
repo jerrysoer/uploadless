@@ -6,6 +6,13 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import AIStatusBadge from "@/components/AIStatusBadge";
 import ThemeToggle from "@/components/ThemeToggle";
+import { WRITE_GROUPS, QUICK_TOOLS } from "@/data/tool-hub";
+
+/** AI paths that belong under the Write tab (derived from tool-hub registry). */
+const WRITE_AI_PATHS = new Set<string>([
+  ...QUICK_TOOLS.map((t) => t.href),
+  ...WRITE_GROUPS.flatMap((g) => g.tools.map((t) => t.href)),
+]);
 
 export default function Header() {
   const pathname = usePathname();
@@ -14,6 +21,8 @@ export default function Header() {
   const isWrite = pathname.startsWith("/write");
   const isTools = pathname.startsWith("/tools");
   const isAI = pathname.startsWith("/ai");
+  const isWriteAI = isAI && WRITE_AI_PATHS.has(pathname);
+  const isCodeAI = isAI && !isWriteAI;
   const isMedia =
     pathname.startsWith("/media") ||
     pathname.startsWith("/record") ||
@@ -22,8 +31,8 @@ export default function Header() {
   const isProtect = pathname.startsWith("/protect");
 
   const navLinks = [
-    { href: "/write", label: "Write", active: isWrite },
-    { href: "/tools", label: "Code", active: isTools || isAI },
+    { href: "/write", label: "Write", active: isWrite || isWriteAI },
+    { href: "/tools", label: "Code", active: isTools || isCodeAI },
     { href: "/media", label: "Media", active: isMedia },
     { href: "/protect", label: "Protect", active: isProtect },
   ];
