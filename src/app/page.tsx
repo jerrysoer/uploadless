@@ -19,31 +19,31 @@ export default function HomePage() {
       <Header />
       <main className="flex-1">
         {/* Hero — editorial, left-aligned */}
-        <section className="px-6 pt-20 pb-16">
+        <section className="px-6 pt-12 pb-10 sm:pt-20 sm:pb-16">
           <div className="max-w-6xl mx-auto">
             <p className="font-mono text-xs tracking-widest uppercase text-text-tertiary mb-4">
               Local-first productivity suite
             </p>
-            <h1 className="font-heading font-bold text-5xl sm:text-6xl lg:text-7xl leading-[1.1] mb-6 max-w-4xl">
+            <h1 className="font-heading font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1] mb-4 sm:mb-6 max-w-4xl">
               45 tools that never
               <br />
               leave your browser
             </h1>
-            <p className="text-text-secondary text-lg sm:text-xl max-w-2xl leading-relaxed mb-10">
+            <p className="text-text-secondary text-base sm:text-lg md:text-xl max-w-2xl leading-relaxed mb-8 sm:mb-10">
               Hash, encrypt, convert, record, sign, and build — powered by
               WebAssembly and local AI. No uploads, no accounts, no tracking.
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
               <a
                 href="/tools"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-text-primary text-bg-primary font-medium transition-opacity hover:opacity-90"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-text-primary text-bg-primary font-medium transition-opacity hover:opacity-90 w-full sm:w-auto"
               >
                 Browse all tools
                 <ArrowRight className="w-4 h-4" />
               </a>
               <a
                 href="/ai"
-                className="inline-flex items-center gap-2 px-6 py-3 border-2 border-text-primary font-medium transition-colors hover:bg-bg-surface"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-text-primary font-medium transition-colors hover:bg-bg-surface w-full sm:w-auto"
               >
                 Try local AI
               </a>
@@ -63,7 +63,7 @@ export default function HomePage() {
         </div>
 
         {/* The Feature — Asymmetric layout */}
-        <section className="px-6 py-20">
+        <section className="px-6 py-12 sm:py-20">
           <div className="max-w-6xl mx-auto">
             <p className="font-mono text-xs tracking-widest uppercase text-text-tertiary mb-6">
               Featured
@@ -103,23 +103,23 @@ export default function HomePage() {
         </div>
 
         {/* Departments */}
-        <section className="px-6 py-20">
+        <section className="px-6 py-12 sm:py-20">
           <div className="max-w-6xl mx-auto">
             <p className="font-mono text-xs tracking-widest uppercase text-text-tertiary mb-2">
               Departments
             </p>
-            <h2 className="font-heading text-3xl sm:text-4xl font-semibold mb-10">
+            <h2 className="font-heading text-3xl sm:text-4xl font-semibold mb-6 sm:mb-10">
               Organized by purpose
             </h2>
 
             <div className="grid sm:grid-cols-2 gap-4">
               <DepartmentCard
                 number="01"
-                name="Convert"
-                toolCount={6}
-                description="Images, documents, audio, and video — all processed locally with WebAssembly. No uploads."
-                href="/convert"
-                deptColor="var(--color-dept-convert)"
+                name="AI-Powered"
+                toolCount={2}
+                description="Summarize and rewrite text using a local AI model. No server, no API keys, no data leaves your device."
+                href="/ai"
+                deptColor="var(--color-dept-ai)"
               />
               <DepartmentCard
                 number="02"
@@ -131,19 +131,19 @@ export default function HomePage() {
               />
               <DepartmentCard
                 number="03"
+                name="Convert"
+                toolCount={6}
+                description="Images, documents, audio, and video — all processed locally with WebAssembly. No uploads."
+                href="/convert"
+                deptColor="var(--color-dept-convert)"
+              />
+              <DepartmentCard
+                number="04"
                 name="Developer Tools"
                 toolCount={28}
                 description="Hash, encode, format, generate, diff, and inspect. The everyday toolkit for developers."
                 href="/tools"
                 deptColor="var(--color-dept-dev)"
-              />
-              <DepartmentCard
-                number="04"
-                name="AI-Powered"
-                toolCount={2}
-                description="Summarize and rewrite text using a local AI model. No server, no API keys, no data leaves your device."
-                href="/ai"
-                deptColor="var(--color-dept-ai)"
               />
             </div>
           </div>
@@ -154,13 +154,13 @@ export default function HomePage() {
         </div>
 
         {/* The Promise */}
-        <section className="px-6 py-20">
+        <section className="px-6 py-12 sm:py-20">
           <div className="max-w-6xl mx-auto">
-            <h2 className="font-heading text-3xl sm:text-4xl font-semibold mb-12 max-w-2xl">
+            <h2 className="font-heading text-3xl sm:text-4xl font-semibold mb-8 sm:mb-12 max-w-2xl">
               Your data never leaves your device. That&apos;s the entire point.
             </h2>
 
-            <div className="grid sm:grid-cols-3 gap-12">
+            <div className="grid sm:grid-cols-3 gap-6 sm:gap-12">
               <div>
                 <ShieldCheck className="w-6 h-6 mb-3 text-text-secondary" />
                 <h3 className="font-heading font-semibold text-lg mb-2">No Uploads</h3>

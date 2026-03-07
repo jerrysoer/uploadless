@@ -21,7 +21,7 @@ export default function DepartmentCard({
   return (
     <Link
       href={href}
-      className="group block bg-bg-surface p-6 transition-colors hover:bg-bg-elevated"
+      className="group block bg-bg-surface p-4 sm:p-6 transition-colors hover:bg-bg-elevated"
       style={{ borderLeft: `3px solid ${deptColor}` }}
     >
       <span
@@ -30,7 +30,7 @@ export default function DepartmentCard({
       >
         No. {number}
       </span>
-      <h3 className="font-heading text-2xl font-semibold mt-1 mb-2">{name}</h3>
+      <h3 className="font-heading text-xl sm:text-2xl font-semibold mt-1 mb-2">{name}</h3>
       <p className="text-text-secondary text-sm leading-relaxed mb-4">
         {description}
       </p>

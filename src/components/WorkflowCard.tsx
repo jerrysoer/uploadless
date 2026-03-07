@@ -5,7 +5,7 @@ import type { Workflow } from "@/data/workflows";
 export default function WorkflowCard({ number, title, summary, tools, deptColor }: Workflow) {
   return (
     <div
-      className="group relative flex-shrink-0 w-[300px] sm:w-[320px] bg-bg-surface p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg snap-start"
+      className="group relative flex-shrink-0 w-[280px] sm:w-[320px] bg-bg-surface p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg snap-start"
       style={{ borderLeft: `3px solid ${deptColor}` }}
     >
       <span className="font-mono text-xs tracking-widest text-text-tertiary uppercase">

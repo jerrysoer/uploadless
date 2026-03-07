@@ -20,10 +20,10 @@ export default function FeaturedToolCard({
     return (
       <Link
         href={href}
-        className="group block bg-bg-surface p-8 sm:p-10 transition-colors hover:bg-bg-elevated"
+        className="group block bg-bg-surface p-5 sm:p-8 md:p-10 transition-colors hover:bg-bg-elevated"
         style={{ borderTop: `4px solid ${deptColor}` }}
       >
-        <h3 className="font-heading text-3xl sm:text-4xl font-semibold mb-4 group-hover:text-accent transition-colors">
+        <h3 className="font-heading text-2xl sm:text-3xl md:text-4xl font-semibold mb-4 group-hover:text-accent transition-colors">
           {title}
         </h3>
         <p className="text-text-secondary text-lg leading-relaxed mb-6 max-w-lg">
@@ -40,7 +40,7 @@ export default function FeaturedToolCard({
   return (
     <Link
       href={href}
-      className="group block bg-bg-surface p-6 transition-colors hover:bg-bg-elevated"
+      className="group block bg-bg-surface p-4 sm:p-6 transition-colors hover:bg-bg-elevated"
       style={{ borderTop: `3px solid ${deptColor}` }}
     >
       <h3 className="font-heading text-xl font-semibold mb-2 group-hover:text-accent transition-colors">

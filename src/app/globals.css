@@ -227,3 +227,13 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Mobile nav drawer entrance */
+@keyframes slide-in-from-top {
+  0% { opacity: 0; transform: translateY(-8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.nav-drawer-enter {
+  animation: slide-in-from-top 0.2s ease-out forwards;
+}
