@@ -110,8 +110,14 @@ export default function ToolsPage() {
 
   return (
     <div>
-      {/* Header */}
+      {/* Header with editorial rule and department accent */}
       <div className="mb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-3 h-3 rounded-sm flex-shrink-0" style={{ backgroundColor: "var(--color-dept-dev)" }} />
+          <span className="font-mono text-xs tracking-widest uppercase text-text-tertiary">
+            Department No. 04
+          </span>
+        </div>
         <EditorialRule className="mb-6" />
         <h1 className="font-heading font-bold text-4xl mb-3">
           Developer & Privacy Tools

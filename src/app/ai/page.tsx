@@ -54,7 +54,7 @@ export default function AIPage() {
         <div className="flex items-center gap-3 mb-4">
           <div className="w-3 h-3 rounded-sm flex-shrink-0" style={{ backgroundColor: "var(--color-dept-ai)" }} />
           <span className="font-mono text-xs tracking-widest uppercase text-text-tertiary">
-            Department No. 04
+            Department No. 01
           </span>
         </div>
         <EditorialRule className="mb-6" />

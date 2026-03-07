@@ -76,7 +76,7 @@ export default function ConvertPage() {
         <div className="flex items-center gap-3 mb-4">
           <div className="w-3 h-3 rounded-sm flex-shrink-0" style={{ backgroundColor: "var(--color-dept-convert)" }} />
           <span className="font-mono text-xs tracking-widest uppercase text-text-tertiary">
-            Department No. 01
+            Department No. 03
           </span>
         </div>
         <EditorialRule className="mb-6" />
