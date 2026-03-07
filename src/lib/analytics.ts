@@ -3,12 +3,23 @@
 import type { AnalyticsEvent, AnalyticsEventName } from "./types";
 import { hasOptedOut } from "./consent";
 
+const SESSION_KEY = "bs_session_id";
+const LEGACY_SESSION_KEY = "sl_session_id";
+
 function getSessionId(): string {
   if (typeof sessionStorage === "undefined") return "unknown";
-  let id = sessionStorage.getItem("sl_session_id");
+
+  // Migrate legacy key
+  const legacy = sessionStorage.getItem(LEGACY_SESSION_KEY);
+  if (legacy && !sessionStorage.getItem(SESSION_KEY)) {
+    sessionStorage.setItem(SESSION_KEY, legacy);
+  }
+  if (legacy) sessionStorage.removeItem(LEGACY_SESSION_KEY);
+
+  let id = sessionStorage.getItem(SESSION_KEY);
   if (!id) {
     id = crypto.randomUUID();
-    sessionStorage.setItem("sl_session_id", id);
+    sessionStorage.setItem(SESSION_KEY, id);
   }
   return id;
 }

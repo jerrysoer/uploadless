@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Number & Date Converter — ShipLocal",
+  title: "Number & Date Converter — BrowserShip",
   description:
     "Convert between number bases and Unix timestamps — all in your browser.",
 };

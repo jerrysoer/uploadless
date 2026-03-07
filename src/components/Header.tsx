@@ -56,7 +56,7 @@ export default function Header() {
       <div className="max-w-6xl mx-auto flex items-center justify-between">
         <Link href="/" className="group">
           <span className="font-heading font-bold text-lg tracking-[0.2em] uppercase">
-            ShipLocal
+            BrowserShip
           </span>
         </Link>
 

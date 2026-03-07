@@ -1,4 +1,14 @@
-const STORAGE_KEY = "sl_analytics_consent";
+const STORAGE_KEY = "bs_analytics_consent";
+const LEGACY_KEY = "sl_analytics_consent";
+
+// Migrate legacy key on load
+if (typeof window !== "undefined") {
+  const legacy = localStorage.getItem(LEGACY_KEY);
+  if (legacy && !localStorage.getItem(STORAGE_KEY)) {
+    localStorage.setItem(STORAGE_KEY, legacy);
+  }
+  if (legacy) localStorage.removeItem(LEGACY_KEY);
+}
 
 export type ConsentStatus = "accepted" | "declined" | "unknown";
 

@@ -420,7 +420,7 @@ function downloadCSV(data: DailyRow[], days: number) {
 
   const a = document.createElement("a");
   a.href = url;
-  a.download = `shiplocal-analytics-${startDate}-${endDate}.csv`;
+  a.download = `browsership-analytics-${startDate}-${endDate}.csv`;
   a.click();
   URL.revokeObjectURL(url);
 }

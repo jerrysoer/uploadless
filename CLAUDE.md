@@ -1,4 +1,4 @@
-# ShipLocal
+# BrowserShip
 
 Local-first productivity suite. 38+ developer tools, file converters, privacy auditor, and AI-powered assistants — all running in your browser. No uploads, no tracking.
 
@@ -37,12 +37,12 @@ Local-first productivity suite. 38+ developer tools, file converters, privacy au
 - **SSRF prevention** — DNS resolution + private IP rejection before Puppeteer launch
 - **Rate limiting** — in-memory sliding window (10 scans/IP/hour)
 
-## Supabase Tables (sl_ prefix)
+## Supabase Tables (bs_ prefix)
 
-- `sl_audits` — cached scan results (24h TTL)
-- `sl_audit_requests` — user audit requests (hashed IP)
-- `sl_analytics_events` — fire-and-forget events (service-role only)
-- `sl_analytics_daily` — daily rollup from raw events
+- `bs_audits` — cached scan results (24h TTL)
+- `bs_audit_requests` — user audit requests (hashed IP)
+- `bs_analytics_events` — fire-and-forget events (service-role only)
+- `bs_analytics_daily` — daily rollup from raw events
 
 ## Environment Variables
 

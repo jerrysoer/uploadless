@@ -29,7 +29,7 @@ export default function ScanProgress({ domain, isActive }: ScanProgressProps) {
   useEffect(() => {
     if (!isActive) return;
 
-    setLines([`$ shiplocal audit ${domain}`]);
+    setLines([`$ browsership audit ${domain}`]);
     setProgress(0);
 
     let idx = 0;

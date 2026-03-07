@@ -256,7 +256,7 @@ export default function JsonFormatter() {
     setInput(
       JSON.stringify(
         {
-          name: "ShipLocal",
+          name: "BrowserShip",
           version: "0.1.0",
           tools: ["JSON Formatter", "QR Generator", "Hash Calculator"],
           config: { theme: "dark", locale: "en-US" },

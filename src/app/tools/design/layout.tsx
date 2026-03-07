@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Color & Design Tools — ShipLocal",
+  title: "Color & Design Tools — BrowserShip",
   description:
     "Check contrast ratios, generate CSS gradients, and extract color palettes — all in your browser.",
 };

@@ -1,12 +1,12 @@
-# ShipLocal
+# BrowserShip
 
 Local-first productivity suite — 40+ tools that run entirely in your browser. No uploads, no accounts, no tracking.
 
-**[shiplocal.vercel.app](https://shiplocal.vercel.app)**
+**[browsership.dev](https://browsership.dev)**
 
 ## What is this?
 
-ShipLocal is a collection of developer tools, file converters, recorders, and AI assistants that process everything locally using WebAssembly and browser APIs. Your files never leave your device.
+BrowserShip is a collection of developer tools, file converters, recorders, and AI assistants that process everything locally using WebAssembly and browser APIs. Your files never leave your device.
 
 ## Departments
 

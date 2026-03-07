@@ -4,7 +4,7 @@ import ToolPageHeader from "@/components/tools/ToolPageHeader";
 import PDFSigner from "@/components/PDFSigner";
 
 export const metadata: Metadata = {
-  title: "Sign PDFs — ShipLocal",
+  title: "Sign PDFs — BrowserShip",
   description:
     "Sign PDFs, fill form fields, and add text annotations — entirely in your browser. No server, no account, no uploads.",
 };

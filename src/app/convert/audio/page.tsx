@@ -3,7 +3,7 @@ import ConverterTabs from "@/components/ConverterTabs";
 import AudioConverter from "@/components/AudioConverter";
 
 export const metadata: Metadata = {
-  title: "Audio Converter — ShipLocal",
+  title: "Audio Converter — BrowserShip",
   description: "Convert audio between MP3, WAV, OGG, AAC, FLAC. Adjust bitrate. All processing happens locally.",
 };
 

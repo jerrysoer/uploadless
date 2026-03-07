@@ -1,12 +1,12 @@
-# ShipLocal — Comprehensive Project Status
+# BrowserShip — Comprehensive Project Status
 
-> **Purpose:** Self-contained technical snapshot of the ShipLocal project — what's built, how it works, what broke along the way, and where it's going. Written for upload to Claude for further thinking.
+> **Purpose:** Self-contained technical snapshot of the BrowserShip project — what's built, how it works, what broke along the way, and where it's going. Written for upload to Claude for further thinking.
 
 ---
 
 ## 1. Project Overview
 
-**ShipLocal** is a privacy-first developer tool platform that runs entirely in the browser. The core thesis: every free online tool (converters, formatters, generators) uploads your files to a server you don't control. ShipLocal does everything client-side with WASM, Web Crypto, and Canvas APIs — zero server uploads.
+**BrowserShip** is a privacy-first developer tool platform that runs entirely in the browser. The core thesis: every free online tool (converters, formatters, generators) uploads your files to a server you don't control. BrowserShip does everything client-side with WASM, Web Crypto, and Canvas APIs — zero server uploads.
 
 The one exception is the **Privacy Auditor**, which necessarily runs server-side (Puppeteer) to scan websites for trackers, cookies, and ad networks, grading them A–F.
 
@@ -73,7 +73,7 @@ Server-side Puppeteer scanner that audits any website for privacy risks.
 **Scan Flow:**
 1. Validate URL (Zod) → SSRF check (DNS resolve, private IP rejection)
 2. Rate limit check (10/IP/hour, in-memory sliding window)
-3. Cache lookup in `sl_audits` (24h TTL)
+3. Cache lookup in `bs_audits` (24h TTL)
 4. Launch Puppeteer (`@sparticuz/chromium` on Vercel, fallback chain locally)
 5. Set request interception → block images/fonts/media for speed
 6. Navigate with `networkidle2` + 2s extra wait for lazy-loaded trackers
@@ -320,8 +320,8 @@ src/
 ### 3.2 Supabase Schema (4 Tables)
 
 ```sql
--- sl_audits: Cached scan results (24h TTL)
-CREATE TABLE sl_audits (
+-- bs_audits: Cached scan results (24h TTL)
+CREATE TABLE bs_audits (
   id TEXT PRIMARY KEY,             -- slug e.g. "google-com"
   domain TEXT NOT NULL,
   display_url TEXT NOT NULL,
@@ -334,8 +334,8 @@ CREATE TABLE sl_audits (
 -- Indexes: domain, expires_at
 -- RLS: public read, service-role write
 
--- sl_audit_requests: User audit request log
-CREATE TABLE sl_audit_requests (
+-- bs_audit_requests: User audit request log
+CREATE TABLE bs_audit_requests (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   domain TEXT NOT NULL,
   requested_by_ip TEXT NOT NULL,   -- SHA-256 hashed, 16-char truncated
@@ -344,8 +344,8 @@ CREATE TABLE sl_audit_requests (
 -- Index: domain
 -- RLS: public insert only
 
--- sl_analytics_events: Raw fire-and-forget events
-CREATE TABLE sl_analytics_events (
+-- bs_analytics_events: Raw fire-and-forget events
+CREATE TABLE bs_analytics_events (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   event TEXT NOT NULL,
   properties JSONB DEFAULT '{}',
@@ -358,8 +358,8 @@ CREATE TABLE sl_analytics_events (
 -- RLS: service-role only
 -- 30-day retention (cron cleanup)
 
--- sl_analytics_daily: Pre-aggregated daily rollup
-CREATE TABLE sl_analytics_daily (
+-- bs_analytics_daily: Pre-aggregated daily rollup
+CREATE TABLE bs_analytics_daily (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   date DATE NOT NULL,
   event TEXT NOT NULL,
@@ -721,11 +721,11 @@ These 6 tools were originally Phase 2 Group G items but were pulled forward.
 ### Database
 | File | Purpose |
 |------|---------|
-| `supabase/migrations/20260304193001_create_sl_audits.sql` | Audit cache table |
-| `supabase/migrations/20260304193002_create_sl_audit_requests.sql` | Audit request log |
+| `supabase/migrations/20260304193001_create_bs_audits.sql` | Audit cache table |
+| `supabase/migrations/20260304193002_create_bs_audit_requests.sql` | Audit request log |
 | `supabase/migrations/20260304193003_create_st_analytics.sql` | Raw analytics events |
 | `supabase/migrations/20260305120001_add_analytics_session_country.sql` | Session + country columns |
-| `supabase/migrations/20260305120002_create_sl_analytics_daily.sql` | Daily aggregation table |
+| `supabase/migrations/20260305120002_create_bs_analytics_daily.sql` | Daily aggregation table |
 
 ---
 
@@ -735,7 +735,7 @@ These 6 tools were originally Phase 2 Group G items but were pulled forward.
 |----------|----------|---------|---------|
 | `SUPABASE_URL` | For DB features | — | Supabase project URL |
 | `SUPABASE_SERVICE_ROLE_KEY` | For DB features | — | Supabase admin key |
-| `IP_HASH_SALT` | No | `"shiplocal-salt-2026"` | Salt for IP privacy hashing |
+| `IP_HASH_SALT` | No | `"browsership-salt-2026"` | Salt for IP privacy hashing |
 | `AUTH_USER` | For admin | — | Dashboard HTTP Basic Auth username |
 | `AUTH_PASSWORD` | For admin | — | Dashboard HTTP Basic Auth password |
 | `CRON_SECRET` | For analytics | — | Bearer token for aggregate cron |
@@ -746,17 +746,17 @@ These 6 tools were originally Phase 2 Group G items but were pulled forward.
 ## 11. Commit History
 
 ```
-6e87951 fix(shiplocal): Downgrade pdfjs-dist v5 → v4.10.38 for browser compat
-a205ce8 fix(shiplocal): Fix PDF render - switch worker CDN to jsdelivr, add canvasContext
-298da73 feat(shiplocal): Add Phase 2 tools — contrast, gradient, SVG→React, regex, wordcount, case
-a6b0ea4 fix(shiplocal): Replace toBlobURL with direct CDN for pdfjs worker
-1ce3ff5 fix(shiplocal): Fix PDF signer, footer logo, video trimming; rename /admin to /dashboard
-9fb66d3 feat(shiplocal): Hide audit, redesign homepage, add analytics pipeline + admin dashboard
-27678da feat(shiplocal): Update metadata, add analytics roadmap, speed up video converter
-b125cb4 feat(shiplocal): Move PDF/ZIP to /convert, fix audit scanner, rebrand logo
-d015324 feat(shiplocal): Add 16 developer/privacy tools with unified design system
-ba5371f feat(shiplocal): Add video converter, PDF signer, batch UX, and converter expansions
+6e87951 fix(browsership): Downgrade pdfjs-dist v5 → v4.10.38 for browser compat
+a205ce8 fix(browsership): Fix PDF render - switch worker CDN to jsdelivr, add canvasContext
+298da73 feat(browsership): Add Phase 2 tools — contrast, gradient, SVG→React, regex, wordcount, case
+a6b0ea4 fix(browsership): Replace toBlobURL with direct CDN for pdfjs worker
+1ce3ff5 fix(browsership): Fix PDF signer, footer logo, video trimming; rename /admin to /dashboard
+9fb66d3 feat(browsership): Hide audit, redesign homepage, add analytics pipeline + admin dashboard
+27678da feat(browsership): Update metadata, add analytics roadmap, speed up video converter
+b125cb4 feat(browsership): Move PDF/ZIP to /convert, fix audit scanner, rebrand logo
+d015324 feat(browsership): Add 16 developer/privacy tools with unified design system
+ba5371f feat(browsership): Add video converter, PDF signer, batch UX, and converter expansions
 49ab4b5 fix: add missing @types/react and @types/react-dom to devDependencies
 2710c00 chore: rename migrations with Supabase timestamps and push to remote
-656e358 feat: ShipLocal Phase 1 MVP — privacy auditor & local file converter
+656e358 feat: BrowserShip Phase 1 MVP — privacy auditor & local file converter
 ```

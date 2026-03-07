@@ -12,7 +12,7 @@ async function getAudit(slug: string): Promise<AuditResult | null> {
   if (!supabase) return null;
 
   const { data } = await supabase
-    .from("sl_audits")
+    .from("bs_audits")
     .select("*")
     .eq("id", slug)
     .single();
@@ -37,10 +37,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const displayDomain = slug.replace(/-/g, ".");
 
   if (!audit) {
-    return { title: `Audit: ${displayDomain} — ShipLocal` };
+    return { title: `Audit: ${displayDomain} — BrowserShip` };
   }
 
-  const title = `${displayDomain} gets a ${audit.grade} — ShipLocal Privacy Audit`;
+  const title = `${displayDomain} gets a ${audit.grade} — BrowserShip Privacy Audit`;
   const description = `${audit.scan.cookies.thirdParty} third-party cookies, ${audit.scan.thirdPartyDomains.total} third-party domains, and ${audit.scan.trackers.advertising.length} ad networks found.`;
 
   return {

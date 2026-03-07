@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import HashCalculator from "@/components/tools/HashCalculator";
 
 export const metadata: Metadata = {
-  title: "Hash Calculator — ShipLocal",
+  title: "Hash Calculator — BrowserShip",
   description:
     "Compute MD5, SHA-1, SHA-256, and SHA-512 hashes for text or files. Verify checksums instantly — all in your browser.",
 };

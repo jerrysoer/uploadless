@@ -84,7 +84,7 @@ export async function POST(req: NextRequest) {
       ? body.device_type
       : "unknown";
 
-    await supabase.from("sl_analytics_events").insert({
+    await supabase.from("bs_analytics_events").insert({
       event: eventName,
       properties: sanitizeProperties(body.properties),
       session_ip: hashIp(clientIp),

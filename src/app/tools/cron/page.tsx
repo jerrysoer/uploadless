@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import CronBuilder from "@/components/tools/CronBuilder";
 
 export const metadata: Metadata = {
-  title: "Cron Expression Builder — ShipLocal",
+  title: "Cron Expression Builder — BrowserShip",
   description:
     "Build cron expressions visually with dropdowns, presets, and a human-readable explanation. All processing happens locally in your browser.",
 };

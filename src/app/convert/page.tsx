@@ -4,7 +4,7 @@ import { Image, FileText, Music, Video, Layers, FileSignature, Camera, FileArchi
 import EditorialRule from "@/components/EditorialRule";
 
 export const metadata: Metadata = {
-  title: "Convert Files Locally — ShipLocal",
+  title: "Convert Files Locally — BrowserShip",
   description:
     "Convert images, documents, audio, and video files entirely in your browser. No uploads, no servers, no tracking.",
 };

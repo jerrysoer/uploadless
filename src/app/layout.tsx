@@ -5,11 +5,11 @@ import PageViewTracker from "@/components/PageViewTracker";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "ShipLocal — Local-first productivity suite",
+  title: "BrowserShip — Local-first productivity suite",
   description:
     "Developer & privacy tools that run entirely in your browser. Hash, encrypt, convert, sign — no uploads, no tracking.",
   openGraph: {
-    title: "ShipLocal — Local-first productivity suite",
+    title: "BrowserShip — Local-first productivity suite",
     description:
       "Developer & privacy tools that run entirely in your browser. Hash, encrypt, convert, sign — no uploads, no tracking.",
     type: "website",

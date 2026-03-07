@@ -18,7 +18,7 @@ export async function GET() {
     ).toISOString().split("T")[0];
 
     const { data, error } = await supabase
-      .from("sl_analytics_daily")
+      .from("bs_analytics_daily")
       .select("date, event, country, count, unique_sessions, properties_summary")
       .gte("date", thirtyDaysAgo);
 

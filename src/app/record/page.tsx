@@ -8,7 +8,7 @@ import {
 import EditorialRule from "@/components/EditorialRule";
 
 export const metadata: Metadata = {
-  title: "Record & Capture — ShipLocal",
+  title: "Record & Capture — BrowserShip",
   description:
     "Screen recordings, audio capture, and meeting notes. All processed locally.",
 };

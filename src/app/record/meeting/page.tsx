@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import MeetingRecorder from "@/components/recording/MeetingRecorder";
 
 export const metadata: Metadata = {
-  title: "Meeting Recorder — ShipLocal",
+  title: "Meeting Recorder — BrowserShip",
   description:
     "Record, transcribe, and summarize meetings. Export as ZIP with audio, transcript, and summary.",
 };
