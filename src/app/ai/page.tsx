@@ -1,6 +1,5 @@
 "use client";
 
-import type { Metadata } from "next";
 import Link from "next/link";
 import {
   Sparkles,
@@ -12,6 +11,7 @@ import {
   PenLine,
 } from "lucide-react";
 import { useLocalAI } from "@/hooks/useLocalAI";
+import EditorialRule from "@/components/EditorialRule";
 
 const AI_TOOLS = [
   {
@@ -44,27 +44,32 @@ export default function AIHubPage() {
 
   return (
     <div>
-      {/* Hero */}
-      <div className="text-center mb-10 py-2">
-        <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-accent/10 mb-5">
-          <Sparkles className="w-7 h-7 text-accent" />
+      {/* Header with editorial rule and department accent */}
+      <div className="mb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-3 h-3 rounded-sm flex-shrink-0" style={{ backgroundColor: "var(--color-dept-ai)" }} />
+          <span className="font-mono text-xs tracking-widest uppercase text-text-tertiary">
+            Department No. 04
+          </span>
         </div>
-        <h1 className="font-heading font-bold text-3xl mb-3">
+        <EditorialRule className="mb-6" />
+        <h1 className="font-heading font-bold text-4xl mb-3">
           Local AI Tools
         </h1>
-        <p className="text-text-secondary mb-4">
+        <p className="text-text-secondary max-w-xl">
           Run AI models directly in your browser. No server, no API keys, no
           data leaves your device.
         </p>
       </div>
 
-      {/* Model Status Card */}
-      <div className="bg-bg-surface border border-border rounded-xl p-6 mb-8">
+      {/* Model Status Card — editorial style */}
+      <div
+        className="p-6 mb-10 border-b border-border"
+        style={{ borderTop: "3px solid var(--color-dept-ai)" }}
+      >
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-accent/10">
-              <Cpu className="w-5 h-5 text-accent" />
-            </div>
+            <Cpu className="w-5 h-5 text-text-tertiary" />
             <div>
               <h2 className="font-heading font-semibold">AI Model</h2>
               <p className="text-text-tertiary text-sm">
@@ -78,7 +83,7 @@ export default function AIHubPage() {
           {isReady && provider === "webllm" && (
             <button
               onClick={deleteModel}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-text-tertiary hover:text-grade-f border border-border rounded-lg transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-text-tertiary hover:text-grade-f border border-border transition-colors"
             >
               <Trash2 className="w-3.5 h-3.5" />
               Delete cached model
@@ -87,7 +92,7 @@ export default function AIHubPage() {
         </div>
 
         {!isSupported && (
-          <div className="flex items-start gap-3 p-4 rounded-lg bg-grade-f/5 border border-grade-f/20">
+          <div className="flex items-start gap-3 p-4 bg-grade-f/5 border border-grade-f/20">
             <AlertCircle className="w-5 h-5 text-grade-f shrink-0 mt-0.5" />
             <div className="text-sm">
               <p className="font-medium text-grade-f mb-1">
@@ -115,7 +120,7 @@ export default function AIHubPage() {
           <button
             onClick={loadModel}
             disabled={status === "checking"}
-            className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-accent hover:bg-accent/90 text-accent-fg rounded-lg font-medium transition-colors disabled:opacity-50"
+            className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-text-primary text-bg-primary font-medium transition-opacity hover:opacity-90 disabled:opacity-50"
           >
             <Download className="w-4 h-4" />
             Load AI Model
@@ -128,10 +133,10 @@ export default function AIHubPage() {
               <span>{progressText}</span>
               <span>{progress}%</span>
             </div>
-            <div className="h-2 bg-bg-elevated rounded-full overflow-hidden">
+            <div className="h-1 bg-bg-elevated overflow-hidden">
               <div
-                className="h-full bg-accent transition-all duration-300 rounded-full"
-                style={{ width: `${progress}%` }}
+                className="h-full transition-all duration-300"
+                style={{ width: `${progress}%`, backgroundColor: "var(--color-dept-ai)" }}
               />
             </div>
           </div>
@@ -147,29 +152,32 @@ export default function AIHubPage() {
         )}
 
         {error && (
-          <div className="flex items-start gap-2 p-3 rounded-lg bg-grade-f/5 border border-grade-f/20 text-sm">
+          <div className="flex items-start gap-2 p-3 bg-grade-f/5 border border-grade-f/20 text-sm">
             <AlertCircle className="w-4 h-4 text-grade-f shrink-0 mt-0.5" />
             <span className="text-text-secondary">{error}</span>
           </div>
         )}
       </div>
 
-      {/* AI Tools Grid */}
-      <h2 className="font-heading font-semibold text-lg text-text-secondary mb-3">
-        AI-Powered Tools
-      </h2>
-      <div className="grid gap-3">
+      {/* AI Tools — editorial list */}
+      <div className="flex items-center gap-3 mb-4">
+        <div className="w-3 h-3 rounded-sm flex-shrink-0" style={{ backgroundColor: "var(--color-dept-ai)" }} />
+        <span className="font-mono text-xs tracking-widest uppercase text-text-tertiary">
+          AI-Powered · {AI_TOOLS.length} tools
+        </span>
+      </div>
+
+      <div>
         {AI_TOOLS.map((tool) => (
           <Link
             key={tool.href}
             href={tool.href}
-            className="group flex items-start gap-4 bg-bg-surface border border-border rounded-xl p-5 hover:border-border-hover transition-colors"
+            className="group flex items-start gap-4 py-5 border-b border-border hover:bg-bg-surface transition-colors -mx-3 px-3"
+            style={{ borderLeftWidth: "3px", borderLeftColor: "var(--color-dept-ai)" }}
           >
-            <div className="p-2.5 rounded-xl bg-accent/10 group-hover:bg-accent/15 transition-colors">
-              <tool.icon className="w-5 h-5 text-accent" />
-            </div>
+            <tool.icon className="w-5 h-5 text-text-tertiary group-hover:text-text-secondary transition-colors flex-shrink-0 mt-0.5" />
             <div>
-              <h3 className="font-heading font-semibold mb-0.5">
+              <h3 className="font-heading font-semibold text-lg mb-1 group-hover:text-accent transition-colors">
                 {tool.title}
               </h3>
               <p className="text-text-secondary text-sm">
@@ -181,7 +189,7 @@ export default function AIHubPage() {
       </div>
 
       {/* Note */}
-      <p className="text-text-tertiary text-xs text-center mt-8">
+      <p className="text-text-tertiary text-xs mt-10">
         AI models run entirely in your browser using WebGPU. The first load
         downloads ~1–2 GB to your local cache. No data is sent to any server.
       </p>

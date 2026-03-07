@@ -1,14 +1,16 @@
 import Link from "next/link";
-import { SquareSlash } from "lucide-react";
 import AnalyticsStatus from "@/components/AnalyticsStatus";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-border mt-auto px-6 py-8">
+    <footer className="mt-auto px-6 py-8 border-t-4 border-text-primary">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-text-tertiary text-sm">
-        <div className="flex items-center gap-2">
-          <SquareSlash className="w-4 h-4" />
-          <span>ShipLocal — Local-first productivity suite</span>
+        <div>
+          <span className="font-heading font-semibold tracking-[0.15em] uppercase text-text-secondary">
+            ShipLocal
+          </span>
+          <span className="mx-2">·</span>
+          <span>{new Date().getFullYear()}</span>
         </div>
         <div className="flex items-center gap-4">
           <Link
@@ -17,6 +19,7 @@ export default function Footer() {
           >
             Transparency
           </Link>
+          <span className="text-text-tertiary">·</span>
           <span>No tracking. No uploads. No cookies.</span>
           <AnalyticsStatus />
         </div>

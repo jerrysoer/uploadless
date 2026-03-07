@@ -2,15 +2,15 @@
 
 @theme {
   /* Background — dark defaults (Tailwind generates utility classes from these) */
-  --color-bg-primary: #0F0F0F;
-  --color-bg-surface: #1A1918;
-  --color-bg-elevated: #252321;
-  --color-bg-hover: #2E2B28;
+  --color-bg-primary: #151311;
+  --color-bg-surface: #1E1B18;
+  --color-bg-elevated: #282420;
+  --color-bg-hover: #332E29;
 
   /* Text */
-  --color-text-primary: #E5E0DB;
-  --color-text-secondary: #8C8580;
-  --color-text-tertiary: #5C5652;
+  --color-text-primary: #ECE8E2;
+  --color-text-secondary: #9B9590;
+  --color-text-tertiary: #6B6560;
 
   /* Grades */
   --color-grade-a: #22C55E;
@@ -20,59 +20,80 @@
   --color-grade-f: #EF4444;
 
   /* Accent */
-  --color-accent: #F87171;
-  --color-accent-hover: #EF4444;
+  --color-accent: #D4704A;
+  --color-accent-hover: #E88A65;
   --color-accent-secondary: #D4A574;
-  --color-accent-fg: #1C1917;
+  --color-accent-fg: #151311;
 
   /* Border */
-  --color-border: #2E2B28;
-  --color-border-hover: #3D3935;
+  --color-border: #332E29;
+  --color-border-hover: #44403C;
+
+  /* Department colors */
+  --color-dept-convert: #4A9E42;
+  --color-dept-record: #8B6BBF;
+  --color-dept-dev: #4A8DB5;
+  --color-dept-privacy: #D4704A;
+  --color-dept-ai: #D4A017;
 
   /* Font families */
-  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-heading: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-sans: "Source Sans 3", "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Playfair Display", ui-serif, Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 }
 
 /* Runtime light/dark overrides */
 @layer base {
   :root {
-    --color-bg-primary: #F5F3F0;
-    --color-bg-surface: #EDEBE8;
-    --color-bg-elevated: #E5E2DF;
-    --color-bg-hover: #DBD8D4;
+    --color-bg-primary: #FAF8F5;
+    --color-bg-surface: #F2EFEB;
+    --color-bg-elevated: #E8E4DF;
+    --color-bg-hover: #DDD8D2;
 
-    --color-text-primary: #1C1917;
-    --color-text-secondary: #78716C;
-    --color-text-tertiary: #A8A29E;
+    --color-text-primary: #1A1714;
+    --color-text-secondary: #6B6560;
+    --color-text-tertiary: #9E9890;
 
-    --color-accent: #B91C1C;
-    --color-accent-hover: #991B1B;
+    --color-accent: #8B2500;
+    --color-accent-hover: #6E1D00;
     --color-accent-secondary: #D4A574;
     --color-accent-fg: #FFFFFF;
 
-    --color-border: #D6D3CF;
-    --color-border-hover: #A8A29E;
+    --color-border: #DDD8D2;
+    --color-border-hover: #C5C0BA;
+
+    /* Department colors — light mode */
+    --color-dept-convert: #2D5A27;
+    --color-dept-record: #5B3A8C;
+    --color-dept-dev: #1A4B6E;
+    --color-dept-privacy: #8B2500;
+    --color-dept-ai: #B8860B;
   }
 
   .dark {
-    --color-bg-primary: #0F0F0F;
-    --color-bg-surface: #1A1918;
-    --color-bg-elevated: #252321;
-    --color-bg-hover: #2E2B28;
+    --color-bg-primary: #151311;
+    --color-bg-surface: #1E1B18;
+    --color-bg-elevated: #282420;
+    --color-bg-hover: #332E29;
 
-    --color-text-primary: #E5E0DB;
-    --color-text-secondary: #8C8580;
-    --color-text-tertiary: #5C5652;
+    --color-text-primary: #ECE8E2;
+    --color-text-secondary: #9B9590;
+    --color-text-tertiary: #6B6560;
 
-    --color-accent: #F87171;
-    --color-accent-hover: #EF4444;
+    --color-accent: #D4704A;
+    --color-accent-hover: #E88A65;
     --color-accent-secondary: #D4A574;
-    --color-accent-fg: #1C1917;
+    --color-accent-fg: #151311;
 
-    --color-border: #2E2B28;
-    --color-border-hover: #3D3935;
+    --color-border: #332E29;
+    --color-border-hover: #44403C;
+
+    /* Department colors — dark mode (brighter for contrast) */
+    --color-dept-convert: #4A9E42;
+    --color-dept-record: #8B6BBF;
+    --color-dept-dev: #4A8DB5;
+    --color-dept-privacy: #D4704A;
+    --color-dept-ai: #D4A017;
   }
 }
 
@@ -105,6 +126,21 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-border-hover);
+}
+
+/* Editorial rules */
+.editorial-rule {
+  height: 4px;
+  background-color: var(--color-text-primary);
+  border: none;
+  width: 100%;
+}
+
+.editorial-rule-thin {
+  height: 1px;
+  background-color: var(--color-border);
+  border: none;
+  width: 100%;
 }
 
 /* Grade glow effects — reduced in light mode */
@@ -170,4 +206,24 @@ body {
 
 .progress-fill {
   animation: progress-fill 0.4s ease-out forwards;
+}
+
+/* Workflow card entrance */
+@keyframes slide-up {
+  0% { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.slide-up {
+  animation: slide-up 0.4s ease-out forwards;
+}
+
+/* Horizontal scroll — hide scrollbar on workflow section */
+.scroll-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
