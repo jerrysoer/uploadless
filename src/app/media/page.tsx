@@ -6,14 +6,9 @@ import { useLocalAI } from "@/hooks/useLocalAI";
 import EditorialRule from "@/components/EditorialRule";
 import ToolAccordion from "@/components/ToolAccordion";
 import TabAIBar from "@/components/TabAIBar";
-import { CODE_GROUPS, CODE_TOOL_COUNT } from "@/data/tool-hub";
+import { MEDIA_GROUPS, MEDIA_TOOL_COUNT } from "@/data/tool-hub";
 
-const CODE_AI_COUNT = CODE_GROUPS.reduce(
-  (sum, g) => sum + g.tools.filter((t) => t.ai).length,
-  0,
-);
-
-export default function ToolsPage() {
+export default function MediaPage() {
   const [query, setQuery] = useState("");
   const { isReady, selectedSlug } = useLocalAI();
 
@@ -24,24 +19,22 @@ export default function ToolsPage() {
         <div className="flex items-center gap-3 mb-4">
           <div
             className="w-3 h-3 rounded-sm flex-shrink-0"
-            style={{ backgroundColor: "var(--color-dept-dev)" }}
+            style={{ backgroundColor: "var(--color-dept-record)" }}
           />
           <span className="font-mono text-xs tracking-widest uppercase text-text-tertiary">
-            Code &middot; {CODE_TOOL_COUNT} tools ({CODE_AI_COUNT} AI-powered)
+            Media &middot; {MEDIA_TOOL_COUNT} tools
           </span>
         </div>
         <EditorialRule className="mb-6" />
-        <h1 className="font-heading font-bold text-4xl mb-3">
-          Code & Development
-        </h1>
+        <h1 className="font-heading font-bold text-4xl mb-3">Media & Files</h1>
         <p className="text-text-secondary max-w-xl">
-          Review, generate, format, and ship — AI code tools and developer
-          utilities running in your browser.
+          Record, convert, and create — images, audio, video, and documents
+          processed entirely in your browser using WebAssembly.
         </p>
       </div>
 
-      {/* Per-tab AI context bar */}
-      <TabAIBar groups={CODE_GROUPS} />
+      {/* Per-tab AI context bar (auto-hides if 0 AI tools) */}
+      <TabAIBar groups={MEDIA_GROUPS} />
 
       {/* Search */}
       <div className="sticky top-0 z-10 bg-bg-primary pb-3 pt-1 -mx-1 px-1">
@@ -67,17 +60,17 @@ export default function ToolsPage() {
 
       {/* Tool Accordion */}
       <ToolAccordion
-        groups={CODE_GROUPS}
+        groups={MEDIA_GROUPS}
         searchFilter={query}
-        storageKey="code-hub-state"
+        storageKey="media-hub-state"
         activeSlug={selectedSlug}
         isReady={isReady}
       />
 
       {/* Footer note */}
       <p className="text-text-tertiary text-xs mt-10">
-        AI-powered tools run locally in your browser using WebGPU or connect to
-        Ollama. No data is sent to any server.
+        All media processing runs locally using WebAssembly. Your files never
+        leave your device.
       </p>
     </div>
   );

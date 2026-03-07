@@ -10,15 +10,22 @@ import ThemeToggle from "@/components/ThemeToggle";
 export default function Header() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const isConvert = pathname.startsWith("/convert") || pathname.startsWith("/sign");
-  const isRecord = pathname.startsWith("/record");
+
+  const isWrite = pathname.startsWith("/write");
   const isTools = pathname.startsWith("/tools");
   const isAI = pathname.startsWith("/ai");
+  const isMedia =
+    pathname.startsWith("/media") ||
+    pathname.startsWith("/record") ||
+    pathname.startsWith("/convert") ||
+    pathname.startsWith("/sign");
+  const isProtect = pathname.startsWith("/protect");
 
   const navLinks = [
-    { href: "/record", label: "Record", active: isRecord },
-    { href: "/convert", label: "Convert", active: isConvert },
-    { href: "/tools", label: "Tools", active: isTools || isAI },
+    { href: "/write", label: "Write", active: isWrite },
+    { href: "/tools", label: "Code", active: isTools || isAI },
+    { href: "/media", label: "Media", active: isMedia },
+    { href: "/protect", label: "Protect", active: isProtect },
   ];
 
   // Close drawer on route change

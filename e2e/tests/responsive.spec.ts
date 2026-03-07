@@ -13,13 +13,9 @@ test.describe("Responsive — Mobile (375px)", () => {
     test.skip(testInfo.project.name !== "mobile", "Mobile-only tests");
   });
 
-  test("AI Tools Hub is readable on mobile", async ({ page }) => {
-    await page.goto("/ai");
+  test("Write tab is readable on mobile", async ({ page }) => {
+    await page.goto("/write");
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-
-    // Tabs should be visible
-    const tabs = page.locator("button").filter({ hasText: "Summarize" });
-    await expect(tabs.first()).toBeVisible();
 
     // No horizontal overflow
     const scrollWidth = await page.evaluate(
@@ -31,8 +27,8 @@ test.describe("Responsive — Mobile (375px)", () => {
     expect(scrollWidth).toBeLessThanOrEqual(clientWidth + 5);
   });
 
-  test("Model Store is readable on mobile", async ({ page }) => {
-    await page.goto("/ai/models");
+  test("Code tab is readable on mobile", async ({ page }) => {
+    await page.goto("/tools");
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
 
     const scrollWidth = await page.evaluate(
@@ -44,8 +40,34 @@ test.describe("Responsive — Mobile (375px)", () => {
     expect(scrollWidth).toBeLessThanOrEqual(clientWidth + 5);
   });
 
-  test("Dev tools page is readable on mobile", async ({ page }) => {
-    await page.goto("/tools");
+  test("Media tab is readable on mobile", async ({ page }) => {
+    await page.goto("/media");
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+
+    const scrollWidth = await page.evaluate(
+      () => document.documentElement.scrollWidth
+    );
+    const clientWidth = await page.evaluate(
+      () => document.documentElement.clientWidth
+    );
+    expect(scrollWidth).toBeLessThanOrEqual(clientWidth + 5);
+  });
+
+  test("Protect tab is readable on mobile", async ({ page }) => {
+    await page.goto("/protect");
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+
+    const scrollWidth = await page.evaluate(
+      () => document.documentElement.scrollWidth
+    );
+    const clientWidth = await page.evaluate(
+      () => document.documentElement.clientWidth
+    );
+    expect(scrollWidth).toBeLessThanOrEqual(clientWidth + 5);
+  });
+
+  test("Model Store is readable on mobile", async ({ page }) => {
+    await page.goto("/ai/models");
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
 
     const scrollWidth = await page.evaluate(

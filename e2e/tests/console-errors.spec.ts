@@ -5,7 +5,7 @@ import { test, expect } from "@playwright/test";
  * Filters out known non-critical messages (favicon, WebGPU availability, resource loading).
  */
 
-const CRITICAL_PAGES = ["/ai", "/ai/models", "/tools"];
+const CRITICAL_PAGES = ["/write", "/tools", "/media", "/protect", "/ai/models"];
 
 const KNOWN_NOISE = [
   "favicon",
@@ -29,8 +29,9 @@ for (const route of CRITICAL_PAGES) {
       }
     });
 
-    await page.goto(route);
-    await page.waitForLoadState("networkidle");
+    await page.goto(route, { waitUntil: "load" });
+    // Allow time for async scripts to execute and potentially log errors
+    await page.waitForTimeout(2_000);
 
     expect(errors).toEqual([]);
   });

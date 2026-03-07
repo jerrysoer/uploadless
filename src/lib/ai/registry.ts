@@ -185,3 +185,70 @@ export function getRequiredModelLabel(capability: ModelCapability): string {
   const pack = getBestModelForCapability(capability);
   return pack ? pack.name : "Unknown";
 }
+
+// ─── Tab AI Coverage ───────────────────────────────────────────────────
+
+interface ToolWithAI {
+  ai?: { tier: string; capability?: ModelCapability };
+}
+
+export interface TabAICoverage {
+  /** Total AI tools in this tab */
+  totalAI: number;
+  /** Tools compatible with the active model */
+  supported: number;
+  /** Tools not compatible with the active model */
+  unsupported: number;
+  /** Tools that require Ollama (not available in WebLLM) */
+  ollamaOnly: number;
+  /** Tools that use specialized models (Whisper, Tesseract, etc.) */
+  specializedOnly: number;
+  /** Best WebLLM model slug for this tab's tools */
+  bestSlug: ModelSlug | null;
+  /** How many tools the best model would cover */
+  bestCoverage: number;
+}
+
+/** Compute AI coverage for a set of tools given the active model slug */
+export function getTabAICoverage(
+  tools: ToolWithAI[],
+  activeSlug: ModelSlug | null,
+): TabAICoverage {
+  const aiTools = tools.filter((t) => t.ai);
+  const ollamaOnly = aiTools.filter((t) => t.ai?.tier === "Ollama").length;
+  const specializedOnly = aiTools.filter(
+    (t) => t.ai?.tier === "Specialized" || t.ai?.tier === "AI",
+  ).length;
+
+  // Count supported tools (those with a capability the active model handles)
+  const supported = activeSlug
+    ? aiTools.filter((t) => {
+        if (!t.ai?.capability) return false;
+        return canUseFeature(t.ai.capability, activeSlug);
+      }).length
+    : 0;
+
+  // Find the best WebLLM model for this tab's tools
+  let bestSlug: ModelSlug | null = null;
+  let bestCoverage = 0;
+  for (const pack of MODEL_PACKS) {
+    const coverage = aiTools.filter((t) => {
+      if (!t.ai?.capability) return false;
+      return pack.capabilities.includes(t.ai.capability);
+    }).length;
+    if (coverage > bestCoverage) {
+      bestCoverage = coverage;
+      bestSlug = pack.slug;
+    }
+  }
+
+  return {
+    totalAI: aiTools.length,
+    supported,
+    unsupported: aiTools.length - supported,
+    ollamaOnly,
+    specializedOnly,
+    bestSlug,
+    bestCoverage,
+  };
+}

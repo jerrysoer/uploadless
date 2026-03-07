@@ -3,13 +3,15 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import Link from "next/link";
 import { ChevronDown, Sparkles } from "lucide-react";
+import { canUseFeature } from "@/lib/ai/registry";
+import type { ModelSlug, ModelCapability } from "@/lib/ai/registry";
 
 export interface ToolEntry {
   href: string;
   icon: React.ComponentType<{ className?: string }>;
   title: string;
   description: string;
-  ai?: { tier: string };
+  ai?: { tier: string; capability?: ModelCapability };
 }
 
 export interface ToolGroup {
@@ -21,25 +23,52 @@ interface ToolAccordionProps {
   groups: ToolGroup[];
   storageKey?: string;
   searchFilter?: string;
+  activeSlug?: ModelSlug | null;
+  isReady?: boolean;
 }
 
-function AIBadge({ tier }: { tier: string }) {
+function AIBadge({
+  tier,
+  capability,
+  activeSlug,
+  isModelReady,
+}: {
+  tier: string;
+  capability?: ModelCapability;
+  activeSlug?: ModelSlug | null;
+  isModelReady?: boolean;
+}) {
   const isOllama = tier === "Ollama";
+  const isSpecialized = tier === "Specialized" || tier === "AI";
+
+  // Determine compatibility dot color
+  let dotColor = "bg-text-tertiary"; // gray — no model
+  if (isModelReady && capability && activeSlug) {
+    dotColor = canUseFeature(capability, activeSlug)
+      ? "bg-grade-a" // green — compatible
+      : "bg-grade-c"; // yellow — wrong model
+  }
+
+  const showDot = !isOllama && !isSpecialized;
+
   return (
     <span
       className={`inline-flex items-center gap-1 px-1.5 py-0.5 text-[10px] font-mono tracking-wider uppercase leading-none rounded-sm flex-shrink-0 ${
-        isOllama
+        isOllama || isSpecialized
           ? "bg-[var(--color-dept-ai)]/10 text-[var(--color-dept-ai)] border border-dashed border-[var(--color-dept-ai)]/20"
           : "bg-[var(--color-dept-ai)]/10 text-[var(--color-dept-ai)] border border-[var(--color-dept-ai)]/20"
       }`}
     >
+      {showDot && (
+        <span className={`w-1.5 h-1.5 rounded-full ${dotColor} flex-shrink-0`} />
+      )}
       <Sparkles className="w-2.5 h-2.5" />
       <span>AI &middot; {tier}</span>
     </span>
   );
 }
 
-function ToolRow({ href, icon: Icon, title, description, ai }: ToolEntry) {
+function ToolRow({ href, icon: Icon, title, description, ai, activeSlug, isModelReady }: ToolEntry & { activeSlug?: ModelSlug | null; isModelReady?: boolean }) {
   return (
     <Link
       href={href}
@@ -49,7 +78,14 @@ function ToolRow({ href, icon: Icon, title, description, ai }: ToolEntry) {
       <span className="font-medium text-sm group-hover:text-accent transition-colors min-w-[140px] sm:min-w-[180px]">
         {title}
       </span>
-      {ai && <AIBadge tier={ai.tier} />}
+      {ai && (
+        <AIBadge
+          tier={ai.tier}
+          capability={ai.capability}
+          activeSlug={activeSlug}
+          isModelReady={isModelReady}
+        />
+      )}
       <span className="text-text-secondary text-sm hidden sm:block">
         {description}
       </span>
@@ -61,6 +97,8 @@ export default function ToolAccordion({
   groups,
   storageKey = "tool-accordion-state",
   searchFilter,
+  activeSlug,
+  isReady,
 }: ToolAccordionProps) {
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({});
   const [hydrated, setHydrated] = useState(false);
@@ -156,7 +194,7 @@ export default function ToolAccordion({
               <div className="overflow-hidden">
                 <div className="pb-6">
                   {group.tools.map((tool) => (
-                    <ToolRow key={tool.href} {...tool} />
+                    <ToolRow key={tool.href} {...tool} activeSlug={activeSlug} isModelReady={isReady} />
                   ))}
                 </div>
               </div>

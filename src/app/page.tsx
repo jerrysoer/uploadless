@@ -54,8 +54,6 @@ export default function HomePage() {
           <EditorialRule />
         </div>
 
-        {/* TODO: Workflow Section — future roadmap (chain tools into pipelines) */}
-
         {/* The Feature — Asymmetric layout */}
         <section className="px-6 py-12 sm:py-20">
           <div className="max-w-6xl mx-auto">
@@ -96,7 +94,7 @@ export default function HomePage() {
           <EditorialRule />
         </div>
 
-        {/* Departments */}
+        {/* Departments — 4 cards matching tab structure */}
         <section className="px-6 py-12 sm:py-20">
           <div className="max-w-6xl mx-auto">
             <p className="font-mono text-xs tracking-widest uppercase text-text-tertiary mb-2">
@@ -109,27 +107,35 @@ export default function HomePage() {
             <div className="grid sm:grid-cols-2 gap-4">
               <DepartmentCard
                 number="01"
-                name="All Tools"
-                toolCount={62}
-                description="Developer, AI, and privacy tools — hash, encode, generate, review code, analyze documents, and more."
+                name="Write"
+                toolCount={19}
+                description="AI-powered writing, document analysis, structured extraction, and text utilities."
+                href="/write"
+                deptColor="var(--color-dept-ai)"
+              />
+              <DepartmentCard
+                number="02"
+                name="Code"
+                toolCount={29}
+                description="AI code review, generation, formatting, encoding, and DevOps utilities."
                 href="/tools"
                 deptColor="var(--color-dept-dev)"
               />
               <DepartmentCard
-                number="02"
-                name="Record & Capture"
-                toolCount={3}
-                description="Screen recordings, audio capture, and meeting notes — processed on your device."
-                href="/record"
+                number="03"
+                name="Media"
+                toolCount={15}
+                description="Record, convert, and create — images, audio, video, documents, and design assets."
+                href="/media"
                 deptColor="var(--color-dept-record)"
               />
               <DepartmentCard
-                number="03"
-                name="Convert"
-                toolCount={8}
-                description="Images, documents, audio, and video — all processed locally with WebAssembly. No uploads."
-                href="/convert"
-                deptColor="var(--color-dept-convert)"
+                number="04"
+                name="Protect"
+                toolCount={12}
+                description="Encrypt files, decode JWTs, strip metadata, detect tracking, and audit privacy."
+                href="/protect"
+                deptColor="var(--color-dept-privacy)"
               />
             </div>
           </div>

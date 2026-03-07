@@ -20,39 +20,40 @@ export default function OgImage() {
             "radial-gradient(circle at 50% 50%, #1A1918 0%, #0F0F0F 70%)",
         }}
       >
-        {/* Logo mark */}
-        <div
+        {/* Monogram accent */}
+        <span
           style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: 88,
-            height: 88,
-            border: "3px solid #F87171",
-            borderRadius: 18,
-            marginBottom: 32,
+            fontSize: 40,
+            fontWeight: 800,
+            color: "#F87171",
+            fontFamily: "Georgia, serif",
+            lineHeight: 1,
+            marginBottom: 20,
           }}
         >
-          <span
-            style={{
-              fontSize: 56,
-              fontWeight: 700,
-              color: "#F87171",
-              lineHeight: 1,
-            }}
-          >
-            /
-          </span>
-        </div>
+          B
+        </span>
+
+        {/* Accent line */}
+        <div
+          style={{
+            width: 48,
+            height: 2,
+            backgroundColor: "#F87171",
+            marginBottom: 28,
+            borderRadius: 1,
+          }}
+        />
 
         {/* Title */}
         <div
           style={{
-            fontSize: 64,
+            fontSize: 72,
             fontWeight: 700,
             color: "#E5E0DB",
-            letterSpacing: "-1px",
+            letterSpacing: "3px",
             marginBottom: 16,
+            fontFamily: "Georgia, serif",
           }}
         >
           BrowserShip

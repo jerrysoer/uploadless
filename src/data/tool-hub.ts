@@ -1,12 +1,26 @@
 import {
-  // Writing & Communication
+  // Write tab — AI Writing
   Mail,
   Share2,
   Shield,
   PenTool,
+  // Write tab — Document Analysis
+  FileJson,
+  FileText,
+  Users,
+  Briefcase,
+  Receipt,
+  LayoutGrid,
+  HeartPulse,
+  Tags,
+  // Write tab — AI Text Processing
+  FileStack,
+  ScanText,
+  // Write tab — Text Utilities
   ALargeSmall,
   Pilcrow,
-  // Code & Development
+  TextCursorInput,
+  // Code tab — AI Code
   SearchCode,
   FileCode,
   GitCommit,
@@ -16,43 +30,46 @@ import {
   Bug,
   Database,
   ShieldCheck,
+  // Code tab — Code Utilities
   Code,
   Regex,
   GitCompare,
   Camera,
-  FileCheck,
-  Bot,
-  // Documents & Analysis
-  FileJson,
-  FileText,
-  Users,
-  Briefcase,
-  Receipt,
-  LayoutGrid,
-  HeartPulse,
-  Tags,
-  // Media & Vision
-  ImageOff,
-  ScanText,
-  Mic,
-  FileStack,
-  Image,
-  Palette,
-  // Encode & Transform
+  Eye as OGPreviewIcon,
+  // Code tab — Data & Encode
   Braces,
   ArrowLeftRight,
   Binary,
-  Hash,
   Clock,
   Ruler,
-  Eye as OGPreviewIcon,
-  TextCursorInput,
-  // Security & Crypto
+  QrCode,
+  // Code tab — DevOps & System
+  FileCheck,
+  Bot,
+  Fingerprint,
+  Network,
+  Monitor,
+  // Media tab — Record
+  MonitorSpeaker,
+  // Media tab — Convert Media
+  Image,
+  Music,
+  Video,
+  ImageOff,
+  Mic,
+  // Media tab — Documents
+  Layers,
+  FileSignature,
+  FileArchive,
+  // Media tab — Design
+  Palette,
+  // Protect tab — Security & Crypto
   KeyRound,
   FileKey,
   Lock,
+  Hash,
   Eye,
-  // Privacy & Inspection
+  // Protect tab — Privacy & Data
   Scan,
   Unplug,
   Type,
@@ -60,24 +77,19 @@ import {
   EyeOff,
   Mail as EmailHeaderIcon,
   FileSearch,
-  // System & DevOps
-  Fingerprint,
-  QrCode,
-  Network,
-  Monitor,
   // Quick Tools
   Sparkles,
 } from "lucide-react";
+import type { ModelCapability } from "@/lib/ai/registry";
 
-// Re-export for icon references that collide (Eye, Mail used in two groups)
-// We alias them in the import above so each tool gets a clear binding.
+// ─── Interfaces ────────────────────────────────────────────────────────
 
 export interface ToolHubEntry {
   href: string;
   icon: React.ComponentType<{ className?: string }>;
   title: string;
   description: string;
-  ai?: { tier: string };
+  ai?: { tier: string; capability?: ModelCapability };
 }
 
 export interface ToolHubGroup {
@@ -92,7 +104,7 @@ export interface QuickTool {
   description: string;
 }
 
-// ─── Quick AI Tools (pinned above accordion) ────────────────────────
+// ─── Quick AI Tools (pinned above Write tab accordion) ─────────────────
 
 export const QUICK_TOOLS: QuickTool[] = [
   {
@@ -109,103 +121,170 @@ export const QUICK_TOOLS: QuickTool[] = [
   },
 ];
 
-// ─── 8 Functional Groups (62 tools) ─────────────────────────────────
+// ═══════════════════════════════════════════════════════════════════════
+// TAB 1: WRITE — 17 tools in accordion + 2 Quick AI = 19 total
+// "I need to compose, analyze, or process text."
+// ═══════════════════════════════════════════════════════════════════════
 
-export const TOOL_HUB_GROUPS: ToolHubGroup[] = [
-  // 1. Writing & Communication (6 tools, 4 AI)
+export const WRITE_GROUPS: ToolHubGroup[] = [
   {
-    label: "Writing & Communication",
+    label: "AI Writing",
     tools: [
-      { href: "/ai/email", icon: Mail, title: "Email Composer", description: "Draft emails with tone control — professional, casual, follow-up.", ai: { tier: "Balanced+" } },
-      { href: "/ai/social", icon: Share2, title: "Social Post Generator", description: "Create platform-optimized posts for Twitter, LinkedIn, Instagram.", ai: { tier: "Balanced+" } },
-      { href: "/ai/privacy-policy", icon: Shield, title: "Privacy Policy Summarizer", description: "Analyze privacy policies for data collection, sharing, and red flags.", ai: { tier: "General+" } },
-      { href: "/ai/tech-writing", icon: PenTool, title: "Tech Writing Assistant", description: "Generate technical documentation and guides.", ai: { tier: "Ollama" } },
-      { href: "/tools/text", icon: ALargeSmall, title: "Text Utilities", description: "Word count, case conversion, and text transformations." },
-      { href: "/tools/lorem", icon: Pilcrow, title: "Lorem Ipsum Generator", description: "Generate placeholder text in various styles and lengths." },
+      { href: "/ai/email", icon: Mail, title: "Email Composer", description: "Draft emails with tone control — professional, casual, follow-up.", ai: { tier: "Balanced+", capability: "email_compose" } },
+      { href: "/ai/social", icon: Share2, title: "Social Post Generator", description: "Create platform-optimized posts for Twitter, LinkedIn, Instagram.", ai: { tier: "Balanced+", capability: "social_post" } },
+      { href: "/ai/privacy-policy", icon: Shield, title: "Privacy Policy Summarizer", description: "Analyze privacy policies for data collection, sharing, and red flags.", ai: { tier: "General+", capability: "privacy_policy" } },
+      { href: "/ai/tech-writing", icon: PenTool, title: "Tech Writing Assistant", description: "Generate technical documentation and guides.", ai: { tier: "Ollama", capability: "tech_writing" } },
     ],
   },
-
-  // 2. Code & Development (17 tools, 10 AI)
   {
-    label: "Code & Development",
+    label: "Document Analysis",
     tools: [
-      { href: "/ai/code-review", icon: SearchCode, title: "Code Reviewer", description: "Review code for bugs, security, performance, and style.", ai: { tier: "Code" } },
-      { href: "/ai/code-explain", icon: FileCode, title: "Code Explainer", description: "Get line-by-line explanations of code snippets.", ai: { tier: "Code" } },
-      { href: "/ai/commit-msg", icon: GitCommit, title: "Commit Message", description: "Generate conventional commit messages from diffs.", ai: { tier: "Code" } },
-      { href: "/ai/pr-desc", icon: GitPullRequest, title: "PR Description", description: "Write pull request descriptions from diffs.", ai: { tier: "Code" } },
-      { href: "/ai/readme-gen", icon: BookOpen, title: "README Generator", description: "Generate project README from descriptions.", ai: { tier: "Code" } },
-      { href: "/ai/test-gen", icon: FlaskConical, title: "Test Generator", description: "Generate test cases for functions (Jest, pytest).", ai: { tier: "Code" } },
-      { href: "/ai/error-decode", icon: Bug, title: "Error Decoder", description: "Decode error messages and stack traces into fixes.", ai: { tier: "Code" } },
-      { href: "/ai/sql-gen", icon: Database, title: "SQL Generator", description: "Generate SQL from natural language descriptions.", ai: { tier: "Code" } },
-      { href: "/ai/full-review", icon: ShieldCheck, title: "Full Code Review", description: "Comprehensive code review for large files.", ai: { tier: "Ollama" } },
+      { href: "/ai/extract", icon: FileJson, title: "Structured Extractor", description: "Extract structured JSON from unstructured text using a custom schema.", ai: { tier: "General+", capability: "extract_json" } },
+      { href: "/ai/contracts", icon: FileText, title: "Contract Analyzer", description: "Analyze contracts and flag clauses by severity.", ai: { tier: "General+", capability: "contract_analyze" } },
+      { href: "/ai/meeting-minutes", icon: Users, title: "Meeting Minutes", description: "Generate structured minutes from meeting transcripts.", ai: { tier: "General+", capability: "meeting_minutes" } },
+      { href: "/ai/job-analyzer", icon: Briefcase, title: "Job Description Analyzer", description: "Analyze job postings for red flags, requirements, and match tips.", ai: { tier: "General+", capability: "job_analyze" } },
+      { href: "/ai/receipts", icon: Receipt, title: "Receipt Parser", description: "Upload receipt images \u2192 OCR \u2192 structured line items and totals.", ai: { tier: "General+", capability: "receipt_parse" } },
+      { href: "/ai/swot", icon: LayoutGrid, title: "SWOT Analyzer", description: "Strategic SWOT analysis for businesses and projects.", ai: { tier: "Reasoning", capability: "swot" } },
+      { href: "/ai/sentiment", icon: HeartPulse, title: "Sentiment Analyzer", description: "Analyze emotional tone and sentiment of text.", ai: { tier: "Tiny+", capability: "sentiment" } },
+      { href: "/ai/keywords", icon: Tags, title: "Keyword Extractor", description: "Extract and categorize keywords from text.", ai: { tier: "Tiny+", capability: "keywords" } },
+    ],
+  },
+  {
+    label: "AI Text Processing",
+    tools: [
+      { href: "/ai/long-doc", icon: FileStack, title: "Long Document Summarizer", description: "Summarize lengthy documents with 8K+ context.", ai: { tier: "Ollama", capability: "long_doc" } },
+      { href: "/ai/ocr", icon: ScanText, title: "OCR \u2014 Text from Images", description: "Extract text from images with Tesseract.js.", ai: { tier: "Specialized" } },
+    ],
+  },
+  {
+    label: "Text Utilities",
+    tools: [
+      { href: "/tools/text", icon: ALargeSmall, title: "Text Utilities", description: "Word count, case conversion, and text transformations." },
+      { href: "/tools/lorem", icon: Pilcrow, title: "Lorem Ipsum Generator", description: "Generate placeholder text in various styles and lengths." },
+      { href: "/tools/wordcount", icon: TextCursorInput, title: "Word Count", description: "Count words, characters, sentences, and reading time." },
+    ],
+  },
+];
+
+// ═══════════════════════════════════════════════════════════════════════
+// TAB 2: CODE — 29 tools
+// "I'm building, debugging, or deploying software."
+// Route stays at /tools to avoid breaking 29 existing /tools/* child routes.
+// ═══════════════════════════════════════════════════════════════════════
+
+export const CODE_GROUPS: ToolHubGroup[] = [
+  {
+    label: "AI Code Tools",
+    tools: [
+      { href: "/ai/code-review", icon: SearchCode, title: "Code Reviewer", description: "Review code for bugs, security, performance, and style.", ai: { tier: "Code", capability: "code_review" } },
+      { href: "/ai/code-explain", icon: FileCode, title: "Code Explainer", description: "Get line-by-line explanations of code snippets.", ai: { tier: "Code", capability: "code_explain" } },
+      { href: "/ai/commit-msg", icon: GitCommit, title: "Commit Message", description: "Generate conventional commit messages from diffs.", ai: { tier: "Code", capability: "commit_message" } },
+      { href: "/ai/pr-desc", icon: GitPullRequest, title: "PR Description", description: "Write pull request descriptions from diffs.", ai: { tier: "Code", capability: "pr_description" } },
+      { href: "/ai/readme-gen", icon: BookOpen, title: "README Generator", description: "Generate project README from descriptions.", ai: { tier: "Code", capability: "readme_generate" } },
+      { href: "/ai/test-gen", icon: FlaskConical, title: "Test Generator", description: "Generate test cases for functions (Jest, pytest).", ai: { tier: "Code", capability: "test_generate" } },
+      { href: "/ai/error-decode", icon: Bug, title: "Error Decoder", description: "Decode error messages and stack traces into fixes.", ai: { tier: "Code", capability: "error_decode" } },
+      { href: "/ai/sql-gen", icon: Database, title: "SQL Generator", description: "Generate SQL from natural language descriptions.", ai: { tier: "Code", capability: "sql_generate" } },
+      { href: "/ai/full-review", icon: ShieldCheck, title: "Full Code Review", description: "Comprehensive code review for large files.", ai: { tier: "Ollama", capability: "full_review" } },
+    ],
+  },
+  {
+    label: "Code Utilities",
+    tools: [
       { href: "/tools/code", icon: Code, title: "Code Tools", description: "Markdown editor, SVG \u2192 React, and code utilities." },
       { href: "/tools/regex", icon: Regex, title: "Regex Playground", description: "Test regular expressions with real-time matching and highlights." },
       { href: "/tools/sql-format", icon: Database, title: "SQL Formatter", description: "Format, beautify, and minify SQL with dialect support." },
       { href: "/tools/diff", icon: GitCompare, title: "Text Diff / Compare", description: "Compare two texts side by side with highlighted additions and deletions." },
       { href: "/tools/code-screenshot", icon: Camera, title: "Code Screenshot", description: "Generate beautiful code screenshots for sharing." },
-      { href: "/tools/env-validate", icon: FileCheck, title: ".env Validator", description: "Validate .env files for format, duplicates, missing values, and secrets." },
-      { href: "/tools/robots", icon: Bot, title: "robots.txt Generator", description: "Build robots.txt visually with AI crawler and SEO presets." },
-      { href: "/tools/csp", icon: Shield, title: "CSP Header Builder", description: "Build Content-Security-Policy headers with visual toggles and presets." },
+      { href: "/tools/og-preview", icon: OGPreviewIcon, title: "OG Image Preview", description: "Preview how your page looks when shared on Twitter, Facebook, and LinkedIn." },
     ],
   },
-
-  // 3. Documents & Analysis (8 tools, 8 AI)
   {
-    label: "Documents & Analysis",
-    tools: [
-      { href: "/ai/extract", icon: FileJson, title: "Structured Extractor", description: "Extract structured JSON from unstructured text using a custom schema.", ai: { tier: "General+" } },
-      { href: "/ai/contracts", icon: FileText, title: "Contract Analyzer", description: "Analyze contracts and flag clauses by severity.", ai: { tier: "General+" } },
-      { href: "/ai/meeting-minutes", icon: Users, title: "Meeting Minutes", description: "Generate structured minutes from meeting transcripts.", ai: { tier: "General+" } },
-      { href: "/ai/job-analyzer", icon: Briefcase, title: "Job Description Analyzer", description: "Analyze job postings for red flags, requirements, and match tips.", ai: { tier: "General+" } },
-      { href: "/ai/receipts", icon: Receipt, title: "Receipt Parser", description: "Upload receipt images \u2192 OCR \u2192 structured line items and totals.", ai: { tier: "General+" } },
-      { href: "/ai/swot", icon: LayoutGrid, title: "SWOT Analyzer", description: "Strategic SWOT analysis for businesses and projects.", ai: { tier: "Reasoning" } },
-      { href: "/ai/sentiment", icon: HeartPulse, title: "Sentiment Analyzer", description: "Analyze emotional tone and sentiment of text.", ai: { tier: "Tiny+" } },
-      { href: "/ai/keywords", icon: Tags, title: "Keyword Extractor", description: "Extract and categorize keywords from text.", ai: { tier: "Tiny+" } },
-    ],
-  },
-
-  // 4. Media & Vision (6 tools, 4 AI)
-  {
-    label: "Media & Vision",
-    tools: [
-      { href: "/ai/background-removal", icon: ImageOff, title: "Background Removal", description: "Remove image backgrounds using AI segmentation.", ai: { tier: "Specialized" } },
-      { href: "/ai/ocr", icon: ScanText, title: "OCR \u2014 Text from Images", description: "Extract text from images with Tesseract.js.", ai: { tier: "Specialized" } },
-      { href: "/ai/transcribe", icon: Mic, title: "Speech-to-Text", description: "Transcribe audio with timestamps using Whisper.", ai: { tier: "Specialized" } },
-      { href: "/ai/long-doc", icon: FileStack, title: "Long Document Summarizer", description: "Summarize lengthy documents with 8K+ context.", ai: { tier: "Ollama" } },
-      { href: "/tools/favicon", icon: Image, title: "Favicon Generator", description: "Generate favicons from images or emoji in all required sizes." },
-      { href: "/tools/design", icon: Palette, title: "Color & Design", description: "Contrast checker, CSS gradients, and color palette extraction." },
-    ],
-  },
-
-  // 5. Encode & Transform (8 tools, 0 AI)
-  {
-    label: "Encode & Transform",
+    label: "Data & Encode",
     tools: [
       { href: "/tools/json", icon: Braces, title: "JSON Formatter", description: "Format, minify, validate, and convert JSON to CSV/YAML." },
       { href: "/tools/format-convert", icon: ArrowLeftRight, title: "JSON / YAML / TOML Converter", description: "Convert between JSON, YAML, and TOML with auto-detection." },
       { href: "/tools/encode", icon: Binary, title: "Encode / Decode", description: "Base64, HTML entities, and URL encode/decode." },
-      { href: "/tools/hash", icon: Hash, title: "Hash Calculator", description: "MD5, SHA-1, SHA-256, SHA-512 for text and files." },
       { href: "/tools/numbers", icon: Clock, title: "Number & Date Converter", description: "Number bases (bin, oct, hex) and Unix epoch timestamps." },
       { href: "/tools/units", icon: Ruler, title: "Unit Converter", description: "Convert length, weight, temperature, data, time, and speed." },
-      { href: "/tools/og-preview", icon: OGPreviewIcon, title: "OG Image Preview", description: "Preview how your page looks when shared on Twitter, Facebook, and LinkedIn." },
-      { href: "/tools/wordcount", icon: TextCursorInput, title: "Word Count", description: "Count words, characters, sentences, and reading time." },
+      { href: "/tools/qr", icon: QrCode, title: "QR Code Generator", description: "Create QR codes for URLs, WiFi, vCards, and text." },
     ],
   },
+  {
+    label: "DevOps & System",
+    tools: [
+      { href: "/tools/env-validate", icon: FileCheck, title: ".env Validator", description: "Validate .env files for format, duplicates, missing values, and secrets." },
+      { href: "/tools/robots", icon: Bot, title: "robots.txt Generator", description: "Build robots.txt visually with AI crawler and SEO presets." },
+      { href: "/tools/csp", icon: Shield, title: "CSP Header Builder", description: "Build Content-Security-Policy headers with visual toggles and presets." },
+      { href: "/tools/uuid", icon: Fingerprint, title: "UUID Generator", description: "Generate v4 UUIDs in bulk with format options." },
+      { href: "/tools/cron", icon: Clock, title: "Cron Expression Builder", description: "Build cron expressions visually with presets and human-readable output." },
+      { href: "/tools/chmod", icon: Shield, title: "Chmod Calculator", description: "Calculate Unix file permissions with a visual checkbox grid." },
+      { href: "/tools/ip-calc", icon: Network, title: "IP / Subnet Calculator", description: "Calculate subnet details from CIDR notation or IP + mask." },
+      { href: "/tools/useragent", icon: Monitor, title: "User-Agent Parser", description: "Parse UA strings for browser, OS, device type, and bot detection." },
+    ],
+  },
+];
 
-  // 6. Security & Crypto (4 tools, 0 AI)
+// ═══════════════════════════════════════════════════════════════════════
+// TAB 3: MEDIA — 15 tools
+// "I need to record, convert, or create media assets."
+// ═══════════════════════════════════════════════════════════════════════
+
+export const MEDIA_GROUPS: ToolHubGroup[] = [
+  {
+    label: "Record",
+    tools: [
+      { href: "/record/audio", icon: MonitorSpeaker, title: "Audio Recorder", description: "Capture system audio, microphone, or both. Trim and export as MP3/WAV/OGG." },
+      { href: "/record/screen", icon: Monitor, title: "Screen Recorder", description: "Record your screen with optional webcam overlay and audio. Export as WebM, MP4, or GIF." },
+      { href: "/record/meeting", icon: Users, title: "Meeting Recorder", description: "Record, transcribe, and summarize meetings. Export as ZIP bundle.", ai: { tier: "AI" } },
+    ],
+  },
+  {
+    label: "Convert Media",
+    tools: [
+      { href: "/convert/images", icon: Image, title: "Image Converter", description: "Convert between PNG, JPG, WebP, AVIF, SVG. Resize and compress." },
+      { href: "/convert/audio", icon: Music, title: "Audio Converter", description: "Transcode between MP3, WAV, OGG, AAC, FLAC. Adjust bitrate." },
+      { href: "/convert/video", icon: Video, title: "Video Converter", description: "Convert between MP4, WebM, GIF. Resize, trim, and adjust quality." },
+      { href: "/ai/background-removal", icon: ImageOff, title: "Background Removal", description: "Remove image backgrounds using AI segmentation.", ai: { tier: "Specialized" } },
+      { href: "/ai/transcribe", icon: Mic, title: "Speech-to-Text", description: "Transcribe audio with timestamps using Whisper.", ai: { tier: "Specialized" } },
+    ],
+  },
+  {
+    label: "Documents",
+    tools: [
+      { href: "/convert/documents", icon: FileText, title: "Document Converter", description: "Convert DOCX, PDF, XLSX, CSV, JSON, and TXT between formats." },
+      { href: "/convert/pdf-tools", icon: Layers, title: "PDF Merge & Split", description: "Merge multiple PDFs into one or split by page ranges." },
+      { href: "/sign", icon: FileSignature, title: "Sign PDFs", description: "Add signatures, fill form fields, and insert dates — no server, no account." },
+      { href: "/convert/scan", icon: Camera, title: "Document Scanner", description: "Scan documents with your camera. Edge detection, perspective correction, OCR." },
+      { href: "/convert/zip", icon: FileArchive, title: "ZIP / Unzip", description: "Create and extract ZIP archives. Browse file trees." },
+    ],
+  },
+  {
+    label: "Design",
+    tools: [
+      { href: "/tools/favicon", icon: Image, title: "Favicon Generator", description: "Generate favicons from images or emoji in all required sizes." },
+      { href: "/tools/design", icon: Palette, title: "Color & Design", description: "Contrast checker, CSS gradients, and color palette extraction." },
+    ],
+  },
+];
+
+// ═══════════════════════════════════════════════════════════════════════
+// TAB 4: PROTECT — 12 tools
+// "I need to secure, inspect, or clean data."
+// ═══════════════════════════════════════════════════════════════════════
+
+export const PROTECT_GROUPS: ToolHubGroup[] = [
   {
     label: "Security & Crypto",
     tools: [
       { href: "/tools/password", icon: KeyRound, title: "Password Generator", description: "Generate strong passwords and passphrases with strength meter." },
       { href: "/tools/jwt", icon: FileKey, title: "JWT Decoder", description: "Decode and inspect JWT tokens. Header, payload, and expiry." },
       { href: "/tools/encrypt", icon: Lock, title: "File Encryption", description: "Encrypt and decrypt files with AES-256-GCM. Password-based." },
+      { href: "/tools/hash", icon: Hash, title: "Hash Calculator", description: "MD5, SHA-1, SHA-256, SHA-512 for text and files." },
       { href: "/tools/exif", icon: Eye, title: "EXIF Stripper", description: "View and strip metadata from images. GPS, camera, dates." },
     ],
   },
-
-  // 7. Privacy & Inspection (7 tools, 0 AI)
   {
-    label: "Privacy & Inspection",
+    label: "Privacy & Data Protection",
     tools: [
       { href: "/tools/fingerprint", icon: Scan, title: "Browser Fingerprint", description: "See what your browser reveals. Canvas, WebGL, fonts, and more." },
       { href: "/tools/tracking-pixels", icon: Unplug, title: "Tracking Pixel Detector", description: "Paste email HTML to detect hidden tracking pixels." },
@@ -216,28 +295,29 @@ export const TOOL_HUB_GROUPS: ToolHubGroup[] = [
       { href: "/tools/file-signature", icon: FileSearch, title: "File Signature Checker", description: "Verify file types by magic bytes. Detect extension mismatches." },
     ],
   },
-
-  // 8. System & DevOps (6 tools, 0 AI)
-  {
-    label: "System & DevOps",
-    tools: [
-      { href: "/tools/uuid", icon: Fingerprint, title: "UUID Generator", description: "Generate v4 UUIDs in bulk with format options." },
-      { href: "/tools/qr", icon: QrCode, title: "QR Code Generator", description: "Create QR codes for URLs, WiFi, vCards, and text." },
-      { href: "/tools/cron", icon: Clock, title: "Cron Expression Builder", description: "Build cron expressions visually with presets and human-readable output." },
-      { href: "/tools/chmod", icon: Shield, title: "Chmod Calculator", description: "Calculate Unix file permissions with a visual checkbox grid." },
-      { href: "/tools/ip-calc", icon: Network, title: "IP / Subnet Calculator", description: "Calculate subnet details from CIDR notation or IP + mask." },
-      { href: "/tools/useragent", icon: Monitor, title: "User-Agent Parser", description: "Parse UA strings for browser, OS, device type, and bot detection." },
-    ],
-  },
 ];
 
-// Total tool count for display
-export const TOTAL_TOOL_COUNT = TOOL_HUB_GROUPS.reduce(
-  (sum, g) => sum + g.tools.length,
-  0
-);
+// ─── Combined export (for search-all or sitemap use) ───────────────────
 
-export const AI_TOOL_COUNT = TOOL_HUB_GROUPS.reduce(
-  (sum, g) => sum + g.tools.filter((t) => t.ai).length,
-  0
-);
+export const ALL_TAB_GROUPS = [
+  ...WRITE_GROUPS,
+  ...CODE_GROUPS,
+  ...MEDIA_GROUPS,
+  ...PROTECT_GROUPS,
+];
+
+// ─── Per-tab counts ────────────────────────────────────────────────────
+
+const countTools = (groups: ToolHubGroup[]) =>
+  groups.reduce((sum, g) => sum + g.tools.length, 0);
+
+const countAI = (groups: ToolHubGroup[]) =>
+  groups.reduce((sum, g) => sum + g.tools.filter((t) => t.ai).length, 0);
+
+export const WRITE_TOOL_COUNT = countTools(WRITE_GROUPS) + QUICK_TOOLS.length; // 17 + 2 = 19
+export const CODE_TOOL_COUNT = countTools(CODE_GROUPS);   // 29
+export const MEDIA_TOOL_COUNT = countTools(MEDIA_GROUPS);  // 15
+export const PROTECT_TOOL_COUNT = countTools(PROTECT_GROUPS); // 12
+
+export const TOTAL_TOOL_COUNT = WRITE_TOOL_COUNT + CODE_TOOL_COUNT + MEDIA_TOOL_COUNT + PROTECT_TOOL_COUNT;
+export const AI_TOOL_COUNT = countAI(WRITE_GROUPS) + countAI(CODE_GROUPS) + countAI(MEDIA_GROUPS) + QUICK_TOOLS.length;

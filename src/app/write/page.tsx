@@ -1,19 +1,24 @@
 "use client";
 
 import { useState } from "react";
-import { Search } from "lucide-react";
+import { Search, ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { useLocalAI } from "@/hooks/useLocalAI";
 import EditorialRule from "@/components/EditorialRule";
 import ToolAccordion from "@/components/ToolAccordion";
 import TabAIBar from "@/components/TabAIBar";
-import { CODE_GROUPS, CODE_TOOL_COUNT } from "@/data/tool-hub";
+import {
+  WRITE_GROUPS,
+  QUICK_TOOLS,
+  WRITE_TOOL_COUNT,
+} from "@/data/tool-hub";
 
-const CODE_AI_COUNT = CODE_GROUPS.reduce(
+const WRITE_AI_COUNT = WRITE_GROUPS.reduce(
   (sum, g) => sum + g.tools.filter((t) => t.ai).length,
   0,
-);
+) + QUICK_TOOLS.length;
 
-export default function ToolsPage() {
+export default function WritePage() {
   const [query, setQuery] = useState("");
   const { isReady, selectedSlug } = useLocalAI();
 
@@ -24,24 +29,51 @@ export default function ToolsPage() {
         <div className="flex items-center gap-3 mb-4">
           <div
             className="w-3 h-3 rounded-sm flex-shrink-0"
-            style={{ backgroundColor: "var(--color-dept-dev)" }}
+            style={{ backgroundColor: "var(--color-dept-ai)" }}
           />
           <span className="font-mono text-xs tracking-widest uppercase text-text-tertiary">
-            Code &middot; {CODE_TOOL_COUNT} tools ({CODE_AI_COUNT} AI-powered)
+            Write &middot; {WRITE_TOOL_COUNT} tools ({WRITE_AI_COUNT} AI-powered)
           </span>
         </div>
         <EditorialRule className="mb-6" />
-        <h1 className="font-heading font-bold text-4xl mb-3">
-          Code & Development
-        </h1>
+        <h1 className="font-heading font-bold text-4xl mb-3">Write & Analyze</h1>
         <p className="text-text-secondary max-w-xl">
-          Review, generate, format, and ship — AI code tools and developer
-          utilities running in your browser.
+          Compose emails, analyze documents, extract data, and process text —
+          powered by local AI. Nothing leaves your browser.
         </p>
       </div>
 
       {/* Per-tab AI context bar */}
-      <TabAIBar groups={CODE_GROUPS} />
+      <TabAIBar groups={WRITE_GROUPS} />
+
+      {/* Quick AI Tools */}
+      <section className="mb-8">
+        <span className="font-mono text-[10px] tracking-widest uppercase text-text-tertiary mb-3 block">
+          Quick AI Tools
+        </span>
+        <div className="grid sm:grid-cols-2 gap-3">
+          {QUICK_TOOLS.map((tool) => (
+            <Link
+              key={tool.href}
+              href={tool.href}
+              className="group flex items-start gap-3 p-4 border border-border rounded-lg hover:bg-bg-surface transition-colors"
+            >
+              <span className="mt-0.5 flex-shrink-0" style={{ color: "var(--color-dept-ai)" }}>
+                <tool.icon className="w-4 h-4" />
+              </span>
+              <div className="min-w-0">
+                <span className="font-medium text-sm group-hover:text-accent transition-colors block">
+                  {tool.title}
+                </span>
+                <span className="text-text-secondary text-xs">
+                  {tool.description}
+                </span>
+              </div>
+              <ArrowRight className="w-4 h-4 text-text-tertiary ml-auto mt-0.5 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />
+            </Link>
+          ))}
+        </div>
+      </section>
 
       {/* Search */}
       <div className="sticky top-0 z-10 bg-bg-primary pb-3 pt-1 -mx-1 px-1">
@@ -67,9 +99,9 @@ export default function ToolsPage() {
 
       {/* Tool Accordion */}
       <ToolAccordion
-        groups={CODE_GROUPS}
+        groups={WRITE_GROUPS}
         searchFilter={query}
-        storageKey="code-hub-state"
+        storageKey="write-hub-state"
         activeSlug={selectedSlug}
         isReady={isReady}
       />

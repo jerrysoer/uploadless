@@ -1,13 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
-import { timingSafeEqual, createHash } from "crypto";
 
-function safeCompare(a: string, b: string): boolean {
-  const ha = createHash("sha256").update(a).digest();
-  const hb = createHash("sha256").update(b).digest();
-  return timingSafeEqual(ha, hb);
+async function sha256(str: string): Promise<ArrayBuffer> {
+  return crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
 }
 
-export function middleware(req: NextRequest) {
+async function safeCompare(a: string, b: string): Promise<boolean> {
+  const [ha, hb] = await Promise.all([sha256(a), sha256(b)]);
+  const viewA = new Uint8Array(ha);
+  const viewB = new Uint8Array(hb);
+  if (viewA.length !== viewB.length) return false;
+  let result = 0;
+  for (let i = 0; i < viewA.length; i++) {
+    result |= viewA[i] ^ viewB[i];
+  }
+  return result === 0;
+}
+
+export async function middleware(req: NextRequest) {
   const authUser = process.env.AUTH_USER;
   const authPassword = process.env.AUTH_PASSWORD;
 
@@ -26,7 +35,7 @@ export function middleware(req: NextRequest) {
     const user = decoded.slice(0, colonIdx);
     const pass = decoded.slice(colonIdx + 1);
 
-    if (safeCompare(user, authUser) && safeCompare(pass, authPassword)) {
+    if (await safeCompare(user, authUser) && await safeCompare(pass, authPassword)) {
       return NextResponse.next();
     }
   }
