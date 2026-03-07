@@ -106,7 +106,7 @@ const OUTPUT_OPTIONS: { value: Format; label: string }[] = [
 ];
 
 const SAMPLE_JSON = `{
-  "name": "browsership",
+  "name": "uploadless",
   "version": "1.0.0",
   "description": "Local-first developer tools",
   "dependencies": {

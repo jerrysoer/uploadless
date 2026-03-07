@@ -1,12 +1,12 @@
-# BrowserShip
+# Uploadless
 
-Local-first productivity suite — 40+ tools that run entirely in your browser. No uploads, no accounts, no tracking.
+75+ privacy-first browser tools. Zero uploads. Everything runs locally in your browser.
 
-**[browsership.dev](https://browsership.dev)**
+**[uploadless.dev](https://uploadless.dev)**
 
 ## What is this?
 
-BrowserShip is a collection of developer tools, file converters, recorders, and AI assistants that process everything locally using WebAssembly and browser APIs. Your files never leave your device.
+Uploadless is a collection of developer tools, file converters, recorders, and AI assistants that process everything locally using WebAssembly and browser APIs. Your files never leave your device.
 
 ## Departments
 

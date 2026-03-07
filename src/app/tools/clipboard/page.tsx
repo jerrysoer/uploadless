@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import ClipboardCleaner from "@/components/tools/ClipboardCleaner";
 
 export const metadata: Metadata = {
-  title: "Clipboard Cleaner — BrowserShip",
+  title: "Clipboard Cleaner — Uploadless",
   description:
     "Paste rich text to strip tracking pixels, hidden spans, inline styles, and Microsoft Office markup. Get clean plaintext — all in your browser.",
 };

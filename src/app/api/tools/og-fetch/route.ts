@@ -74,7 +74,7 @@ export async function GET(req: NextRequest) {
       res = await fetch(fetchUrl, {
         signal: controller.signal,
         headers: {
-          "User-Agent": "BrowserShip-OGBot/1.0",
+          "User-Agent": "Uploadless-OGBot/1.0",
           Accept: "text/html",
         },
         redirect: "manual",

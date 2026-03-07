@@ -67,7 +67,7 @@ export async function POST(req: NextRequest) {
 
     if (supabase) {
       const { data: cached } = await supabase
-        .from("bs_audits")
+        .from("ul_audits")
         .select("*")
         .eq("domain", domain)
         .gt("expires_at", new Date().toISOString())
@@ -92,7 +92,7 @@ export async function POST(req: NextRequest) {
 
     // 4b. Log scan_initiated
     if (supabase) {
-      supabase.from("bs_analytics_events").insert({
+      supabase.from("ul_analytics_events").insert({
         event: "scan_initiated",
         properties: { domain },
       }).then(() => {});
@@ -124,7 +124,7 @@ export async function POST(req: NextRequest) {
 
     // 6. Cache in Supabase
     if (supabase) {
-      await supabase.from("bs_audits").upsert({
+      await supabase.from("ul_audits").upsert({
         id: slug,
         domain,
         display_url: domain,
@@ -136,13 +136,13 @@ export async function POST(req: NextRequest) {
       });
 
       // Log the request
-      await supabase.from("bs_audit_requests").insert({
+      await supabase.from("ul_audit_requests").insert({
         domain,
         requested_by_ip: hashIp(clientIp),
       });
 
       // Log scan_completed
-      supabase.from("bs_analytics_events").insert({
+      supabase.from("ul_analytics_events").insert({
         event: "scan_completed",
         properties: { domain, grade },
       }).then(() => {});

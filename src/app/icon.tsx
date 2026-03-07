@@ -26,7 +26,7 @@ export default function Icon() {
             lineHeight: 1,
           }}
         >
-          B
+          U
         </span>
       </div>
     ),

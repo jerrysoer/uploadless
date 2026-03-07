@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import ScreenRecorder from "@/components/recording/ScreenRecorder";
 
 export const metadata: Metadata = {
-  title: "Screen Recorder — BrowserShip",
+  title: "Screen Recorder — Uploadless",
   description:
     "Record your screen with optional webcam overlay and audio. Export as WebM or MP4.",
 };

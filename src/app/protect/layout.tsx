@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Security & Privacy — BrowserShip",
+  title: "Security & Privacy — Uploadless",
   description:
     "Encrypt files, decode JWTs, strip metadata, detect tracking, and audit privacy. All tools run locally in your browser.",
 };

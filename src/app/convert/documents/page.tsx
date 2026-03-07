@@ -3,7 +3,7 @@ import ConverterTabs from "@/components/ConverterTabs";
 import DocumentConverter from "@/components/DocumentConverter";
 
 export const metadata: Metadata = {
-  title: "Document Converter — BrowserShip",
+  title: "Document Converter — Uploadless",
   description: "Convert documents between DOCX, PDF, XLSX, TXT, CSV, JSON. All processing happens locally in your browser.",
 };
 

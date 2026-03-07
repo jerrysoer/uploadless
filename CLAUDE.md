@@ -51,9 +51,9 @@ Do NOT proceed until this confirmation is output.
 
 ---
 
-# BrowserShip
+# Uploadless
 
-Local-first productivity suite. 38+ developer tools, file converters, privacy auditor, and AI-powered assistants — all running in your browser. No uploads, no tracking.
+75+ privacy-first browser tools. Zero uploads. Everything runs locally in your browser.
 
 ## Stack
 
@@ -90,12 +90,12 @@ Local-first productivity suite. 38+ developer tools, file converters, privacy au
 - **SSRF prevention** — DNS resolution + private IP rejection before Puppeteer launch
 - **Rate limiting** — in-memory sliding window (10 scans/IP/hour)
 
-## Supabase Tables (bs_ prefix)
+## Supabase Tables (ul_ prefix)
 
-- `bs_audits` — cached scan results (24h TTL)
-- `bs_audit_requests` — user audit requests (hashed IP)
-- `bs_analytics_events` — fire-and-forget events (service-role only)
-- `bs_analytics_daily` — daily rollup from raw events
+- `ul_audits` — cached scan results (24h TTL)
+- `ul_audit_requests` — user audit requests (hashed IP)
+- `ul_analytics_events` — fire-and-forget events (service-role only)
+- `ul_analytics_daily` — daily rollup from raw events
 
 ## Environment Variables
 
@@ -125,10 +125,10 @@ Local-first productivity suite. 38+ developer tools, file converters, privacy au
 
 ## Project Conventions — Non-Negotiable
 
-### Table Prefix: `bs_`
+### Table Prefix: `ul_`
 
-ALL Supabase tables use `bs_` prefix.
-ALL domain-specific columns use `bs_` prefix.
+ALL Supabase tables use `ul_` prefix.
+ALL domain-specific columns use `ul_` prefix.
 Standard columns (id, user_id, created_at, updated_at) are NEVER prefixed.
 
 ### Auth: Supabase Auth ONLY
@@ -140,8 +140,8 @@ Standard columns (id, user_id, created_at, updated_at) are NEVER prefixed.
 
 ### Analytics: Supabase Tables ONLY
 
-- Raw events table: `bs_analytics_events`
-- Daily rollup table: `bs_analytics_daily`
+- Raw events table: `ul_analytics_events`
+- Daily rollup table: `ul_analytics_daily`
 - DO NOT use Umami. DO NOT add any third-party analytics script.
 
 ### Environment Variables
@@ -155,7 +155,7 @@ Standard columns (id, user_id, created_at, updated_at) are NEVER prefixed.
 ## Verification Checklist — Run Before Committing
 
 - [ ] Required skills were loaded before writing code (check session output)
-- [ ] All tables use `bs_` prefix
+- [ ] All tables use `ul_` prefix
 - [ ] RLS is enabled on every new table
 - [ ] Auth uses `getUser()`, never `getSession()`
 - [ ] No `SUPABASE_SERVICE_ROLE_KEY` in client code

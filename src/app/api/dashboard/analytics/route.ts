@@ -25,7 +25,7 @@ export async function GET(request: NextRequest) {
     const since = startDate.toISOString().split("T")[0];
 
     const { data, error } = await supabase
-      .from("bs_analytics_daily")
+      .from("ul_analytics_daily")
       .select("*")
       .gte("date", since)
       .order("date", { ascending: true });

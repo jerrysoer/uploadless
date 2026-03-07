@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Code & Development — BrowserShip",
+  title: "Code & Development — Uploadless",
   description:
     "29 developer and AI code tools that run entirely in your browser. Review, generate, format, encode, deploy — no uploads, no tracking.",
 };

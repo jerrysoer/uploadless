@@ -3,8 +3,8 @@
 import type { AnalyticsEvent, AnalyticsEventName } from "./types";
 import { hasOptedOut } from "./consent";
 
-const SESSION_KEY = "bs_session_id";
-const LEGACY_SESSION_KEY = "sl_session_id";
+const SESSION_KEY = "ul_session_id";
+const LEGACY_SESSION_KEY = "bs_session_id";
 
 function getSessionId(): string {
   if (typeof sessionStorage === "undefined") return "unknown";

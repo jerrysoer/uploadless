@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-text-tertiary text-sm">
         <div>
           <span className="font-heading font-semibold tracking-[0.15em] uppercase text-text-secondary">
-            BrowserShip
+            Uploadless
           </span>
           <span className="mx-2">·</span>
           <span>{new Date().getFullYear()}</span>

@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import UuidGenerator from "@/components/tools/UuidGenerator";
 
 export const metadata: Metadata = {
-  title: "UUID Generator — BrowserShip",
+  title: "UUID Generator — Uploadless",
   description:
     "Generate v4 UUIDs in bulk with format options. Cryptographically secure, runs entirely in your browser.",
 };

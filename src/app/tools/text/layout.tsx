@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Text Utilities — BrowserShip",
+  title: "Text Utilities — Uploadless",
   description:
     "Count words, convert case, and generate lorem ipsum — all in your browser.",
 };

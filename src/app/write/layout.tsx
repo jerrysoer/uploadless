@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Write & Analyze — BrowserShip",
+  title: "Write & Analyze — Uploadless",
   description:
     "AI-powered writing, document analysis, and text processing tools. Compose, extract, summarize — all running in your browser.",
 };

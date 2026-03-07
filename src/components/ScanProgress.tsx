@@ -29,7 +29,7 @@ export default function ScanProgress({ domain, isActive }: ScanProgressProps) {
   useEffect(() => {
     if (!isActive) return;
 
-    setLines([`$ browsership audit ${domain}`]);
+    setLines([`$ uploadless audit ${domain}`]);
     setProgress(0);
 
     let idx = 0;

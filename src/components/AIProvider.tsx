@@ -17,8 +17,8 @@ import type {
 import type { ModelSlug } from "@/lib/ai/registry";
 import { getModelPack, MODEL_PACKS } from "@/lib/ai/registry";
 
-const LS_MODEL_KEY = "bs_ai_model";
-const LS_MODEL_CHOSEN_KEY = "bs_ai_model_chosen";
+const LS_MODEL_KEY = "ul_ai_model";
+const LS_MODEL_CHOSEN_KEY = "ul_ai_model_chosen";
 
 export const AIContext = createContext<AIContextValue | null>(null);
 

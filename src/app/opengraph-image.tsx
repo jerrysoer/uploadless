@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "BrowserShip — Developer & Privacy Tools";
+export const alt = "Uploadless — browser tools, no cloud required";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -31,7 +31,7 @@ export default function OgImage() {
             marginBottom: 20,
           }}
         >
-          B
+          U
         </span>
 
         {/* Accent line */}
@@ -56,7 +56,7 @@ export default function OgImage() {
             fontFamily: "Georgia, serif",
           }}
         >
-          BrowserShip
+          Uploadless
         </div>
 
         {/* Subtitle */}
@@ -68,7 +68,7 @@ export default function OgImage() {
             textAlign: "center",
           }}
         >
-          Local-first productivity suite — all in your browser
+          browser tools, no cloud required
         </div>
       </div>
     ),

@@ -11,7 +11,7 @@ interface AIChipProps {
   disabled?: boolean;
 }
 
-const LS_MODEL_CHOSEN_KEY = "bs_ai_model_chosen";
+const LS_MODEL_CHOSEN_KEY = "ul_ai_model_chosen";
 
 /**
  * Small "Sparkles Local AI" chip for tools that support AI enhancement.

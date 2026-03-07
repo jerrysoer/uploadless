@@ -5,13 +5,13 @@ import PageViewTracker from "@/components/PageViewTracker";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "BrowserShip — Local-first productivity suite",
+  title: "Uploadless — browser tools, no cloud required",
   description:
-    "Developer & privacy tools that run entirely in your browser. Hash, encrypt, convert, sign — no uploads, no tracking.",
+    "75+ privacy-first browser tools. Zero uploads. Everything runs locally in your browser.",
   openGraph: {
-    title: "BrowserShip — Local-first productivity suite",
+    title: "Uploadless — browser tools, no cloud required",
     description:
-      "Developer & privacy tools that run entirely in your browser. Hash, encrypt, convert, sign — no uploads, no tracking.",
+      "75+ privacy-first browser tools. Zero uploads. Everything runs locally in your browser.",
     type: "website",
   },
 };

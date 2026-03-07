@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import FingerprintViewer from "@/components/tools/FingerprintViewer";
 
 export const metadata: Metadata = {
-  title: "Browser Fingerprint Viewer — BrowserShip",
+  title: "Browser Fingerprint Viewer — Uploadless",
   description:
     "See what your browser reveals to websites. Canvas, WebGL, fonts, screen, and hardware fingerprinting signals — all checked locally.",
 };

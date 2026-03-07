@@ -5,9 +5,9 @@ import { ShieldCheck, Eye, ExternalLink } from "lucide-react";
 import TransparencyClient from "./TransparencyClient";
 
 export const metadata: Metadata = {
-  title: "Transparency — BrowserShip",
+  title: "Transparency — Uploadless",
   description:
-    "See exactly what BrowserShip tracks, how it compares to typical tools, and audit our analytics source code.",
+    "See exactly what Uploadless tracks, how it compares to typical tools, and audit our analytics source code.",
 };
 
 const EVENTS = [
@@ -142,7 +142,7 @@ export default function TransparencyPage() {
             </h1>
             <p className="text-text-secondary text-lg max-w-2xl mx-auto">
               We believe you should know exactly what any tool does with your
-              data. Here is everything BrowserShip tracks — and everything it
+              data. Here is everything Uploadless tracks — and everything it
               intentionally does not.
             </p>
           </div>
@@ -154,7 +154,7 @@ export default function TransparencyPage() {
                 What We Track
               </h2>
               <p className="text-text-secondary mb-4">
-                BrowserShip fires 10 analytics events. Each one is listed below
+                Uploadless fires 10 analytics events. Each one is listed below
                 with its exact payload shape.
               </p>
 
@@ -234,7 +234,7 @@ export default function TransparencyPage() {
                         Feature
                       </th>
                       <th className="py-2 pr-4 font-medium text-grade-a">
-                        BrowserShip
+                        Uploadless
                       </th>
                       <th className="py-2 font-medium text-grade-f">
                         Typical Free Tool
@@ -270,7 +270,7 @@ export default function TransparencyPage() {
 
               <div className="grid sm:grid-cols-2 gap-3">
                 <a
-                  href="https://github.com/jerrysoer/browsership/blob/main/src/lib/analytics.ts"
+                  href="https://github.com/jerrysoer/uploadless/blob/main/src/lib/analytics.ts"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 bg-bg-surface border border-border rounded-xl p-4 hover:border-border-hover transition-colors"
@@ -281,7 +281,7 @@ export default function TransparencyPage() {
                   <ExternalLink className="w-3.5 h-3.5 text-text-tertiary ml-auto" />
                 </a>
                 <a
-                  href="https://github.com/jerrysoer/browsership/blob/main/src/lib/consent.ts"
+                  href="https://github.com/jerrysoer/uploadless/blob/main/src/lib/consent.ts"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 bg-bg-surface border border-border rounded-xl p-4 hover:border-border-hover transition-colors"
@@ -292,7 +292,7 @@ export default function TransparencyPage() {
                   <ExternalLink className="w-3.5 h-3.5 text-text-tertiary ml-auto" />
                 </a>
                 <a
-                  href="https://github.com/jerrysoer/browsership/blob/main/src/app/api/analytics/event/route.ts"
+                  href="https://github.com/jerrysoer/uploadless/blob/main/src/app/api/analytics/event/route.ts"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 bg-bg-surface border border-border rounded-xl p-4 hover:border-border-hover transition-colors"
@@ -303,7 +303,7 @@ export default function TransparencyPage() {
                   <ExternalLink className="w-3.5 h-3.5 text-text-tertiary ml-auto" />
                 </a>
                 <a
-                  href="https://github.com/jerrysoer/browsership/blob/main/src/app/api/analytics/aggregate/route.ts"
+                  href="https://github.com/jerrysoer/uploadless/blob/main/src/app/api/analytics/aggregate/route.ts"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 bg-bg-surface border border-border rounded-xl p-4 hover:border-border-hover transition-colors"
@@ -317,7 +317,7 @@ export default function TransparencyPage() {
 
               <div className="mt-4 text-center">
                 <a
-                  href="https://github.com/jerrysoer/browsership/issues/new"
+                  href="https://github.com/jerrysoer/uploadless/issues/new"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-accent-fg font-medium rounded-xl hover:bg-accent/90 transition-colors text-sm"

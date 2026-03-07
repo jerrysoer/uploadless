@@ -1,5 +1,5 @@
-const STORAGE_KEY = "bs_analytics_consent";
-const LEGACY_KEY = "sl_analytics_consent";
+const STORAGE_KEY = "ul_analytics_consent";
+const LEGACY_KEY = "bs_analytics_consent";
 
 // Migrate legacy key on load
 if (typeof window !== "undefined") {

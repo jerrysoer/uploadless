@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import FaviconGenerator from "@/components/tools/FaviconGenerator";
 
 export const metadata: Metadata = {
-  title: "Favicon Generator — BrowserShip",
+  title: "Favicon Generator — Uploadless",
   description:
     "Generate favicons from an image or emoji. Preview all sizes and download as PNG or ICO.",
 };

@@ -25,7 +25,7 @@ export default function ReportCard({ result }: ReportCardProps) {
         backgroundColor: bgColor || "#0F0F0F",
       });
       const link = document.createElement("a");
-      link.download = `browsership-audit-${result.domain}.png`;
+      link.download = `uploadless-audit-${result.domain}.png`;
       link.href = dataUrl;
       link.click();
       trackEvent("report_shared", { method: "download", domain: result.domain });
@@ -101,7 +101,7 @@ export default function ReportCard({ result }: ReportCardProps) {
         </div>
 
         <p className="text-text-tertiary text-[10px] font-mono text-center mt-4">
-          browsership.dev · Audited {new Date(scan.scannedAt).toLocaleDateString()}
+          uploadless.dev · Audited {new Date(scan.scannedAt).toLocaleDateString()}
         </p>
       </div>
 
