@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://uploadless.dev</loc><priority>1.0</priority></url>
+  <url><loc>https://uploadless.dev/tools</loc><priority>0.9</priority></url>
+  <url><loc>https://uploadless.dev/audit</loc><priority>0.9</priority></url>
+  <url><loc>https://uploadless.dev/about</loc><priority>0.8</priority></url>
+  <url><loc>https://uploadless.dev/transparency</loc><priority>0.8</priority></url>
+  <url><loc>https://uploadless.dev/sign</loc><priority>0.7</priority></url>
+  <url><loc>https://uploadless.dev/convert/image</loc><priority>0.7</priority></url>
+  <url><loc>https://uploadless.dev/convert/audio</loc><priority>0.7</priority></url>
+  <url><loc>https://uploadless.dev/convert/video</loc><priority>0.7</priority></url>
+  <url><loc>https://uploadless.dev/convert/document</loc><priority>0.7</priority></url>
+  <url><loc>https://uploadless.dev/convert/pdf</loc><priority>0.7</priority></url>
+  <url><loc>https://uploadless.dev/convert/data</loc><priority>0.7</priority></url>
+  <url><loc>https://uploadless.dev/convert/font</loc><priority>0.7</priority></url>
+  <url><loc>https://uploadless.dev/write</loc><priority>0.7</priority></url>
+  <url><loc>https://uploadless.dev/media</loc><priority>0.7</priority></url>
+  <url><loc>https://uploadless.dev/protect</loc><priority>0.7</priority></url>
+  <url><loc>https://uploadless.dev/record/screen</loc><priority>0.6</priority></url>
+  <url><loc>https://uploadless.dev/record/camera</loc><priority>0.6</priority></url>
+  <url><loc>https://uploadless.dev/record/audio</loc><priority>0.6</priority></url>
+</urlset>

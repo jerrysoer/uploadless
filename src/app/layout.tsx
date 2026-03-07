@@ -5,14 +5,44 @@ import PageViewTracker from "@/components/PageViewTracker";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Uploadless — browser tools, no cloud required",
-  description:
-    "75+ privacy-first browser tools. Zero uploads. Everything runs locally in your browser.",
+  metadataBase: new URL('https://uploadless.dev'),
+  title: {
+    default: 'Uploadless — Privacy-First Browser Tools',
+    template: '%s | Uploadless',
+  },
+  description: 'Privacy-first browser tools that never upload your files. Convert, sign, audit, and build — everything runs locally in your browser.',
+  keywords: ['privacy tools', 'browser tools', 'local-first', 'no upload', 'file converter', 'pdf signer', 'privacy audit', 'open source'],
+  authors: [{ name: 'Uploadless' }],
+  creator: 'Uploadless',
+  publisher: 'Uploadless',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   openGraph: {
-    title: "Uploadless — browser tools, no cloud required",
-    description:
-      "75+ privacy-first browser tools. Zero uploads. Everything runs locally in your browser.",
-    type: "website",
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://uploadless.dev',
+    siteName: 'Uploadless',
+    title: 'Uploadless — Privacy-First Browser Tools',
+    description: 'Privacy-first browser tools that never upload your files. Convert, sign, audit, and build — everything runs locally in your browser.',
+    images: [{ url: '/og/default.png', width: 1200, height: 630, alt: 'Uploadless — Privacy-First Browser Tools' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Uploadless — Privacy-First Browser Tools',
+    description: 'Privacy-first browser tools that never upload your files.',
+    images: ['/og/default.png'],
+  },
+  alternates: {
+    canonical: 'https://uploadless.dev',
   },
 };
 

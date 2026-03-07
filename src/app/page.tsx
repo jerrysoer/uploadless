@@ -7,9 +7,8 @@ import FeaturedToolCard from "@/components/FeaturedToolCard";
 import DepartmentCard from "@/components/DepartmentCard";
 
 export const metadata: Metadata = {
-  title: "Uploadless — Local-first productivity suite",
-  description:
-    "Developer & privacy tools that run entirely in your browser. Hash, encrypt, convert, sign — no uploads, no tracking.",
+  title: 'Uploadless — Privacy-First Browser Tools',
+  description: 'Privacy-first browser tools that never upload your files. Convert, sign, audit, and build — everything runs locally in your browser.',
 };
 
 export default function HomePage() {
