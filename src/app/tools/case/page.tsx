@@ -1,12 +1,5 @@
-import { Metadata } from "next";
-import CaseConverter from "@/components/tools/CaseConverter";
-
-export const metadata: Metadata = {
-  title: "Case Converter — ShipLocal",
-  description:
-    "Convert text between UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case, and more.",
-};
+import { redirect } from "next/navigation";
 
 export default function CasePage() {
-  return <CaseConverter />;
+  redirect("/tools/text");
 }

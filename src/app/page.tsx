@@ -25,7 +25,7 @@ export default function HomePage() {
               Local-first productivity suite
             </p>
             <h1 className="font-heading font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1] mb-4 sm:mb-6 max-w-4xl">
-              45 tools that never
+              37 tools that never
               <br />
               leave your browser
             </h1>
@@ -116,7 +116,7 @@ export default function HomePage() {
               <DepartmentCard
                 number="01"
                 name="AI-Powered"
-                toolCount={2}
+                toolCount={1}
                 description="Summarize and rewrite text using a local AI model. No server, no API keys, no data leaves your device."
                 href="/ai"
                 deptColor="var(--color-dept-ai)"
@@ -140,7 +140,7 @@ export default function HomePage() {
               <DepartmentCard
                 number="04"
                 name="Developer Tools"
-                toolCount={28}
+                toolCount={18}
                 description="Hash, encode, format, generate, diff, and inspect. The everyday toolkit for developers."
                 href="/tools"
                 deptColor="var(--color-dept-dev)"

@@ -1,5 +1,5 @@
-import { Metadata } from "next";
-import Link from "next/link";
+"use client";
+
 import {
   Hash,
   QrCode,
@@ -14,32 +14,22 @@ import {
   Type,
   ClipboardPaste,
   Unplug,
-  ScanEye,
   Palette,
   Code,
   Regex,
-  FileText,
   ALargeSmall,
-  Sparkles,
-  PenLine,
   Shield,
-  Link as LinkIcon,
   GitCompare,
   Image,
   Share2,
-  Camera,
   EyeOff,
   Eye,
   Mail,
   FileSearch,
 } from "lucide-react";
 import EditorialRule from "@/components/EditorialRule";
-
-export const metadata: Metadata = {
-  title: "Developer & Privacy Tools — ShipLocal",
-  description:
-    "38+ developer and privacy tools that run entirely in your browser. Hash, encode, encrypt, generate, diff, inspect — no uploads, no tracking.",
-};
+import ToolAccordion from "@/components/ToolAccordion";
+import Link from "next/link";
 
 interface ToolEntry {
   href: string;
@@ -48,40 +38,46 @@ interface ToolEntry {
   description: string;
 }
 
-const DEVELOPER_TOOLS: ToolEntry[] = [
-  { href: "/tools/json", icon: Braces, title: "JSON Formatter", description: "Format, minify, validate, and convert JSON to CSV/YAML." },
-  { href: "/tools/hash", icon: Hash, title: "Hash Calculator", description: "MD5, SHA-1, SHA-256, SHA-512 for text and files." },
-  { href: "/tools/base64", icon: Binary, title: "Base64 Encode/Decode", description: "Encode and decode Base64 for text and files." },
-  { href: "/tools/uuid", icon: Fingerprint, title: "UUID Generator", description: "Generate v4 UUIDs in bulk with format options." },
-  { href: "/tools/qr", icon: QrCode, title: "QR Code Generator", description: "Create QR codes for URLs, WiFi, vCards, and text." },
-  { href: "/tools/password", icon: KeyRound, title: "Password Generator", description: "Generate strong passwords and passphrases with strength meter." },
-  { href: "/tools/epoch", icon: Clock, title: "Epoch Converter", description: "Convert between Unix timestamps, ISO 8601, and human dates." },
-  { href: "/tools/jwt", icon: FileKey, title: "JWT Decoder", description: "Decode and inspect JWT tokens. Header, payload, and expiry." },
-  { href: "/tools/encrypt", icon: Lock, title: "File Encryption", description: "Encrypt and decrypt files with AES-256-GCM. Password-based." },
-  { href: "/tools/exif", icon: Eye, title: "EXIF Stripper", description: "View and strip metadata from images. GPS, camera, dates." },
-  { href: "/tools/contrast", icon: ScanEye, title: "Contrast Checker", description: "Check WCAG 2.1 color contrast ratios. AA and AAA compliance." },
-  { href: "/tools/gradient", icon: Palette, title: "CSS Gradient Generator", description: "Create linear, radial, and conic CSS gradients visually." },
-  { href: "/tools/svg-to-react", icon: Code, title: "SVG → React", description: "Convert SVG markup into a clean React component with JSX." },
-  { href: "/tools/regex", icon: Regex, title: "Regex Playground", description: "Test regular expressions with real-time matching and highlights." },
-  { href: "/tools/wordcount", icon: FileText, title: "Word Counter", description: "Count words, characters, sentences, and estimate reading time." },
-  { href: "/tools/case", icon: ALargeSmall, title: "Case Converter", description: "Convert text between camelCase, snake_case, kebab-case, and more." },
-  { href: "/tools/cron", icon: Clock, title: "Cron Expression Builder", description: "Build cron expressions visually with presets and human-readable output." },
-  { href: "/tools/chmod", icon: Shield, title: "Chmod Calculator", description: "Calculate Unix file permissions with a visual checkbox grid." },
-  { href: "/tools/url", icon: LinkIcon, title: "URL Parser", description: "Break URLs into protocol, host, path, params, and hash. Encode/decode." },
-  { href: "/tools/lorem", icon: Type, title: "Lorem Ipsum Generator", description: "Generate placeholder text by paragraphs, sentences, or words." },
-  { href: "/tools/html-entities", icon: Code, title: "HTML Entity Encoder", description: "Encode and decode HTML entities. Named, numeric, and hex support." },
-  { href: "/tools/base-convert", icon: Binary, title: "Number Base Converter", description: "Convert numbers between binary, octal, decimal, and hexadecimal." },
-  { href: "/tools/diff", icon: GitCompare, title: "Text Diff / Compare", description: "Compare two texts side by side with highlighted additions and deletions." },
-  { href: "/tools/markdown", icon: FileText, title: "Markdown Editor", description: "Write Markdown with a live preview. Toolbar for formatting shortcuts." },
-  { href: "/tools/favicon", icon: Image, title: "Favicon Generator", description: "Generate favicons from images or emoji in all required sizes." },
-  { href: "/tools/og-preview", icon: Share2, title: "OG Image Preview", description: "Preview how your page looks when shared on Twitter, Facebook, and LinkedIn." },
-  { href: "/tools/palette", icon: Palette, title: "Color Palette from Image", description: "Extract dominant colors from any image using k-means clustering." },
-  { href: "/tools/code-screenshot", icon: Camera, title: "Code Screenshot", description: "Create beautiful code screenshots with syntax highlighting and themes." },
-];
-
-const AI_TOOLS: ToolEntry[] = [
-  { href: "/ai/summarize", icon: Sparkles, title: "Text Summarizer", description: "Summarize text using a local AI model. No server required." },
-  { href: "/ai/rewrite", icon: PenLine, title: "Text Rewriter", description: "Rewrite text in different tones using local AI." },
+const DEVELOPER_GROUPS = [
+  {
+    label: "Encode & Transform",
+    tools: [
+      { href: "/tools/json", icon: Braces, title: "JSON Formatter", description: "Format, minify, validate, and convert JSON to CSV/YAML." },
+      { href: "/tools/encode", icon: Binary, title: "Encode / Decode", description: "Base64, HTML entities, and URL encode/decode." },
+      { href: "/tools/hash", icon: Hash, title: "Hash Calculator", description: "MD5, SHA-1, SHA-256, SHA-512 for text and files." },
+      { href: "/tools/numbers", icon: Clock, title: "Number & Date Converter", description: "Number bases (bin, oct, hex) and Unix epoch timestamps." },
+      { href: "/tools/text", icon: ALargeSmall, title: "Text Utilities", description: "Word count, case conversion, and lorem ipsum generator." },
+    ],
+  },
+  {
+    label: "Security & Crypto",
+    tools: [
+      { href: "/tools/password", icon: KeyRound, title: "Password Generator", description: "Generate strong passwords and passphrases with strength meter." },
+      { href: "/tools/jwt", icon: FileKey, title: "JWT Decoder", description: "Decode and inspect JWT tokens. Header, payload, and expiry." },
+      { href: "/tools/encrypt", icon: Lock, title: "File Encryption", description: "Encrypt and decrypt files with AES-256-GCM. Password-based." },
+      { href: "/tools/exif", icon: Eye, title: "EXIF Stripper", description: "View and strip metadata from images. GPS, camera, dates." },
+    ],
+  },
+  {
+    label: "Code & Design",
+    tools: [
+      { href: "/tools/code", icon: Code, title: "Code Tools", description: "Markdown editor, SVG \u2192 React, and code screenshots." },
+      { href: "/tools/regex", icon: Regex, title: "Regex Playground", description: "Test regular expressions with real-time matching and highlights." },
+      { href: "/tools/design", icon: Palette, title: "Color & Design", description: "Contrast checker, CSS gradients, and color palette extraction." },
+      { href: "/tools/og-preview", icon: Share2, title: "OG Image Preview", description: "Preview how your page looks when shared on Twitter, Facebook, and LinkedIn." },
+      { href: "/tools/favicon", icon: Image, title: "Favicon Generator", description: "Generate favicons from images or emoji in all required sizes." },
+    ],
+  },
+  {
+    label: "System & DevOps",
+    tools: [
+      { href: "/tools/uuid", icon: Fingerprint, title: "UUID Generator", description: "Generate v4 UUIDs in bulk with format options." },
+      { href: "/tools/qr", icon: QrCode, title: "QR Code Generator", description: "Create QR codes for URLs, WiFi, vCards, and text." },
+      { href: "/tools/cron", icon: Clock, title: "Cron Expression Builder", description: "Build cron expressions visually with presets and human-readable output." },
+      { href: "/tools/chmod", icon: Shield, title: "Chmod Calculator", description: "Calculate Unix file permissions with a visual checkbox grid." },
+      { href: "/tools/diff", icon: GitCompare, title: "Text Diff / Compare", description: "Compare two texts side by side with highlighted additions and deletions." },
+    ],
+  },
 ];
 
 const PRIVACY_TOOLS: ToolEntry[] = [
@@ -109,35 +105,9 @@ function ToolRow({ href, icon: Icon, title, description }: ToolEntry) {
   );
 }
 
-function ToolSection({
-  label,
-  count,
-  tools,
-  deptColor,
-}: {
-  label: string;
-  count: number;
-  tools: ToolEntry[];
-  deptColor: string;
-}) {
-  return (
-    <section className="mb-12">
-      <div className="flex items-center gap-3 mb-4">
-        <div className="w-3 h-3 rounded-sm flex-shrink-0" style={{ backgroundColor: deptColor }} />
-        <span className="font-mono text-xs tracking-widest uppercase text-text-tertiary">
-          {label} · {count} tools
-        </span>
-      </div>
-      <div>
-        {tools.map((tool) => (
-          <ToolRow key={tool.href} {...tool} />
-        ))}
-      </div>
-    </section>
-  );
-}
-
 export default function ToolsPage() {
+  const devToolCount = DEVELOPER_GROUPS.reduce((sum, g) => sum + g.tools.length, 0);
+
   return (
     <div>
       {/* Header */}
@@ -152,24 +122,31 @@ export default function ToolsPage() {
         </p>
       </div>
 
-      <ToolSection
-        label="Developer"
-        count={DEVELOPER_TOOLS.length}
-        tools={DEVELOPER_TOOLS}
-        deptColor="var(--color-dept-dev)"
-      />
-      <ToolSection
-        label="AI-Powered"
-        count={AI_TOOLS.length}
-        tools={AI_TOOLS}
-        deptColor="var(--color-dept-ai)"
-      />
-      <ToolSection
-        label="Privacy"
-        count={PRIVACY_TOOLS.length}
-        tools={PRIVACY_TOOLS}
-        deptColor="var(--color-dept-privacy)"
-      />
+      {/* Developer Tools — Accordion */}
+      <section className="mb-12">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-3 h-3 rounded-sm flex-shrink-0" style={{ backgroundColor: "var(--color-dept-dev)" }} />
+          <span className="font-mono text-xs tracking-widest uppercase text-text-tertiary">
+            Developer · {devToolCount} tools
+          </span>
+        </div>
+        <ToolAccordion groups={DEVELOPER_GROUPS} />
+      </section>
+
+      {/* Privacy Tools — flat list */}
+      <section className="mb-12">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-3 h-3 rounded-sm flex-shrink-0" style={{ backgroundColor: "var(--color-dept-privacy)" }} />
+          <span className="font-mono text-xs tracking-widest uppercase text-text-tertiary">
+            Privacy · {PRIVACY_TOOLS.length} tools
+          </span>
+        </div>
+        <div>
+          {PRIVACY_TOOLS.map((tool) => (
+            <ToolRow key={tool.href} {...tool} />
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

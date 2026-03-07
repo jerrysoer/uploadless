@@ -1,34 +1,26 @@
 "use client";
 
-import Link from "next/link";
+import { useState, useEffect } from "react";
 import {
   Sparkles,
   Download,
   Trash2,
   Cpu,
   AlertCircle,
-  FileText,
-  PenLine,
 } from "lucide-react";
 import { useLocalAI } from "@/hooks/useLocalAI";
 import EditorialRule from "@/components/EditorialRule";
+import AISummarizer from "@/components/tools/AISummarizer";
+import AIRewriter from "@/components/tools/AIRewriter";
 
-const AI_TOOLS = [
-  {
-    href: "/ai/summarize",
-    title: "Text Summarizer",
-    description: "Paste long text and get a concise summary. Choose length: 1 sentence, 1 paragraph, or key points.",
-    icon: FileText,
-  },
-  {
-    href: "/ai/rewrite",
-    title: "Text Rewriter",
-    description: "Rewrite text in different tones: formal, simple, shorter, or more detailed.",
-    icon: PenLine,
-  },
-];
+const TABS = [
+  { id: "summarize", label: "Summarize" },
+  { id: "rewrite", label: "Rewrite" },
+] as const;
 
-export default function AIHubPage() {
+export default function AIPage() {
+  const [activeTab, setActiveTab] = useState<string>("summarize");
+
   const {
     status,
     provider,
@@ -42,6 +34,19 @@ export default function AIHubPage() {
     deleteModel,
   } = useLocalAI();
 
+  // Sync from URL hash on mount
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (TABS.some((t) => t.id === hash)) {
+      setActiveTab(hash);
+    }
+  }, []);
+
+  const handleTabChange = (id: string) => {
+    setActiveTab(id);
+    window.history.replaceState(null, "", `#${id}`);
+  };
+
   return (
     <div>
       {/* Header with editorial rule and department accent */}
@@ -54,17 +59,17 @@ export default function AIHubPage() {
         </div>
         <EditorialRule className="mb-6" />
         <h1 className="font-heading font-bold text-4xl mb-3">
-          Local AI Tools
+          AI Text Tools
         </h1>
         <p className="text-text-secondary max-w-xl">
-          Run AI models directly in your browser. No server, no API keys, no
-          data leaves your device.
+          Summarize and rewrite text using a local AI model. No server, no API
+          keys, no data leaves your device.
         </p>
       </div>
 
-      {/* Model Status Card — editorial style */}
+      {/* Model Status Card */}
       <div
-        className="p-6 mb-10 border-b border-border"
+        className="p-6 mb-8 border-b border-border"
         style={{ borderTop: "3px solid var(--color-dept-ai)" }}
       >
         <div className="flex items-start justify-between mb-4">
@@ -159,34 +164,26 @@ export default function AIHubPage() {
         )}
       </div>
 
-      {/* AI Tools — editorial list */}
-      <div className="flex items-center gap-3 mb-4">
-        <div className="w-3 h-3 rounded-sm flex-shrink-0" style={{ backgroundColor: "var(--color-dept-ai)" }} />
-        <span className="font-mono text-xs tracking-widest uppercase text-text-tertiary">
-          AI-Powered · {AI_TOOLS.length} tools
-        </span>
-      </div>
-
-      <div>
-        {AI_TOOLS.map((tool) => (
-          <Link
-            key={tool.href}
-            href={tool.href}
-            className="group flex items-start gap-4 py-5 border-b border-border hover:bg-bg-surface transition-colors -mx-3 px-3"
-            style={{ borderLeftWidth: "3px", borderLeftColor: "var(--color-dept-ai)" }}
+      {/* Tab switcher */}
+      <div className="flex gap-1 p-1 bg-bg-surface border border-border rounded-xl mb-6">
+        {TABS.map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => handleTabChange(tab.id)}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+              activeTab === tab.id
+                ? "bg-accent text-white"
+                : "text-text-secondary hover:text-text-primary"
+            }`}
           >
-            <tool.icon className="w-5 h-5 text-text-tertiary group-hover:text-text-secondary transition-colors flex-shrink-0 mt-0.5" />
-            <div>
-              <h3 className="font-heading font-semibold text-lg mb-1 group-hover:text-accent transition-colors">
-                {tool.title}
-              </h3>
-              <p className="text-text-secondary text-sm">
-                {tool.description}
-              </p>
-            </div>
-          </Link>
+            {tab.label}
+          </button>
         ))}
       </div>
+
+      {/* Tool content */}
+      {activeTab === "summarize" && <AISummarizer />}
+      {activeTab === "rewrite" && <AIRewriter />}
 
       {/* Note */}
       <p className="text-text-tertiary text-xs mt-10">

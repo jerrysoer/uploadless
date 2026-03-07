@@ -1,12 +1,5 @@
-import { Metadata } from "next";
-import CodeScreenshot from "@/components/tools/CodeScreenshot";
-
-export const metadata: Metadata = {
-  title: "Code Screenshot — ShipLocal",
-  description:
-    "Create beautiful code screenshots with syntax highlighting, custom themes, and padding options.",
-};
+import { redirect } from "next/navigation";
 
 export default function CodeScreenshotPage() {
-  return <CodeScreenshot />;
+  redirect("/tools/code");
 }

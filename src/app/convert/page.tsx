@@ -90,7 +90,73 @@ export default function ConvertPage() {
       </div>
 
       <div className="space-y-1">
-        {CONVERTERS.map(({ href, icon: Icon, title, description, formats }) => (
+        {/* Media */}
+        <p className="font-mono text-xs tracking-widest uppercase text-text-tertiary pt-4 pb-2">
+          Media
+        </p>
+        {CONVERTERS.slice(0, 4).map(({ href, icon: Icon, title, description, formats }) => (
+          <Link
+            key={href}
+            href={href}
+            className="group flex items-start gap-4 py-5 border-b border-border hover:bg-bg-surface transition-colors -mx-3 px-3"
+            style={{ borderLeftWidth: "3px", borderLeftColor: "var(--color-dept-convert)" }}
+          >
+            <Icon className="w-5 h-5 text-text-tertiary group-hover:text-text-secondary transition-colors flex-shrink-0 mt-0.5" />
+            <div className="flex-1 min-w-0">
+              <h2 className="font-heading font-semibold text-lg mb-1 group-hover:text-accent transition-colors">
+                {title}
+              </h2>
+              <p className="text-text-secondary text-sm mb-2">{description}</p>
+              <div className="flex flex-wrap gap-1.5">
+                {formats.map((fmt) => (
+                  <span
+                    key={fmt}
+                    className="font-mono text-[10px] tracking-wider uppercase px-2 py-0.5 bg-bg-elevated text-text-tertiary"
+                  >
+                    {fmt}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </Link>
+        ))}
+
+        {/* Documents */}
+        <p className="font-mono text-xs tracking-widest uppercase text-text-tertiary pt-6 pb-2">
+          Documents
+        </p>
+        {CONVERTERS.slice(4, 7).map(({ href, icon: Icon, title, description, formats }) => (
+          <Link
+            key={href}
+            href={href}
+            className="group flex items-start gap-4 py-5 border-b border-border hover:bg-bg-surface transition-colors -mx-3 px-3"
+            style={{ borderLeftWidth: "3px", borderLeftColor: "var(--color-dept-convert)" }}
+          >
+            <Icon className="w-5 h-5 text-text-tertiary group-hover:text-text-secondary transition-colors flex-shrink-0 mt-0.5" />
+            <div className="flex-1 min-w-0">
+              <h2 className="font-heading font-semibold text-lg mb-1 group-hover:text-accent transition-colors">
+                {title}
+              </h2>
+              <p className="text-text-secondary text-sm mb-2">{description}</p>
+              <div className="flex flex-wrap gap-1.5">
+                {formats.map((fmt) => (
+                  <span
+                    key={fmt}
+                    className="font-mono text-[10px] tracking-wider uppercase px-2 py-0.5 bg-bg-elevated text-text-tertiary"
+                  >
+                    {fmt}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </Link>
+        ))}
+
+        {/* Archive */}
+        <p className="font-mono text-xs tracking-widest uppercase text-text-tertiary pt-6 pb-2">
+          Archive
+        </p>
+        {CONVERTERS.slice(7).map(({ href, icon: Icon, title, description, formats }) => (
           <Link
             key={href}
             href={href}

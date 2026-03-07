@@ -1,12 +1,5 @@
-import { Metadata } from "next";
-import GradientGenerator from "@/components/tools/GradientGenerator";
-
-export const metadata: Metadata = {
-  title: "CSS Gradient Generator — ShipLocal",
-  description:
-    "Create beautiful CSS gradients with a visual editor. Linear, radial, and conic gradients — copy the CSS instantly.",
-};
+import { redirect } from "next/navigation";
 
 export default function GradientPage() {
-  return <GradientGenerator />;
+  redirect("/tools/design");
 }
