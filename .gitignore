@@ -47,3 +47,37 @@ next-env.d.ts
 /test-results/
 /e2e/report/
 /playwright-report/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+Thumbs.db
+
+# Additional env patterns
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Supabase
+supabase/.branches/
+
+# Testing
+coverage/
+.nyc_output/
+
+# OS
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Security
+*.key
+*.cert
+
+# Build
+dist/
