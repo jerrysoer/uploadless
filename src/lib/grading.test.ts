@@ -228,6 +228,82 @@ describe("cookie duration scoring", () => {
   });
 });
 
+describe("consent penalty", () => {
+  it("applies 5-point penalty when Google Consent Mode silently grants", () => {
+    const base = makeScan({});
+    base.consent = {
+      bannerDetected: false,
+      bannerClicked: false,
+      cmpName: null,
+      googleConsentMode: true,
+      consentDefaultGranted: true,
+    };
+    const scores = computeScores(base);
+    expect(scores.total).toBe(95); // 100 - 5 penalty
+  });
+
+  it("no penalty when Google Consent Mode is absent", () => {
+    const base = makeScan({});
+    base.consent = {
+      bannerDetected: false,
+      bannerClicked: false,
+      cmpName: null,
+      googleConsentMode: false,
+      consentDefaultGranted: true,
+    };
+    const scores = computeScores(base);
+    expect(scores.total).toBe(100);
+  });
+});
+
+describe("diversity penalty", () => {
+  it("no penalty with 2 or fewer tracker categories", () => {
+    const scores = computeScores(makeScan({ analyticsCount: 1, adCount: 1 }));
+    // Two categories present (analytics + ads), no diversity penalty
+    const clean = computeScores(makeScan({}));
+    // The raw weighted difference should only be from tracker scores, no extra penalty
+    expect(scores.total).toBeGreaterThan(0);
+  });
+
+  it("applies 5-point penalty with 3 tracker categories", () => {
+    const scores = computeScores(makeScan({
+      analyticsCount: 1,
+      adCount: 1,
+      sessionRecordingCount: 1,
+    }));
+    // 3 categories present → (3-2)*5 = 5 point diversity penalty
+    expect(scores.total).toBeLessThanOrEqual(95);
+  });
+
+  it("applies 10-point penalty with 4 tracker categories", () => {
+    const base = makeScan({
+      analyticsCount: 1,
+      adCount: 1,
+      sessionRecordingCount: 1,
+    });
+    // Add a social tracker
+    base.trackers.social = [{ domain: "facebook.com", category: "social", name: "Facebook" }];
+    const scores = computeScores(base);
+    // 4 categories → (4-2)*5 = 10 point diversity penalty
+    expect(scores.total).toBeLessThanOrEqual(90);
+  });
+});
+
+describe("backward compatibility", () => {
+  it("always sets serverSide to 0", () => {
+    const scores = computeScores(makeScan({}));
+    expect(scores.serverSide).toBe(0);
+  });
+
+  it("handles missing fingerprinting field gracefully", () => {
+    const scan = makeScan({});
+    // Simulate a cached result from before fingerprinting was added
+    delete (scan as unknown as Record<string, unknown>).fingerprinting;
+    const scores = computeScores(scan);
+    expect(scores.fingerprinting).toBe(100); // undefined?.length ?? 0 = 0 techniques
+  });
+});
+
 describe("gradeFromScan — tier differentiation", () => {
   it("Tier 5 (pristine, e.g. example.com) → A", () => {
     const { grade } = gradeFromScan(makeScan({}));

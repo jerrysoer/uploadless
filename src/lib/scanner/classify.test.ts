@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { getBaseDomain, isThirdPartyCookie, isThirdPartyDomain } from "./classify";
+import { getBaseDomain, isThirdPartyCookie, isThirdPartyDomain, classifyCookies, detectServerSideProcessing } from "./classify";
 
 describe("getBaseDomain — PSL-backed", () => {
   it("handles simple .com domains", () => {
@@ -62,5 +62,57 @@ describe("isThirdPartyCookie — ccTLD accuracy", () => {
 
   it("flags different .co.uk domain as third-party", () => {
     expect(isThirdPartyCookie({ domain: ".tracker.co.uk" }, "www.bbc.co.uk")).toBe(true);
+  });
+});
+
+describe("classifyCookies", () => {
+  it("transforms raw Puppeteer cookies into CookieInfo[]", () => {
+    const raw = [
+      { name: "session", domain: ".example.com", path: "/" },
+      { name: "tracker", domain: ".adtech.com", path: "/", secure: true, httpOnly: true, sameSite: "Strict", expires: 1700000000 },
+    ];
+    const result = classifyCookies(raw, "example.com");
+
+    expect(result).toHaveLength(2);
+    expect(result[0].thirdParty).toBe(false);
+    expect(result[0].secure).toBe(false); // defaults
+    expect(result[0].sameSite).toBe("None"); // defaults
+    expect(result[0].expires).toBe(-1); // defaults
+
+    expect(result[1].thirdParty).toBe(true);
+    expect(result[1].secure).toBe(true);
+    expect(result[1].httpOnly).toBe(true);
+    expect(result[1].sameSite).toBe("Strict");
+    expect(result[1].expires).toBe(1700000000);
+  });
+
+  it("handles empty cookie array", () => {
+    expect(classifyCookies([], "example.com")).toEqual([]);
+  });
+});
+
+describe("detectServerSideProcessing", () => {
+  it("detects S3 domains", () => {
+    expect(detectServerSideProcessing(["s3.amazonaws.com"])).toBe(true);
+  });
+
+  it("detects GCS domains", () => {
+    expect(detectServerSideProcessing(["storage.googleapis.com"])).toBe(true);
+  });
+
+  it("detects Azure blob storage", () => {
+    expect(detectServerSideProcessing(["myaccount.blob.core.windows.net"])).toBe(true);
+  });
+
+  it("detects upload endpoints", () => {
+    expect(detectServerSideProcessing(["upload.example.com"])).toBe(true);
+  });
+
+  it("returns false for regular domains", () => {
+    expect(detectServerSideProcessing(["cdn.example.com", "fonts.googleapis.com"])).toBe(false);
+  });
+
+  it("returns false for empty array", () => {
+    expect(detectServerSideProcessing([])).toBe(false);
   });
 });
