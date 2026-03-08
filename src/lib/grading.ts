@@ -23,7 +23,7 @@ export function computeScores(scan: ScanData): AuditScores {
   const thirdPartyDomains = linearScore(scan.thirdPartyDomains.total, 0, 50);
   const sessionRecording = scan.trackers.sessionRecording.length > 0 ? 0 : 100;
   const adNetworks = linearScore(scan.trackers.advertising.length, 0, 2);
-  const analyticsTrackers = linearScore(scan.trackers.analytics.length, 1, 4);
+  const analyticsTrackers = linearScore(scan.trackers.analytics.length, 0, 4);
   const serverSide = scan.serverSideProcessing ? 0 : 100;
 
   const total = Math.round(

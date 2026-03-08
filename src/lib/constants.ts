@@ -48,7 +48,7 @@ export const SCAN_RATE_WINDOW_MS = 60 * 60 * 1000;
 export const AUDIT_CACHE_TTL_HOURS = 24;
 
 /** Puppeteer navigation timeout */
-export const PAGE_TIMEOUT_MS = 15_000;
+export const PAGE_TIMEOUT_MS = 25_000;
 
 /** Max file sizes for converters (bytes) */
 export const MAX_IMAGE_SIZE = 50 * 1024 * 1024; // 50 MB
