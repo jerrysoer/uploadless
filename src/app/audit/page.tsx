@@ -28,9 +28,9 @@ function extractDomain(url: string): string {
 
 const PHASE_LABELS: Record<ScanPhase, string> = {
   idle: "",
-  launching: "Launching browser\u2026",
-  scanning: "Scanning for trackers\u2026",
-  grading: "Grading results\u2026",
+  launching: "Launching browser…",
+  scanning: "Scanning for trackers…",
+  grading: "Grading results…",
 };
 
 export default function AuditPage() {
@@ -89,7 +89,7 @@ export default function AuditPage() {
       <ToolPageHeader
         icon={ShieldCheck}
         title="Privacy Audit"
-        description="Enter any website to scan for trackers, cookies, and data collection. Get an A\u2013F privacy grade."
+        description="Enter any website to scan for trackers, cookies, and data collection. Get an A–F privacy grade."
       />
 
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -141,7 +141,7 @@ export default function AuditPage() {
               <div className="h-full rounded-full bg-accent animate-pulse w-full" />
             </div>
             <p className="text-text-tertiary text-xs">
-              Scans typically take 10\u201330 seconds.
+              Scans typically take 10–30 seconds.
             </p>
           </div>
         )}
