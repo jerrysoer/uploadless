@@ -81,7 +81,7 @@ export async function recognizeText(
   return {
     text: data.text,
     confidence: data.confidence,
-    words: data.words.map((w) => ({
+    words: (data.words ?? []).map((w) => ({
       text: w.text,
       confidence: w.confidence,
       bbox: w.bbox,
