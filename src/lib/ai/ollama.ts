@@ -95,11 +95,8 @@ function inferCapabilities(modelName: string): ModelCapability[] {
       "commit_message",
       "code_review",
       "code_explain",
-      "sql_generate",
-      "test_generate",
       "error_decode",
       "pr_description",
-      "readme_generate",
     ];
   }
 
@@ -125,15 +122,11 @@ function inferCapabilities(modelName: string): ModelCapability[] {
       "commit_message",
       "code_review",
       "code_explain",
-      "sql_generate",
-      "test_generate",
       "error_decode",
       "pr_description",
-      "readme_generate",
       "swot",
       "threat_model",
       "long_doc",
-      "full_review",
       "tech_writing",
     ];
   }

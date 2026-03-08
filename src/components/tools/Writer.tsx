@@ -14,13 +14,14 @@ import type { ModelCapability } from "@/lib/ai/registry";
 
 // ── Mode definitions ────────────────────────────────────────────────────
 
-type WriterMode = "email" | "social" | "rewrite" | "custom";
+type WriterMode = "email" | "social" | "rewrite" | "custom" | "techdocs";
 
 const MODE_OPTIONS: { value: WriterMode; label: string }[] = [
   { value: "email", label: "Email" },
   { value: "social", label: "Social" },
   { value: "rewrite", label: "Rewrite" },
   { value: "custom", label: "Custom" },
+  { value: "techdocs", label: "Tech Docs" },
 ];
 
 const CAPABILITY_MAP: Record<WriterMode, ModelCapability> = {
@@ -28,6 +29,7 @@ const CAPABILITY_MAP: Record<WriterMode, ModelCapability> = {
   social: "social_post",
   rewrite: "rewrite",
   custom: "rewrite",
+  techdocs: "tech_writing",
 };
 
 const PROMPT_MAP: Record<WriterMode, keyof typeof PROMPTS> = {
@@ -35,6 +37,7 @@ const PROMPT_MAP: Record<WriterMode, keyof typeof PROMPTS> = {
   social: "socialPostGenerator",
   rewrite: "rewriter",
   custom: "rewriter",
+  techdocs: "techWritingAssistant",
 };
 
 // ── Per-mode selector options ───────────────────────────────────────────
@@ -47,6 +50,12 @@ const PLATFORMS: Platform[] = ["Twitter/X", "LinkedIn", "Instagram", "Facebook"]
 
 type RewriteTone = "More formal" | "Simpler" | "Shorter" | "More detailed";
 const REWRITE_TONES: RewriteTone[] = ["More formal", "Simpler", "Shorter", "More detailed"];
+
+type AudienceLevel = "Beginner" | "Intermediate" | "Advanced";
+const AUDIENCE_LEVELS: AudienceLevel[] = ["Beginner", "Intermediate", "Advanced"];
+
+type ContentType = "Tutorial" | "API Reference" | "How-to Guide" | "Explanation" | "Troubleshooting";
+const CONTENT_TYPES: ContentType[] = ["Tutorial", "API Reference", "How-to Guide", "Explanation", "Troubleshooting"];
 
 // ── Component ───────────────────────────────────────────────────────────
 
@@ -64,6 +73,8 @@ export default function Writer() {
   const [emailTone, setEmailTone] = useState<EmailTone>("Professional");
   const [platform, setPlatform] = useState<Platform>("Twitter/X");
   const [rewriteTone, setRewriteTone] = useState<RewriteTone>("Simpler");
+  const [audience, setAudience] = useState<AudienceLevel>("Intermediate");
+  const [contentType, setContentType] = useState<ContentType>("Tutorial");
   const [output, setOutput] = useState("");
   const [isStreaming, setIsStreaming] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -97,8 +108,16 @@ export default function Writer() {
 
       case "custom":
         return `${instruction}\n\n${input}`;
+
+      case "techdocs":
+        return [
+          `Topic: ${input}`,
+          `Audience level: ${audience}`,
+          `Content type: ${contentType}`,
+          secondary.trim() ? `\nNotes/outline:\n${secondary}` : "",
+        ].filter(Boolean).join("\n");
     }
-  }, [mode, input, secondary, instruction, emailTone, platform, rewriteTone]);
+  }, [mode, input, secondary, instruction, emailTone, platform, rewriteTone, audience, contentType]);
 
   const handleGenerate = useCallback(async () => {
     if (!input.trim()) return;
@@ -141,18 +160,21 @@ export default function Writer() {
   const inputLabel = mode === "email" ? "What is the email about?"
     : mode === "social" ? "Topic"
     : mode === "rewrite" ? "Text to rewrite"
+    : mode === "techdocs" ? "Topic"
     : "Your text";
 
   const inputPlaceholder = mode === "email" ? "e.g., Requesting a meeting to discuss Q3 results with the marketing team..."
     : mode === "social" ? "e.g., Launch of our new AI-powered productivity tool..."
     : mode === "rewrite" ? "Paste your text here..."
+    : mode === "techdocs" ? "e.g., Setting up authentication with Supabase in Next.js"
     : "Paste or type your text here...";
 
   const buttonLabel = isModelLoading ? "Loading AI model..."
-    : isStreaming ? (mode === "email" ? "Composing..." : mode === "social" ? "Generating..." : mode === "rewrite" ? "Rewriting..." : "Writing...")
+    : isStreaming ? (mode === "email" ? "Composing..." : mode === "social" ? "Generating..." : mode === "rewrite" ? "Rewriting..." : mode === "techdocs" ? "Writing..." : "Writing...")
     : mode === "email" ? "Compose Email"
     : mode === "social" ? "Generate Post"
     : mode === "rewrite" ? "Rewrite"
+    : mode === "techdocs" ? "Write Docs"
     : "Generate";
 
   const disableButton = mode === "custom"
@@ -166,7 +188,7 @@ export default function Writer() {
       <ToolPageHeader
         icon={PenTool}
         title="Writer"
-        description="Compose emails, social posts, rewrite text, or write with custom instructions — all locally in your browser."
+        description="Compose emails, social posts, tech docs, rewrite text, or write with custom instructions — all locally in your browser."
       />
 
       <FeatureLock requiredCapability={CAPABILITY_MAP[mode]}>
@@ -258,6 +280,47 @@ export default function Writer() {
             </div>
           )}
 
+          {mode === "techdocs" && (
+            <>
+              <div>
+                <label className="block text-sm font-medium text-text-secondary mb-2">Audience Level</label>
+                <div className="flex flex-wrap gap-2">
+                  {AUDIENCE_LEVELS.map((opt) => (
+                    <button
+                      key={opt}
+                      onClick={() => setAudience(opt)}
+                      className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                        audience === opt
+                          ? "bg-accent text-accent-fg"
+                          : "bg-bg-elevated text-text-secondary hover:text-text-primary border border-border"
+                      }`}
+                    >
+                      {opt}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-text-secondary mb-2">Content Type</label>
+                <div className="flex flex-wrap gap-2">
+                  {CONTENT_TYPES.map((opt) => (
+                    <button
+                      key={opt}
+                      onClick={() => setContentType(opt)}
+                      className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                        contentType === opt
+                          ? "bg-accent text-accent-fg"
+                          : "bg-bg-elevated text-text-secondary hover:text-text-primary border border-border"
+                      }`}
+                    >
+                      {opt}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
+
           {/* File upload */}
           <FileTextInput onTextExtracted={(text) => setInput(text)} />
 
@@ -275,20 +338,22 @@ export default function Writer() {
             />
           </div>
 
-          {/* Secondary input (email & social only) */}
-          {(mode === "email" || mode === "social") && (
+          {/* Secondary input (email, social & techdocs) */}
+          {(mode === "email" || mode === "social" || mode === "techdocs") && (
             <div>
               <label className="block text-sm font-medium text-text-secondary mb-2">
-                {mode === "email" ? "Key points (optional)" : "Key message (optional)"}
+                {mode === "email" ? "Key points (optional)" : mode === "techdocs" ? "Notes / outline (optional)" : "Key message (optional)"}
               </label>
               <textarea
                 value={secondary}
                 onChange={(e) => setSecondary(e.target.value)}
                 placeholder={mode === "email"
                   ? "- Mention the deadline is Friday\n- Ask about budget approval"
+                  : mode === "techdocs"
+                  ? "- Cover setup steps\n- Include code examples\n- Mention common pitfalls"
                   : "e.g., Focus on privacy-first approach and local processing..."
                 }
-                rows={mode === "email" ? 3 : 2}
+                rows={mode === "email" ? 3 : mode === "techdocs" ? 4 : 2}
                 className="w-full bg-bg-elevated border border-border rounded-xl px-4 py-3 text-sm text-text-primary placeholder:text-text-tertiary focus:outline-none focus:ring-2 focus:ring-accent/50 resize-y"
               />
             </div>

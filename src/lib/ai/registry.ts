@@ -23,16 +23,12 @@ export type ModelCapability =
   | "translate"
   | "code_review"
   | "code_explain"
-  | "sql_generate"
-  | "test_generate"
   | "error_decode"
   | "swot"
   | "threat_model"
   | "long_doc"
-  | "full_review"
   | "tech_writing"
   | "pr_description"
-  | "readme_generate"
   | "job_analyze";
 
 export interface ModelPack {
@@ -128,11 +124,8 @@ export const MODEL_PACKS: ModelPack[] = [
       "commit_message",
       "code_review",
       "code_explain",
-      "sql_generate",
-      "test_generate",
       "error_decode",
       "pr_description",
-      "readme_generate",
     ],
     provider: "webllm",
   },

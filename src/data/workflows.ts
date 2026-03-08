@@ -2,9 +2,7 @@ import {
   Monitor,
   Video,
   ImageIcon,
-  Camera,
   Eye,
-  ClipboardPaste,
   EyeOff,
   Lock,
   FileKey,
@@ -13,13 +11,14 @@ import {
   Hash,
   FileText,
   Layers,
-  FileSignature,
   Users,
   Sparkles,
   QrCode,
   Palette,
   ScanEye,
   Image,
+  Type,
+  FileArchive,
 } from "lucide-react";
 
 export interface WorkflowTool {
@@ -47,7 +46,7 @@ export const WORKFLOWS: Workflow[] = [
       { name: "Screen Recorder", href: "/record/screen", icon: Monitor },
       { name: "Video Converter", href: "/convert/video", icon: Video },
       { name: "GIF Recorder", href: "/record/gif", icon: ImageIcon },
-      { name: "Code Screenshot", href: "/tools/code-screenshot", icon: Camera },
+      { name: "Image Converter", href: "/convert/images", icon: Image },
     ],
     deptColor: "var(--color-dept-record)",
   },
@@ -58,7 +57,7 @@ export const WORKFLOWS: Workflow[] = [
     summary: "Strip metadata, clean data, redact, encrypt",
     tools: [
       { name: "EXIF Stripper", href: "/tools/exif", icon: Eye },
-      { name: "Clipboard Cleaner", href: "/tools/clipboard", icon: ClipboardPaste },
+      { name: "Text Cleaner", href: "/tools/text-cleaner", icon: Type },
       { name: "Document Redactor", href: "/tools/redact", icon: EyeOff },
       { name: "File Encryption", href: "/tools/encrypt", icon: Lock },
     ],
@@ -71,7 +70,7 @@ export const WORKFLOWS: Workflow[] = [
     summary: "Decode a JWT, inspect payload, verify signature",
     tools: [
       { name: "JWT Decoder", href: "/tools/jwt", icon: FileKey },
-      { name: "JSON Formatter", href: "/tools/json", icon: Braces },
+      { name: "Data Formatter", href: "/tools/data-formatter", icon: Braces },
       { name: "Base64 Decode", href: "/tools/base64", icon: Binary },
       { name: "Hash Calculator", href: "/tools/hash", icon: Hash },
     ],
@@ -97,8 +96,8 @@ export const WORKFLOWS: Workflow[] = [
     summary: "Convert, combine, sign, and encrypt documents",
     tools: [
       { name: "Doc Converter", href: "/convert/documents", icon: FileText },
-      { name: "PDF Merge", href: "/convert/pdf-tools", icon: Layers },
-      { name: "PDF Sign & Fill", href: "/sign", icon: FileSignature },
+      { name: "PDF Tools", href: "/tools/pdf", icon: Layers },
+      { name: "ZIP / Unzip", href: "/convert/zip", icon: FileArchive },
       { name: "File Encryption", href: "/tools/encrypt", icon: Lock },
     ],
     deptColor: "var(--color-dept-convert)",
