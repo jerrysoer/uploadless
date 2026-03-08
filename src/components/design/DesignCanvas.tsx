@@ -45,22 +45,11 @@ export default function DesignCanvas() {
 
       setCanvas(canvas);
 
-      // Fit to container on initial load
+      // Fit to container on initial load — use provider's fitToScreen
+      // so React state.zoom stays in sync with the Fabric canvas zoom
       if (containerRef.current) {
         const rect = containerRef.current.getBoundingClientRect();
-        const padding = 60;
-        const fitZoom = Math.min(
-          (rect.width - padding) / state.canvasSize.width,
-          (rect.height - padding) / state.canvasSize.height,
-          1,
-        );
-        if (fitZoom < 1) {
-          canvas.setZoom(fitZoom);
-          canvas.setDimensions({
-            width: state.canvasSize.width * fitZoom,
-            height: state.canvasSize.height * fitZoom,
-          });
-        }
+        fitToScreen(rect.width, rect.height);
       }
     })();
 
@@ -85,22 +74,6 @@ export default function DesignCanvas() {
     },
     [state.zoom, setZoom],
   );
-
-  // Fit to screen on container resize
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const observer = new ResizeObserver((entries) => {
-      const entry = entries[0];
-      if (entry) {
-        fitToScreen(entry.contentRect.width, entry.contentRect.height);
-      }
-    });
-
-    observer.observe(container);
-    return () => observer.disconnect();
-  }, [fitToScreen]);
 
   return (
     <div

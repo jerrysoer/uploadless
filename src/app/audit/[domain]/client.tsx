@@ -4,6 +4,7 @@ import GradeReveal from "@/components/GradeReveal";
 import AuditReport from "@/components/AuditReport";
 import ReportCard from "@/components/ReportCard";
 import type { AuditResult } from "@/lib/types";
+import { Search } from "lucide-react";
 
 interface AuditPageClientProps {
   audit: AuditResult | null;
@@ -41,6 +42,16 @@ export default function AuditPageClient({ audit, slug }: AuditPageClientProps) {
         score={audit.scores.total}
         domain={audit.domain}
       />
+
+      <div className="flex justify-center mt-2 mb-4">
+        <a
+          href="/audit"
+          className="inline-flex items-center gap-2 text-sm text-text-secondary hover:text-accent transition-colors"
+        >
+          <Search className="w-3.5 h-3.5" />
+          Scan another site
+        </a>
+      </div>
 
       <div className="grid lg:grid-cols-[1fr_380px] gap-8 mt-8">
         <AuditReport result={audit} />
