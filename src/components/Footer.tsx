@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Github } from "lucide-react";
 import AnalyticsStatus from "@/components/AnalyticsStatus";
 
 export default function Footer() {
@@ -26,6 +27,16 @@ export default function Footer() {
           >
             Transparency
           </Link>
+          <span className="text-text-tertiary">·</span>
+          <a
+            href="https://github.com/jerrysoer/uploadless"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-text-secondary transition-colors"
+            aria-label="GitHub"
+          >
+            <Github className="w-4 h-4" />
+          </a>
           <span className="basis-full sm:basis-auto order-last sm:order-none">
             No tracking. No uploads. No cookies.
           </span>
