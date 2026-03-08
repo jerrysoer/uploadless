@@ -149,6 +149,8 @@ export default function ScreenRecorder() {
   // ---- Export state ----
   const [isExporting, setIsExporting] = useState(false);
   const [exportProgress, setExportProgress] = useState(0);
+  const [exportPhase, setExportPhase] = useState<string>("");
+  const [compositedBlob, setCompositedBlob] = useState<Blob | null>(null);
 
   // ---- Annotate ----
   const [annotateActive, setAnnotateActive] = useState(false);
@@ -343,29 +345,63 @@ export default function ScreenRecorder() {
     async (format: "webm" | "mp4" | "gif") => {
       if (!screenResult) return;
 
-      if (format === "webm") {
-        downloadBlob(screenResult.blob, "screen-recording.webm");
-        return;
-      }
+      setIsExporting(true);
+      setExportProgress(0);
+      setExportPhase("");
 
-      if (format === "gif") {
-        // GIF export via ffmpeg (2-step palette approach)
-        setIsExporting(true);
-        setExportProgress(0);
+      try {
+        // Composite webcam overlay if webcam was recorded
+        let sourceBlob = screenResult.blob;
+        if (webcamResult) {
+          if (compositedBlob) {
+            // Use cached composite from a previous export
+            sourceBlob = compositedBlob;
+          } else {
+            setExportPhase("Compositing webcam...");
+            const { compositeWebcam } = await import(
+              "@/lib/recording/composite"
+            );
+            const composited = await compositeWebcam(
+              screenResult.blob,
+              webcamResult.blob,
+              {
+                screenWidth: previewDimensions.width,
+                screenHeight: previewDimensions.height,
+                position: pipPosition,
+                size: pipSize,
+                onProgress: (pct) => setExportProgress(Math.round(pct * 0.4)),
+              },
+            );
+            setCompositedBlob(composited);
+            sourceBlob = composited;
+          }
+        }
 
-        try {
+        setExportProgress(webcamResult ? 40 : 0);
+        setExportPhase("");
+
+        // Progress scaling: if compositing took 0–40%, format export uses 40–100%
+        const progressBase = webcamResult ? 40 : 0;
+        const progressRange = 100 - progressBase;
+
+        if (format === "webm") {
+          downloadBlob(sourceBlob, "screen-recording.webm");
+          setExportProgress(100);
+          return;
+        }
+
+        if (format === "gif") {
+          setExportPhase("Creating GIF...");
+
           const { getFFmpeg } = await import("@/lib/ffmpeg");
           const { fetchFile } = await import("@ffmpeg/util");
 
-          setExportProgress(10);
+          setExportProgress(progressBase + Math.round(progressRange * 0.1));
           const ffmpeg = await getFFmpeg();
-          setExportProgress(20);
+          setExportProgress(progressBase + Math.round(progressRange * 0.2));
 
-          await ffmpeg.writeFile(
-            "input.webm",
-            await fetchFile(screenResult.blob),
-          );
-          setExportProgress(30);
+          await ffmpeg.writeFile("input.webm", await fetchFile(sourceBlob));
+          setExportProgress(progressBase + Math.round(progressRange * 0.3));
 
           // Step 1: Generate palette
           await ffmpeg.exec([
@@ -373,7 +409,7 @@ export default function ScreenRecorder() {
             "-vf", "fps=10,palettegen=stats_mode=diff",
             "-y", "palette.png",
           ]);
-          setExportProgress(50);
+          setExportProgress(progressBase + Math.round(progressRange * 0.5));
 
           // Step 2: Apply palette to create GIF
           await ffmpeg.exec([
@@ -382,13 +418,12 @@ export default function ScreenRecorder() {
             "-lavfi", "fps=10[x];[x][1:v]paletteuse=dither=bayer:bayer_scale=5:diff_mode=rectangle",
             "-y", "output.gif",
           ]);
-          setExportProgress(85);
+          setExportProgress(progressBase + Math.round(progressRange * 0.85));
 
           const data = await ffmpeg.readFile("output.gif");
           const blob = new Blob([data], { type: "image/gif" });
           downloadBlob(blob, "screen-recording.gif");
 
-          // Cleanup
           try {
             await ffmpeg.deleteFile("input.webm");
             await ffmpeg.deleteFile("palette.png");
@@ -398,57 +433,42 @@ export default function ScreenRecorder() {
           }
 
           setExportProgress(100);
-        } catch (err) {
-          console.error("GIF export failed:", err);
-          setError("GIF export failed. Try downloading as WebM instead.");
-        } finally {
-          setIsExporting(false);
+          return;
         }
-        return;
-      }
 
-      // MP4 export via ffmpeg
-      setIsExporting(true);
-      setExportProgress(0);
+        // MP4 export via ffmpeg
+        setExportPhase("Converting to MP4...");
 
-      try {
         const { getFFmpeg } = await import("@/lib/ffmpeg");
         const { fetchFile } = await import("@ffmpeg/util");
 
-        setExportProgress(10);
+        setExportProgress(progressBase + Math.round(progressRange * 0.1));
         const ffmpeg = await getFFmpeg();
-        setExportProgress(20);
+        setExportProgress(progressBase + Math.round(progressRange * 0.2));
 
-        await ffmpeg.writeFile(
-          "input.webm",
-          await fetchFile(screenResult.blob),
-        );
-        setExportProgress(30);
+        await ffmpeg.writeFile("input.webm", await fetchFile(sourceBlob));
+        setExportProgress(progressBase + Math.round(progressRange * 0.3));
 
         ffmpeg.on(
           "progress",
           ({ progress }: { progress: number }) => {
-            setExportProgress(30 + Math.round(progress * 60));
+            setExportProgress(
+              progressBase + Math.round(progressRange * (0.3 + progress * 0.6)),
+            );
           },
         );
 
         await ffmpeg.exec([
-          "-i",
-          "input.webm",
-          "-c:v",
-          "libx264",
-          "-preset",
-          "fast",
-          "-crf",
-          "23",
-          "-c:a",
-          "aac",
-          "-b:a",
-          "128k",
+          "-i", "input.webm",
+          "-c:v", "libx264",
+          "-preset", "fast",
+          "-crf", "23",
+          "-c:a", "aac",
+          "-b:a", "128k",
           "output.mp4",
         ]);
 
-        setExportProgress(95);
+        setExportProgress(progressBase + Math.round(progressRange * 0.95));
 
         const data = await ffmpeg.readFile("output.mp4");
         const blob = new Blob([data], { type: "video/mp4" });
@@ -458,13 +478,14 @@ export default function ScreenRecorder() {
         await ffmpeg.deleteFile("output.mp4");
         setExportProgress(100);
       } catch (err) {
-        console.error("MP4 export failed:", err);
-        setError("MP4 export failed. Try downloading as WebM instead.");
+        console.error(`${format.toUpperCase()} export failed:`, err);
+        setError(`${format.toUpperCase()} export failed. Try downloading as WebM instead.`);
       } finally {
         setIsExporting(false);
+        setExportPhase("");
       }
     },
-    [screenResult],
+    [screenResult, webcamResult, compositedBlob, pipPosition, pipSize, previewDimensions],
   );
 
   // ---- Transcription ----
@@ -501,12 +522,14 @@ export default function ScreenRecorder() {
     if (recordingUrl) URL.revokeObjectURL(recordingUrl);
     setScreenResult(null);
     setWebcamResult(null);
+    setCompositedBlob(null);
     setRecordingUrl(null);
     setTranscription(null);
     setState("idle");
     setDuration(0);
     setError(null);
     setExportProgress(0);
+    setExportPhase("");
     setTranscribeProgress(0);
   }, [recordingUrl]);
 
@@ -525,6 +548,20 @@ export default function ScreenRecorder() {
   const isRecording = state === "recording";
   const isPaused = state === "paused";
   const isActive = isRecording || isPaused;
+
+  // Fix: Assign screen stream to video element after conditional render mounts it
+  useEffect(() => {
+    if (isActive && screenVideoRef.current && screenStreamRef.current) {
+      screenVideoRef.current.srcObject = screenStreamRef.current;
+    }
+  }, [isActive]);
+
+  // Fix: Sync webcam stream from ref to state when recording becomes active
+  useEffect(() => {
+    if (isActive && webcamStreamRef.current && !webcamStream) {
+      setWebcamStream(webcamStreamRef.current);
+    }
+  }, [isActive, webcamStream]);
 
   if (!isSupported) {
     return (
@@ -851,12 +888,19 @@ export default function ScreenRecorder() {
               ))}
             </div>
 
+            {webcamResult && !isExporting && (
+              <p className="mt-3 text-xs text-text-tertiary flex items-center gap-1.5">
+                <Camera className="w-3 h-3" />
+                Webcam overlay will be composited on export
+              </p>
+            )}
+
             {isExporting && (
               <div className="mt-3">
                 <div className="flex items-center gap-2 mb-1">
                   <Loader2 className="w-3 h-3 animate-spin text-accent" />
                   <span className="text-xs text-text-secondary">
-                    Exporting... {exportProgress}%
+                    {exportPhase || "Exporting..."} {exportProgress}%
                   </span>
                 </div>
                 <div className="w-full bg-bg-elevated rounded-full h-1.5 overflow-hidden">

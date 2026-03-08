@@ -59,32 +59,35 @@ export default function HomePage() {
             <p className="font-mono text-xs tracking-widest uppercase text-text-tertiary mb-6">
               Featured
             </p>
-            <div className="grid lg:grid-cols-3 gap-4">
-              <div className="lg:col-span-2">
-                <FeaturedToolCard
-                  href="/sign"
-                  title="Sign PDFs without uploading them"
-                  description="Add signatures, fill form fields, and insert dates — all processed in your browser. No server, no account required. Your documents stay on your device."
-                  deptColor="var(--color-dept-convert)"
-                  size="large"
-                />
-              </div>
-              <div className="flex flex-col gap-4">
-                <FeaturedToolCard
-                  href="/ai/summarize"
-                  title="AI Text Summarizer"
-                  description="Paste long text, get a concise summary — powered by a model running entirely in your browser."
-                  deptColor="var(--color-dept-ai)"
-                  size="small"
-                />
-                <FeaturedToolCard
-                  href="/record/screen"
-                  title="Screen Recorder"
-                  description="Capture your screen with webcam overlay and audio. Export as WebM or MP4."
-                  deptColor="var(--color-dept-record)"
-                  size="small"
-                />
-              </div>
+            <div className="grid lg:grid-cols-2 gap-4">
+              <FeaturedToolCard
+                href="/sign"
+                title="Sign PDFs without uploading them"
+                description="Add signatures, fill form fields, and insert dates — all processed in your browser."
+                deptColor="var(--color-dept-convert)"
+                size="large"
+              />
+              <FeaturedToolCard
+                href="/audit"
+                title="Scan any website for trackers"
+                description="Enter a URL to audit its privacy. Get an A–F grade for trackers, cookies, and data collection — powered by headless browser scanning."
+                deptColor="var(--color-dept-privacy)"
+                size="large"
+              />
+              <FeaturedToolCard
+                href="/ai/summarize"
+                title="AI Text Summarizer"
+                description="Paste long text, get a concise summary — powered by a model running entirely in your browser."
+                deptColor="var(--color-dept-ai)"
+                size="small"
+              />
+              <FeaturedToolCard
+                href="/record/screen"
+                title="Screen Recorder"
+                description="Capture your screen with webcam overlay and audio. Export as WebM or MP4."
+                deptColor="var(--color-dept-record)"
+                size="small"
+              />
             </div>
           </div>
         </section>
