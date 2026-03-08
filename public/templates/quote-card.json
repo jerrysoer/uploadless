@@ -1,0 +1,56 @@
+{
+  "version": "6.4.0",
+  "objects": [
+    {
+      "type": "Rect",
+      "left": 0,
+      "top": 0,
+      "width": 1080,
+      "height": 1080,
+      "fill": "#1a1a2e",
+      "selectable": false,
+      "evented": false,
+      "id": "bg-fill",
+      "name": "Background"
+    },
+    {
+      "type": "Rect",
+      "left": 80,
+      "top": 340,
+      "width": 6,
+      "height": 200,
+      "fill": "#e74c3c",
+      "id": "accent-bar",
+      "name": "Accent Bar"
+    },
+    {
+      "type": "Textbox",
+      "left": 120,
+      "top": 340,
+      "width": 840,
+      "text": "Design is not just what it looks like and feels like. Design is how it works.",
+      "fontSize": 48,
+      "fontFamily": "Playfair Display",
+      "fontWeight": 400,
+      "fontStyle": "italic",
+      "fill": "#ffffff",
+      "lineHeight": 1.4,
+      "id": "quote-text",
+      "name": "Quote"
+    },
+    {
+      "type": "Textbox",
+      "left": 120,
+      "top": 640,
+      "width": 400,
+      "text": "— Steve Jobs",
+      "fontSize": 24,
+      "fontFamily": "Inter",
+      "fontWeight": 500,
+      "fill": "#888888",
+      "id": "author-text",
+      "name": "Author"
+    }
+  ],
+  "background": "#1a1a2e"
+}

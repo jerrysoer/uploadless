@@ -27,7 +27,8 @@ export default function Header() {
     pathname.startsWith("/media") ||
     pathname.startsWith("/record") ||
     pathname.startsWith("/convert") ||
-    pathname.startsWith("/sign");
+    pathname.startsWith("/sign") ||
+    pathname.startsWith("/design");
   const isProtect = pathname.startsWith("/protect");
 
   const navLinks = [

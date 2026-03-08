@@ -1,0 +1,83 @@
+{
+  "version": "6.4.0",
+  "objects": [
+    {
+      "type": "Rect",
+      "left": 0,
+      "top": 0,
+      "width": 1200,
+      "height": 630,
+      "fill": "#f8f9fa",
+      "selectable": false,
+      "evented": false,
+      "id": "bg-fill",
+      "name": "Background"
+    },
+    {
+      "type": "Rect",
+      "left": 0,
+      "top": 0,
+      "width": 8,
+      "height": 630,
+      "fill": "#4A90D9",
+      "id": "side-accent",
+      "name": "Side Accent"
+    },
+    {
+      "type": "Textbox",
+      "left": 60,
+      "top": 80,
+      "width": 200,
+      "text": "ANNOUNCEMENT",
+      "fontSize": 14,
+      "fontFamily": "Montserrat",
+      "fontWeight": 700,
+      "fill": "#4A90D9",
+      "charSpacing": 200,
+      "id": "label-text",
+      "name": "Label"
+    },
+    {
+      "type": "Textbox",
+      "left": 60,
+      "top": 140,
+      "width": 700,
+      "text": "We're launching something new",
+      "fontSize": 56,
+      "fontFamily": "Montserrat",
+      "fontWeight": 700,
+      "fill": "#1a1a1a",
+      "lineHeight": 1.2,
+      "id": "headline-text",
+      "name": "Headline"
+    },
+    {
+      "type": "Textbox",
+      "left": 60,
+      "top": 360,
+      "width": 700,
+      "text": "Join us as we unveil our latest product. Stay tuned for more details coming soon.",
+      "fontSize": 22,
+      "fontFamily": "Inter",
+      "fontWeight": 400,
+      "fill": "#666666",
+      "lineHeight": 1.5,
+      "id": "body-text",
+      "name": "Body"
+    },
+    {
+      "type": "Textbox",
+      "left": 60,
+      "top": 500,
+      "width": 300,
+      "text": "yourcompany.com",
+      "fontSize": 18,
+      "fontFamily": "Inter",
+      "fontWeight": 500,
+      "fill": "#4A90D9",
+      "id": "url-text",
+      "name": "URL"
+    }
+  ],
+  "background": "#f8f9fa"
+}

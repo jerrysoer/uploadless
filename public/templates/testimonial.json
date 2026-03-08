@@ -1,0 +1,82 @@
+{
+  "version": "6.4.0",
+  "objects": [
+    {
+      "type": "Rect",
+      "left": 0,
+      "top": 0,
+      "width": 1080,
+      "height": 1080,
+      "fill": "#faf8f5",
+      "selectable": false,
+      "evented": false,
+      "id": "bg-fill",
+      "name": "Background"
+    },
+    {
+      "type": "Textbox",
+      "left": 100,
+      "top": 200,
+      "width": 200,
+      "text": "\u201c",
+      "fontSize": 200,
+      "fontFamily": "Lora",
+      "fontWeight": 700,
+      "fill": "#e8ddd0",
+      "id": "open-quote",
+      "name": "Open Quote"
+    },
+    {
+      "type": "Textbox",
+      "left": 100,
+      "top": 380,
+      "width": 880,
+      "text": "This product completely changed how our team collaborates. We shipped 3x faster in the first month.",
+      "fontSize": 36,
+      "fontFamily": "Lora",
+      "fontWeight": 400,
+      "fontStyle": "italic",
+      "fill": "#2c2c2c",
+      "lineHeight": 1.6,
+      "id": "testimonial-text",
+      "name": "Testimonial"
+    },
+    {
+      "type": "Rect",
+      "left": 100,
+      "top": 700,
+      "width": 60,
+      "height": 3,
+      "fill": "#c4a882",
+      "id": "divider",
+      "name": "Divider"
+    },
+    {
+      "type": "Textbox",
+      "left": 100,
+      "top": 730,
+      "width": 500,
+      "text": "Sarah Chen",
+      "fontSize": 24,
+      "fontFamily": "DM Sans",
+      "fontWeight": 600,
+      "fill": "#2c2c2c",
+      "id": "name-text",
+      "name": "Name"
+    },
+    {
+      "type": "Textbox",
+      "left": 100,
+      "top": 770,
+      "width": 500,
+      "text": "VP of Engineering, Acme Corp",
+      "fontSize": 18,
+      "fontFamily": "DM Sans",
+      "fontWeight": 400,
+      "fill": "#888888",
+      "id": "title-text",
+      "name": "Title"
+    }
+  ],
+  "background": "#faf8f5"
+}

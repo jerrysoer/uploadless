@@ -1,0 +1,70 @@
+{
+  "templates": [
+    {
+      "id": "quote-card",
+      "name": "Quote Card",
+      "description": "Elegant quote layout with accent bar",
+      "category": "Social",
+      "presetId": "ig-post",
+      "width": 1080,
+      "height": 1080,
+      "fonts": ["Playfair Display", "Inter"],
+      "thumbnail": ""
+    },
+    {
+      "id": "event-promo",
+      "name": "Event Promo",
+      "description": "Bold event announcement with date highlight",
+      "category": "Social",
+      "presetId": "ig-post",
+      "width": 1080,
+      "height": 1080,
+      "fonts": ["Bebas Neue", "Inter"],
+      "thumbnail": ""
+    },
+    {
+      "id": "announcement",
+      "name": "Announcement",
+      "description": "Clean announcement with gradient accent",
+      "category": "Social",
+      "presetId": "fb-post",
+      "width": 1200,
+      "height": 630,
+      "fonts": ["Montserrat", "Inter"],
+      "thumbnail": ""
+    },
+    {
+      "id": "testimonial",
+      "name": "Testimonial",
+      "description": "Customer testimonial with quotation marks",
+      "category": "Social",
+      "presetId": "ig-post",
+      "width": 1080,
+      "height": 1080,
+      "fonts": ["Lora", "DM Sans"],
+      "thumbnail": ""
+    },
+    {
+      "id": "stats-card",
+      "name": "Stats Card",
+      "description": "Data-driven stats highlight card",
+      "category": "Social",
+      "presetId": "linkedin-post",
+      "width": 1200,
+      "height": 627,
+      "fonts": ["Inter", "JetBrains Mono"],
+      "thumbnail": ""
+    },
+    {
+      "id": "minimal-story",
+      "name": "Minimal Story",
+      "description": "Clean vertical story with centered text",
+      "category": "Stories",
+      "presetId": "ig-story",
+      "width": 1080,
+      "height": 1920,
+      "fonts": ["Montserrat"],
+      "thumbnail": ""
+    }
+  ]
+}

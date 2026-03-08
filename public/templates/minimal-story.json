@@ -1,0 +1,67 @@
+{
+  "version": "6.4.0",
+  "objects": [
+    {
+      "type": "Rect",
+      "left": 0,
+      "top": 0,
+      "width": 1080,
+      "height": 1920,
+      "fill": "#111111",
+      "selectable": false,
+      "evented": false,
+      "id": "bg-fill",
+      "name": "Background"
+    },
+    {
+      "type": "Rect",
+      "left": 440,
+      "top": 800,
+      "width": 200,
+      "height": 4,
+      "fill": "#ffffff",
+      "id": "top-accent",
+      "name": "Top Accent"
+    },
+    {
+      "type": "Textbox",
+      "left": 120,
+      "top": 840,
+      "width": 840,
+      "text": "LESS IS\nMORE",
+      "fontSize": 96,
+      "fontFamily": "Montserrat",
+      "fontWeight": 800,
+      "fill": "#ffffff",
+      "textAlign": "center",
+      "lineHeight": 1.1,
+      "id": "main-text",
+      "name": "Main Text"
+    },
+    {
+      "type": "Textbox",
+      "left": 120,
+      "top": 1100,
+      "width": 840,
+      "text": "Minimalism in design",
+      "fontSize": 24,
+      "fontFamily": "Montserrat",
+      "fontWeight": 400,
+      "fill": "#666666",
+      "textAlign": "center",
+      "id": "subtitle-text",
+      "name": "Subtitle"
+    },
+    {
+      "type": "Rect",
+      "left": 440,
+      "top": 1180,
+      "width": 200,
+      "height": 4,
+      "fill": "#ffffff",
+      "id": "bottom-accent",
+      "name": "Bottom Accent"
+    }
+  ],
+  "background": "#111111"
+}

@@ -37,9 +37,9 @@ describe("Tool counts", () => {
     expect(flattenTools(CODE_GROUPS).length).toBe(16);
   });
 
-  it("Media tab has 14 tools", () => {
-    expect(MEDIA_TOOL_COUNT).toBe(14);
-    expect(flattenTools(MEDIA_GROUPS).length).toBe(14);
+  it("Media tab has 15 tools", () => {
+    expect(MEDIA_TOOL_COUNT).toBe(15);
+    expect(flattenTools(MEDIA_GROUPS).length).toBe(15);
   });
 
   it("Protect tab has 7 tools", () => {
@@ -47,8 +47,8 @@ describe("Tool counts", () => {
     expect(flattenTools(PROTECT_GROUPS).length).toBe(7);
   });
 
-  it("Total is 43 tools", () => {
-    expect(TOTAL_TOOL_COUNT).toBe(43);
+  it("Total is 44 tools", () => {
+    expect(TOTAL_TOOL_COUNT).toBe(44);
   });
 
   it("exported count matches actual sum", () => {

@@ -40,6 +40,7 @@ import {
   FileArchive,
   // Media tab — Design
   Palette,
+  Paintbrush,
   // Protect tab — Security
   KeyRound,
   Lock,
@@ -198,6 +199,7 @@ export const MEDIA_GROUPS: ToolHubGroup[] = [
     tools: [
       { href: "/tools/design", icon: Palette, title: "Color & Design", description: "Contrast checker, CSS gradients, and color palette extraction." },
       { href: "/tools/favicon", icon: Image, title: "Favicon Generator", description: "Generate favicons from images or emoji in all required sizes." },
+      { href: "/design", icon: Paintbrush, title: "Design Editor", description: "Create social media graphics with templates, fonts, shapes, and background removal." },
     ],
   },
 ];
