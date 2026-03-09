@@ -133,7 +133,7 @@ export default function TransparencyPage() {
       {/* Hero — editorial, left-aligned */}
       <section className="bg-bg-primary px-6 pt-12 pb-10 sm:pt-20 sm:pb-16">
         <div className="max-w-6xl mx-auto">
-          <p className="font-mono text-xs tracking-widest uppercase text-text-tertiary mb-4">
+          <p className="font-bold text-xs tracking-widest uppercase text-text-tertiary mb-4">
             Transparency
           </p>
           <h1 className="font-heading font-bold text-4xl md:text-5xl lg:text-6xl leading-[1.1] text-text-primary mb-6 max-w-4xl">

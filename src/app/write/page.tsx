@@ -31,7 +31,7 @@ export default function WritePage() {
             className="w-3 h-3 rounded-sm flex-shrink-0"
             style={{ backgroundColor: "var(--color-dept-ai)" }}
           />
-          <span className="font-mono text-xs tracking-widest uppercase text-text-tertiary">
+          <span className="font-bold text-xs tracking-widest uppercase text-text-tertiary">
             Write &middot; {WRITE_TOOL_COUNT} tools ({WRITE_AI_COUNT} AI-powered)
           </span>
         </div>
@@ -48,7 +48,7 @@ export default function WritePage() {
 
       {/* Quick AI Tools */}
       <section className="mb-8">
-        <span className="font-mono text-[10px] tracking-widest uppercase text-text-tertiary mb-3 block">
+        <span className="font-bold text-[10px] tracking-widest uppercase text-text-tertiary mb-3 block">
           Quick AI Tools
         </span>
         <div className="grid sm:grid-cols-2 gap-3">

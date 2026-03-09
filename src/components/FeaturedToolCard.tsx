@@ -27,7 +27,7 @@ export default function FeaturedToolCard({
       >
         {deptName && (
           <p
-            className="font-mono text-[10px] tracking-widest uppercase mb-3"
+            className="font-bold text-[10px] tracking-widest uppercase mb-3"
             style={{ color: deptColor }}
           >
             {deptName}
@@ -36,7 +36,7 @@ export default function FeaturedToolCard({
         <h3 className="font-heading text-2xl sm:text-3xl md:text-4xl font-semibold mb-4 group-hover:text-accent transition-colors">
           {title}
         </h3>
-        <p className="text-text-secondary text-lg leading-relaxed mb-6 max-w-lg">
+        <p className="font-serif text-text-secondary text-lg leading-relaxed mb-6 max-w-lg">
           {description}
         </p>
         <span className="inline-flex items-center gap-2 text-accent font-medium text-sm">
@@ -55,7 +55,7 @@ export default function FeaturedToolCard({
     >
       {deptName && (
         <p
-          className="font-mono text-[10px] tracking-widest uppercase mb-2"
+          className="font-bold text-[10px] tracking-widest uppercase mb-2"
           style={{ color: deptColor }}
         >
           {deptName}
@@ -64,7 +64,7 @@ export default function FeaturedToolCard({
       <h3 className="font-heading text-xl font-semibold mb-2 group-hover:text-accent transition-colors">
         {title}
       </h3>
-      <p className="text-text-secondary text-sm leading-relaxed mb-4">
+      <p className="font-serif text-text-secondary text-sm leading-relaxed mb-4">
         {description}
       </p>
       <span className="inline-flex items-center gap-1.5 text-accent font-medium text-xs">

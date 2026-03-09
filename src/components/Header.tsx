@@ -103,7 +103,7 @@ export default function Header() {
     <header className="px-6 py-5 border-b-4 border-text-primary">
       <div className="max-w-6xl mx-auto flex items-center justify-between">
         <Link href="/" className="group">
-          <span className="font-heading font-bold text-lg tracking-[0.2em] uppercase">
+          <span className="font-heading font-extrabold text-lg tracking-[-0.04em] uppercase">
             Uploadless
           </span>
         </Link>
@@ -157,7 +157,7 @@ export default function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
-                className={`font-heading text-2xl transition-colors ${
+                className={`text-2xl transition-colors ${
                   link.active
                     ? "text-text-primary underline underline-offset-8 decoration-2"
                     : "text-text-secondary hover:text-text-primary"

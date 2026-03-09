@@ -180,7 +180,7 @@ export default function ToolAccordion({
                   isOpen ? "" : "-rotate-90"
                 }`}
               />
-              <span className="font-mono text-xs tracking-widest uppercase text-text-tertiary">
+              <span className="font-bold text-xs tracking-widest uppercase text-text-tertiary">
                 {group.label} &middot; {group.tools.length} tools
               </span>
             </button>

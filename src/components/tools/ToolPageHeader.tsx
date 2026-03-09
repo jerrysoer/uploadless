@@ -20,7 +20,7 @@ export default function ToolPageHeader({
     <div className="mb-8">
       {department && departmentHref && (
         <nav aria-label="Breadcrumb" className="mb-3">
-          <p className="font-mono text-xs tracking-widest uppercase text-text-tertiary">
+          <p className="font-bold text-xs tracking-widest uppercase text-text-tertiary">
             <Link
               href={departmentHref}
               className="hover:text-text-secondary transition-colors"
@@ -36,7 +36,7 @@ export default function ToolPageHeader({
         <Icon className="w-5 h-5 text-text-tertiary" />
         <h1 className="font-heading font-bold text-3xl">{title}</h1>
       </div>
-      <p className="text-text-secondary mb-4">{description}</p>
+      <p className="font-serif text-text-secondary mb-4">{description}</p>
       <PrivacyBadge />
       <hr className="editorial-rule mt-6" />
     </div>

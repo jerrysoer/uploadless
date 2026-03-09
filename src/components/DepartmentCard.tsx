@@ -25,17 +25,17 @@ export default function DepartmentCard({
       style={{ borderLeft: `3px solid ${deptColor}` }}
     >
       <span
-        className="font-mono text-xs tracking-widest uppercase"
+        className="font-bold text-xs tracking-widest uppercase"
         style={{ color: deptColor }}
       >
         No. {number}
       </span>
       <h3 className="font-heading text-xl sm:text-2xl font-semibold mt-1 mb-2">{name}</h3>
-      <p className="text-text-secondary text-sm leading-relaxed mb-4">
+      <p className="font-serif text-text-secondary text-sm leading-relaxed mb-4">
         {description}
       </p>
       <div className="flex items-center justify-between">
-        <span className="font-mono text-xs text-text-tertiary uppercase tracking-wider">
+        <span className="font-bold text-xs text-text-tertiary uppercase tracking-wider">
           {toolCount} tools
         </span>
         <ArrowRight className="w-4 h-4 text-text-tertiary group-hover:text-accent group-hover:translate-x-1 transition-all" />

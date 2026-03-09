@@ -5,8 +5,8 @@ const baseClasses =
   "inline-flex items-center justify-center gap-2 rounded-md transition-colors disabled:opacity-50";
 
 const variantClasses = {
-  primary: "bg-accent text-accent-fg font-medium shadow-sm hover:bg-accent-hover",
-  secondary: "border border-border text-text-secondary font-medium hover:border-border-hover hover:text-text-primary hover:bg-bg-hover",
+  primary: "bg-accent text-accent-fg font-semibold shadow-sm hover:bg-accent-hover",
+  secondary: "border border-border text-text-secondary font-semibold hover:border-border-hover hover:text-text-primary hover:bg-bg-hover",
   ghost: "text-text-secondary hover:text-text-primary",
 } as const;
 

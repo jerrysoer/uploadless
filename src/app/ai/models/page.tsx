@@ -109,7 +109,7 @@ export default function ModelStorePage() {
             className="w-3 h-3 rounded-sm flex-shrink-0"
             style={{ backgroundColor: "var(--color-dept-ai)" }}
           />
-          <span className="font-mono text-xs tracking-widest uppercase text-text-tertiary">
+          <span className="font-bold text-xs tracking-widest uppercase text-text-tertiary">
             Department No. 01
           </span>
         </div>

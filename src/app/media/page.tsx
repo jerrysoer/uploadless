@@ -21,7 +21,7 @@ export default function MediaPage() {
             className="w-3 h-3 rounded-sm flex-shrink-0"
             style={{ backgroundColor: "var(--color-dept-record)" }}
           />
-          <span className="font-mono text-xs tracking-widest uppercase text-text-tertiary">
+          <span className="font-bold text-xs tracking-widest uppercase text-text-tertiary">
             Media &middot; {MEDIA_TOOL_COUNT} tools
           </span>
         </div>

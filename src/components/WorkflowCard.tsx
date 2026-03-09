@@ -8,7 +8,7 @@ export default function WorkflowCard({ number, title, summary, tools, deptColor 
       className="group relative flex-shrink-0 w-[280px] sm:w-[320px] bg-bg-surface p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg snap-start"
       style={{ borderLeft: `3px solid ${deptColor}` }}
     >
-      <span className="font-mono text-xs tracking-widest text-text-tertiary uppercase">
+      <span className="font-bold text-xs tracking-widest text-text-tertiary uppercase">
         Workflow {number}
       </span>
       <h3 className="font-heading font-semibold text-lg mt-1 mb-4">{title}</h3>
