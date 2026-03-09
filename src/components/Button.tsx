@@ -38,7 +38,7 @@ type ButtonAsLink = SharedProps &
 
 export type ButtonProps = ButtonAsButton | ButtonAsLink;
 
-function buildClassName({
+export function buildClassName({
   variant = "primary",
   mono,
   size = "md",
