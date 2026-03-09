@@ -1,45 +1,55 @@
 @import "tailwindcss";
 
 @theme {
-  /* Background — dark defaults (Tailwind generates utility classes from these) */
-  --color-bg-primary: #151311;
-  --color-bg-surface: #1E1B18;
-  --color-bg-elevated: #282420;
-  --color-bg-hover: #332E29;
+  /* Background — light defaults (v2) */
+  --color-bg-primary: #F6F5F1;
+  --color-bg-surface: #FFFFFF;
+  --color-bg-elevated: #F0EFE9;
+  --color-bg-hover: #EAE8E1;
 
   /* Text */
-  --color-text-primary: #ECE8E2;
-  --color-text-secondary: #9B9590;
-  --color-text-tertiary: #6B6560;
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #55524A;
+  --color-text-tertiary: #8C8780;
 
   /* Grades */
-  --color-grade-a: #22C55E;
+  --color-grade-a: #16A34A;
   --color-grade-b: #84CC16;
-  --color-grade-c: #F59E0B;
+  --color-grade-c: #D97706;
   --color-grade-d: #F97316;
-  --color-grade-f: #EF4444;
+  --color-grade-f: #DC2626;
 
   /* Accent */
-  --color-accent: #D4704A;
-  --color-accent-hover: #E88A65;
-  --color-accent-secondary: #D4A574;
-  --color-accent-fg: #151311;
+  --color-accent: #2563EB;
+  --color-accent-hover: #1D4ED8;
+  --color-accent-secondary: #7C3AED;
+  --color-accent-fg: #FFFFFF;
 
   /* Border */
-  --color-border: #332E29;
-  --color-border-hover: #44403C;
+  --color-border: #D8D5CC;
+  --color-border-hover: #B8B4A8;
 
   /* Department colors */
-  --color-dept-convert: #4A9E42;
-  --color-dept-record: #8B6BBF;
-  --color-dept-dev: #4A8DB5;
-  --color-dept-privacy: #D4704A;
-  --color-dept-ai: #D4A017;
+  --color-dept-convert: #16A34A;
+  --color-dept-record: #7C3AED;
+  --color-dept-dev: #2563EB;
+  --color-dept-privacy: #2563EB;
+  --color-dept-ai: #D97706;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.07);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.09);
 
   /* Font families */
-  --font-sans: var(--font-public-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-garamond), ui-serif, Georgia, serif;
-  --font-mono: var(--font-ibm-mono), ui-monospace, monospace;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 }
 
 /* Ensure pointer cursor on all interactive elements */
@@ -52,64 +62,40 @@ label[for] {
   cursor: pointer;
 }
 
-/* Runtime light/dark overrides */
+/* Dark mode overrides */
 @layer base {
-  :root {
-    --color-bg-primary: #FAF8F5;
-    --color-bg-surface: #F2EFEB;
-    --color-bg-elevated: #E8E4DF;
-    --color-bg-hover: #DDD8D2;
+  .dark {
+    --color-bg-primary: #0A0D12;
+    --color-bg-surface: #11151C;
+    --color-bg-elevated: #171C25;
+    --color-bg-hover: #232A38;
 
-    --color-text-primary: #1A1714;
-    --color-text-secondary: #6B6560;
-    --color-text-tertiary: #9E9890;
+    --color-text-primary: #E6EAF0;
+    --color-text-secondary: #8D97AB;
+    --color-text-tertiary: #5B6680;
 
-    --color-accent: #8B2500;
-    --color-accent-hover: #6E1D00;
-    --color-accent-secondary: #D4A574;
+    --color-accent: #3B82F6;
+    --color-accent-hover: #60A5FA;
+    --color-accent-secondary: #A78BFA;
     --color-accent-fg: #FFFFFF;
 
-    --color-border: #DDD8D2;
-    --color-border-hover: #C5C0BA;
+    --color-border: #262E3E;
+    --color-border-hover: #3A4458;
 
-    /* Department colors — light mode */
-    --color-dept-convert: #2D5A27;
-    --color-dept-record: #5B3A8C;
-    --color-dept-dev: #1A4B6E;
-    --color-dept-privacy: #8B2500;
-    --color-dept-ai: #B8860B;
-  }
-
-  .dark {
-    --color-bg-primary: #151311;
-    --color-bg-surface: #1E1B18;
-    --color-bg-elevated: #282420;
-    --color-bg-hover: #332E29;
-
-    --color-text-primary: #ECE8E2;
-    --color-text-secondary: #9B9590;
-    --color-text-tertiary: #6B6560;
-
-    --color-accent: #D4704A;
-    --color-accent-hover: #E88A65;
-    --color-accent-secondary: #D4A574;
-    --color-accent-fg: #151311;
-
-    --color-border: #332E29;
-    --color-border-hover: #44403C;
+    --color-grade-a: #22C55E;
+    --color-grade-f: #EF4444;
 
     /* Department colors — dark mode (brighter for contrast) */
-    --color-dept-convert: #4A9E42;
-    --color-dept-record: #8B6BBF;
-    --color-dept-dev: #4A8DB5;
-    --color-dept-privacy: #D4704A;
-    --color-dept-ai: #D4A017;
+    --color-dept-convert: #22C55E;
+    --color-dept-record: #A78BFA;
+    --color-dept-dev: #3B82F6;
+    --color-dept-privacy: #3B82F6;
+    --color-dept-ai: #F59E0B;
   }
 }
 
 /* Base styles */
 html {
-  font-size: 112.5%; /* 18px base — improves readability of small sizes */
   background-color: var(--color-bg-primary);
   color: var(--color-text-primary);
   font-family: var(--font-sans);

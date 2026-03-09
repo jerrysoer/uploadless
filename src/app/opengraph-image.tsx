@@ -15,9 +15,9 @@ export default function OgImage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#151311",
+          backgroundColor: "#0A0D12",
           backgroundImage:
-            "radial-gradient(circle at 50% 50%, #1A1918 0%, #151311 70%)",
+            "radial-gradient(circle at 50% 50%, #11151C 0%, #0A0D12 70%)",
         }}
       >
         {/* Monogram accent */}
@@ -25,7 +25,7 @@ export default function OgImage() {
           style={{
             fontSize: 40,
             fontWeight: 800,
-            color: "#D4704A",
+            color: "#3B82F6",
             fontFamily: "Georgia, serif",
             lineHeight: 1,
             marginBottom: 20,
@@ -39,7 +39,7 @@ export default function OgImage() {
           style={{
             width: 48,
             height: 2,
-            backgroundColor: "#D4704A",
+            backgroundColor: "#3B82F6",
             marginBottom: 28,
             borderRadius: 1,
           }}
@@ -50,7 +50,7 @@ export default function OgImage() {
           style={{
             fontSize: 72,
             fontWeight: 700,
-            color: "#E5E0DB",
+            color: "#E6EAF0",
             letterSpacing: "3px",
             marginBottom: 16,
             fontFamily: "Georgia, serif",
@@ -63,7 +63,7 @@ export default function OgImage() {
         <div
           style={{
             fontSize: 24,
-            color: "#8C8580",
+            color: "#8D97AB",
             maxWidth: 600,
             textAlign: "center",
           }}
@@ -77,7 +77,7 @@ export default function OgImage() {
             position: "absolute",
             bottom: 40,
             fontSize: 18,
-            color: "#5C5652",
+            color: "#5B6680",
             letterSpacing: "2px",
           }}
         >
