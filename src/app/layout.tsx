@@ -1,29 +1,29 @@
 import type { Metadata } from "next";
-import { EB_Garamond, Public_Sans, IBM_Plex_Mono } from 'next/font/google';
+import { Fraunces, Manrope, JetBrains_Mono } from 'next/font/google';
 import AIProvider from "@/components/AIProvider";
 import ConsentBanner from "@/components/ConsentBanner";
 import PageViewTracker from "@/components/PageViewTracker";
 import { ToastProvider } from "@/components/Toast";
 import "./globals.css";
 
-const garamond = EB_Garamond({
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  variable: '--font-fraunces',
+  display: 'swap',
+  axes: ['opsz'],
+});
+
+const manrope = Manrope({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
-  variable: '--font-garamond',
+  variable: '--font-manrope',
   display: 'swap',
 });
 
-const publicSans = Public_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-public-sans',
-  display: 'swap',
-});
-
-const ibmPlexMono = IBM_Plex_Mono({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   weight: ['400', '500'],
-  variable: '--font-ibm-mono',
+  variable: '--font-jetbrains',
   display: 'swap',
 });
 
@@ -83,7 +83,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${garamond.variable} ${publicSans.variable} ${ibmPlexMono.variable} bg-bg-primary text-text-primary min-h-dvh flex flex-col`}>
+      <body className={`${fraunces.variable} ${manrope.variable} ${jetbrainsMono.variable} bg-bg-primary text-text-primary min-h-dvh flex flex-col`}>
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-accent focus:text-accent-fg focus:font-medium focus:text-sm"

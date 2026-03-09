@@ -5,11 +5,11 @@ import { getSupabase } from "@/lib/supabase";
 export const runtime = "edge";
 
 const GRADE_COLORS: Record<string, string> = {
-  A: "#22C55E",
+  A: "#16A34A",
   B: "#84CC16",
-  C: "#F59E0B",
+  C: "#D97706",
   D: "#F97316",
-  F: "#EF4444",
+  F: "#DC2626",
 };
 
 export async function GET(
@@ -45,7 +45,7 @@ export async function GET(
     }
   }
 
-  const gradeColor = GRADE_COLORS[grade] ?? "#5C5652";
+  const gradeColor = GRADE_COLORS[grade] ?? "#5B6680";
 
   return new ImageResponse(
     (
@@ -57,7 +57,7 @@ export async function GET(
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#151311",
+          backgroundColor: "#0A0D12",
           fontFamily: "sans-serif",
         }}
       >
@@ -65,7 +65,7 @@ export async function GET(
         <div
           style={{
             fontSize: 24,
-            color: "#5C5652",
+            color: "#5B6680",
             marginBottom: 16,
             letterSpacing: 4,
           }}
@@ -77,7 +77,7 @@ export async function GET(
         <div
           style={{
             fontSize: 36,
-            color: "#E5E0DB",
+            color: "#E6EAF0",
             fontWeight: 600,
             marginBottom: 32,
           }}
@@ -132,7 +132,7 @@ export async function GET(
             position: "absolute",
             bottom: 32,
             fontSize: 16,
-            color: "#D4704A",
+            color: "#3B82F6",
           }}
         >
           uploadless.dev

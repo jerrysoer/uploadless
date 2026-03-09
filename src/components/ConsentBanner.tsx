@@ -29,7 +29,7 @@ export default function ConsentBanner() {
 
   return (
     <div className="fixed bottom-0 inset-x-0 z-50 p-4">
-      <div className="max-w-xl mx-auto bg-bg-elevated border border-border px-5 py-4 shadow-lg">
+      <div className="max-w-xl mx-auto bg-bg-elevated border border-border rounded-lg px-5 py-4 shadow-lg">
         <p className="text-text-secondary text-sm mb-2">
           Uploadless uses privacy-respecting analytics to improve the product. No
           personal data is collected.

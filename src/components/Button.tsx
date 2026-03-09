@@ -2,7 +2,7 @@ import { forwardRef, type ButtonHTMLAttributes, type AnchorHTMLAttributes } from
 import Link from "next/link";
 
 const baseClasses =
-  "inline-flex items-center justify-center gap-2 transition-colors disabled:opacity-50";
+  "inline-flex items-center justify-center gap-2 rounded-md transition-colors disabled:opacity-50";
 
 const variantClasses = {
   primary: "bg-accent text-accent-fg font-medium hover:bg-accent-hover",
