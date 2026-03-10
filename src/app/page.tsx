@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import EditorialRule from "@/components/EditorialRule";
 import FeaturedToolCard from "@/components/FeaturedToolCard";
 import DepartmentCard from "@/components/DepartmentCard";
+import { WebGpuBadge } from "@/components/WebGpuBadge";
 
 export const metadata: Metadata = {
   title: 'Uploadless — Privacy-First Browser Tools',
@@ -76,14 +77,19 @@ export default function HomePage() {
                 deptName="AI"
                 size="large"
               />
-              <FeaturedToolCard
-                href="/ai/summarize"
-                title="In-Browser LLM"
-                description="Summarize text, rewrite prose, extract data — all powered by a language model that downloads once and runs locally."
-                deptColor="var(--color-dept-ai)"
-                deptName="Write"
-                size="small"
-              />
+              <div className="relative">
+                <FeaturedToolCard
+                  href="/ai/summarize"
+                  title="In-Browser LLM"
+                  description="Summarize text, rewrite prose, extract data — all powered by a language model that downloads once and runs locally."
+                  deptColor="var(--color-dept-ai)"
+                  deptName="Write"
+                  size="small"
+                />
+                <div className="absolute top-4 right-4">
+                  <WebGpuBadge />
+                </div>
+              </div>
               <FeaturedToolCard
                 href="/tools/encrypt"
                 title="Encrypt Files Locally"
